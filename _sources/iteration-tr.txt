@@ -1235,7 +1235,7 @@ soruları sorabilirsiniz: " Angelina Jolie hangi filmlerde oynamıştır?"
     single: Newton yöntemi
 
 Bir sayının kare kökünü bulmak için Newton yöntemi
--------------------------------------------------
+---------------------------------------------------
 
 Döngüler sayısal hesaplamalarda sıklıkla kullanılır. Bu gibi hesaplamalarda bir
 yaklaşık tahminle başlanır ve bu tahmin yinelenerek geliştirilir. 
@@ -1593,11 +1593,11 @@ yazabilmelisiniz.
    (*ipucu: üçgensel sayının ne olduğunu internetden araştırın.*)
    .. sourcecode:: ignore
 
-   def ucgensel_sayi_bas(n):
-    i = 1
-    while i <=n:
-        print (i,"\t");print (i*(i+1)/2)
-        i +=1
+        def ucgensel_sayi_bas(n):
+        i = 1
+        while i <=n:
+            print (i,"\t");print (i*(i+1)/2)
+            i +=1
 
 
 #. ``asal_sayimi`` isimli bir fonksiyon yazınız. Bu fonksiyon, tek bir argüman
