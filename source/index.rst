@@ -12,6 +12,7 @@ Meyers**
 
 (Jeffrey Elkner, Allen B. Downey ve Chris Meyers'in ikinci baskısı temel
 alınmıştır.)
+
 **Ceviren: 2.baskıyı çeviren Tahir Emre Kalaycı**
 
 **Çeviren: 2.baskıdan 3.baskıyı çeviren Özhan Fenerci**
