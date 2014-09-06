@@ -12,8 +12,9 @@ Meyers**
 
 (Jeffrey Elkner, Allen B. Downey ve Chris Meyers'in ikinci baskısı temel
 alınmıştır.)
+**Ceviren: 2.baskıyı çeviren Tahir Emre Kalaycı**
 
-**Çeviren: Özhan Fenerci**
+**Çeviren: 2.baskıdan 3.baskıyı çeviren Özhan Fenerci**
 
 (Kitap *GNU Free Document License* ile lisanlanmıştır.) 
 
@@ -28,7 +29,7 @@ alınmıştır.)
 * `Bölüm 4 <functions-tr.html>`__ *Fonksiyonlar*
 * `Bölüm 5 <conditionals-tr.html>`__ *Koşul ifadeleri*
 * `Bölüm 6 <fruitful_functions-tr.html>`__ *Ürün veren fonksiyonlar*
-* `Bölüm 7 <iteration-tr.rst>`__ *Yineleme*
+* `Bölüm 7 <iteration-tr.html>`__ *Yineleme*
 
 
 
