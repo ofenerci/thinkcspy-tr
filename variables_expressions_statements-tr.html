@@ -1,0 +1,894 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2. Değişkenler, ifadeler ve deyimler (komutlar) &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="3. Merhaba, küçük kaplumbağlar" href="hello_little_turtles-tr.html" />
+    <link rel="prev" title="1. Programlama Yolu" href="way_of_the_program-tr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hello_little_turtles-tr.html" title="3. Merhaba, küçük kaplumbağlar"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="way_of_the_program-tr.html" title="1. Programlama Yolu"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="degiskenler-ifadeler-ve-deyimler-komutlar">
+<h1>2. Değişkenler, ifadeler ve deyimler (komutlar)<a class="headerlink" href="#degiskenler-ifadeler-ve-deyimler-komutlar" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><div class="section" id="degerler-ve-veri-tipleri">
+<span id="values-n-types"></span><span id="index-1"></span><h2>2.1. Değerler ve veri tipleri<a class="headerlink" href="#degerler-ve-veri-tipleri" title="Permalink to this headline">¶</a></h2>
+<p><strong>Değer</strong> programın işlediği temel şeylerden &#8212;harf ve rakam gibi&#8212; biridir.
+Şimdiye kadar gördüğümüz <tt class="docutils literal"><span class="pre">4</span></tt> ( `` 2 + 2`` işleminin sonucu) ve <tt class="docutils literal"><span class="pre">&quot;Merhaba,</span>
+<span class="pre">Dünya!&quot;</span></tt>.</p>
+<p>Bu değerler  sınıf veya veri tipe denen farklı tiplere aittir: <tt class="docutils literal"><span class="pre">4</span></tt> bir tamsayıdır ve &#8220;Merhaba Dünya!&#8221;
+ise bir  &#8220;karakter dizisi&#8221;dir, çünkü karekterlerden oluşan bir dizidir. Siz (
+ve Python yorumlayıcısı) karakter dizilerini ayırtedebilir, çünkü tırnak
+işaretleri arasında yazılmıştır.</p>
+<p>Eğer bir değerin tipinden emin değilseniz, Python&#8217;un <strong>type</strong> fonksiyonu size
+söyleyebilir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&quot;Merhaba, Dünya!&quot;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="go">&lt;class &#39;int&#39;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Süpriz olmayacak şekilde, karakter dizisi <strong>str</strong> sınıfına ve tamsayılar ise
+<strong>int</strong> sınıfına aittir. Daha az açık olan ise, ondalık basamağa sahip olan
+sayılar <strong>float</strong> sınıfına aittir, çünkü bu sayılar <em>kayan noktalı</em> (floating
+point) biçiminde temsil edilmektedir. Şimdilik <em>sınıf</em> (class) ve <em>type</em> (tür) kelimelerini birbirinin yerine kullanabilirsiniz. Sınıfın ne olduğunu  daha iyi anlamak için ileriki bölümlerde geri döneceğiz.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>
+<span class="go">&lt;class &#39;float&#39;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Peki <tt class="docutils literal"><span class="pre">&quot;17&quot;</span></tt> ve <tt class="docutils literal"><span class="pre">&quot;3.2&quot;</span></tt> şeklindeki ifadelerin tipleri nedir? Sayı gibi
+gözükmektedirler, fakat bunlar karakter dizileri gibi tırnak işaretleri
+içindedir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&quot;17&quot;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&quot;3.2&quot;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Onlar karakter dizileridir!</p>
+<p>Python&#8217;da karakter dizileri ya tek tırnak (<tt class="docutils literal"><span class="pre">'</span></tt>) arasına, çift tırnak
+arasına (<tt class="docutils literal"><span class="pre">&quot;</span></tt>) veya üçlü tırnak arasına (<tt class="docutils literal"><span class="pre">'''</span></tt> veya <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt>) alınabilir.</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&#39;Bu bir karakter dizisidir.&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&quot;Bu da öyle.&quot;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&quot;&quot;&quot;Bu da.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s">&#39;&#39;&#39;ve hatta bu da...&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Tek tırnaklı karakter dizileri <tt class="docutils literal"><span class="pre">&quot;Emre'nin</span> <span class="pre">sakalı&quot;</span></tt> örneğinde olduğu gibi
+çift tırnak içine alınabilir. <tt class="docutils literal"><span class="pre">'</span> <span class="pre">Şovalyeler</span> <span class="pre">&quot;hayır&quot;</span> <span class="pre">diyor.'</span></tt> örneğinde
+olduğu gibi çift tırnaklı karakter dizileri tek  tırnak içine alınabilir</p>
+<p>Üç tane tekli tırnak veya çift tırnak içine alınan karakter dizileri üçlü
+tırnak olarak isimlendirilir. Bunlar tek veya çiftli tırnak içerebilir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s">&#39;&#39;&#39;&quot;Hayır olamaz&quot;, diye haykırdı, &quot;Ahmet&#39;in bisikleti kırıldı!&quot;&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="go">&quot;Hayır olamaz&quot;, diye haykırdı, &quot;Ahmet&#39;in bisikleti kırıldı!&quot;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Üçlü tırnaklı karakter dizileri birkaç satıra yayılabilir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Bu mesaj</span>
+<span class="gp">... </span><span class="s">birkaç satıra</span>
+<span class="gp">... </span><span class="s">yayılacak.&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="go">Bu mesaj</span>
+<span class="go">birkaç satıra</span>
+<span class="go">yayılacak.</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Karakter dizisinin tek, çift; ya da üçlü tek veya üçlü çift tırnak işareti
+arasına alınması Python&#8217;u rahatsız etmez. Python sizin komutunuzu ya da
+programınızı ayrıştırdığında bütün durumları aynı olarak kabul eder ve
+karakter dizisini çevreleyen tırnaklar değerin bir parçası değildir. Fakat
+yorumlayacı karakter dizisini göstermek isterse, hangi tırnak işaretinin bu
+amaçla kullanıldığına karar vermesi gerekir.</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;Bu bir karakter dizisidir.&#39;</span>
+<span class="go">&#39;Bu bir karakter dizisidir.&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;Bu da öyle&quot;&quot;&quot;</span>
+<span class="go">&#39;Bu da öyle.&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Python dilinde çalışanlar genelde karakter dizilerini tekli tırnak içine
+almayı seçerler. Eğer karakter diziniz daha önce tekli tırnak içine
+alınmışsa, bu durumda ne olacağını düşünürsünüz?</p>
+<p>Büyük bir tamsayı yazdığınızda, üçlü rakam grupları arasına, <tt class="docutils literal"><span class="pre">42,000</span></tt>
+örneğinde olduğu gibi virgül kullanmak isteyebilirsiniz. Bu Python için
+geçerli bir tamsayı gösterimi değildir; fakat başka bir şey ifade eden geçerli
+ifadedir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">42000</span>
+<span class="go">42000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">42</span><span class="p">,</span><span class="mi">000</span>
+<span class="go">(42, 0)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu beklediğimiz birşey değil! Python bunu iki öğe içeren bir liste şeklinde
+yorumlar. Bu konuya daha sonra değineceğiz. Fakat şimdilik, tamsayılarınız ne
+kadar büyük olursa olsun aralarına virgül veya boşluk koymayınız. Daha önceki
+bölümde söylediğimiz şeyleri yeniden gözden geçiriniz: Biçimsel diller
+esnetilmeyen kurallara sahiptir; notasyonları (gösterimleri) kesindir ve küçük
+bir değişiklik bile sizin amaçladığınız şeyden farklı birşey anlam ifade
+edebilir.</p>
+</div>
+<div class="section" id="degiskenler">
+<span id="index-2"></span><h2>2.2. Değişkenler<a class="headerlink" href="#degiskenler" title="Permalink to this headline">¶</a></h2>
+<p>Programlama dilinin en güçlü özelliklerinden birisi <strong>değişkenleri</strong>
+değiştirebilme (adından anlaşılacağı gibi) yeteneğidir. Bir değişken bir
+değeri tutan bir isimdir.</p>
+<p><strong>Atama cümlesi</strong> yeni bir değişken yaratır ve değerlerini atar:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mesaj</span> <span class="o">=</span> <span class="s">&quot;Naber, doktor?&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu örnek üç atama gerçekleştirmektedir. Birinci atama <tt class="docutils literal"><span class="pre">&quot;Naber,</span> <span class="pre">doktor?&quot;</span></tt>
+karakter dizisini, <tt class="docutils literal"><span class="pre">mesaj</span></tt> isimli değişkene atar. İkincisi ise, <tt class="docutils literal"><span class="pre">17</span></tt>
+tamsayısını <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;e atar. Üçüncüsü ise <tt class="docutils literal"><span class="pre">3.14159</span></tt> kayan noktalı sayan
+değerini <tt class="docutils literal"><span class="pre">pi</span></tt> değişkenine atar.</p>
+<p><strong>Atama işleci</strong>, <tt class="docutils literal"><span class="pre">=</span></tt>  eşittir işaretiyle <tt class="docutils literal"><span class="pre">==</span></tt>  karıştırılmamalıdır. Atama
+işleci, işlecin sol tarafındaki ismi işlecin sağ tarafındaki değere atar.
+Eğer aşağıdaki ifadeyi yazdığınızda hata mesajıyla karşılaşırsınız:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
+<span class="go">File &quot;&lt;interactive input&gt;&quot;, line 1</span>
+<span class="go">SyntaxError: can&#39;t assign to literal</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Kodu okurken veya yazarken &#8220;n, 17&#8217;ye atanmıştır&#8221; veya &#8221; n, 17 değerini
+alır&#8221; şeklinde kendinize söyleyin.</p>
+</div>
+</div></blockquote>
+<p>Değişkenleri kağıt üzerinde göstermenin genel bir yolu değişken isminden bir
+ok çıkarıp değerini işaret etmektir. Bu çeşit gösterime <strong>durum diyagramı</strong>
+denir, çünkü herbir değişkeninin durumunu o anda gösterir ( değişkenin ruh
+halin olarak da düşünebilirsiniz.) Aşağıdaki diyagram atama komutu sonuçlarını
+gösterir.</p>
+<blockquote>
+<div><img alt="State snapshot" src="_images/state.png" />
+</div></blockquote>
+<p>Eğer yorumlayıcıdan değişkeni hesaplamasını istersek, bu değişkene o anda
+bağlanmış değeri üretecektir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mesaj</span>
+<span class="go">&#39;Naber, doktor?&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">17</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span>
+<span class="go">3.14159</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt>Futbol oyunundaki skor gibi şeyleri hatırlamak için değişkenleri programın içinde kullanırız. Fakat değişkenler bir <em>değişkendir.</em> Bunun anlamı: bunlar zamanla değişirler, futbol oyunundaki skor tabelasındaki değer gibi. Bir değişkene bir değer atayabilir ve daha sonra başka değer de verebilirsiniz. (<em>Bu matematikten farklıdır. Matematikte, eğer `x`&#8217;e 3 değerini verirseniz, bu değer hesaplamalarınız sırasında başka bir değer dönüşmüyecektir!</em>)</dt>
+<dd><div class="first last highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">day</span> <span class="o">=</span> <span class="s">&quot;Thursday&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">day</span>
+<span class="go">&#39;Thursday&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">day</span> <span class="o">=</span> <span class="s">&quot;Friday&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">day</span>
+<span class="go">&#39;Friday&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">day</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">day</span>
+<span class="go">21</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>Dikkat ederseniz <tt class="docutils literal"><span class="pre">bugun</span></tt>&#8216;ün değerini üç kere değiştirdik ve üçüncü değer
+atamamızda farklı bir değer tipine ait değer verdik (ilk iki atamamız karakter
+dizisi iken, son atamamız tamsayı ataması oldu.)</p>
+<p>Programlamanın büyük bir kısmı bilgisayarın şeyleri hatırlamasıdır. Örneğin, *
+Telefonunuza gelen aramalara cevap verememe  sayısını* ele alalım. Eğer
+telefonunuza yeni bir arama gelir ve siz de bu aramaya cevap veremezseniz, bu
+değişken yeni bir değer alacak ve değişecektir.</p>
+</div>
+<div class="section" id="degisken-isimleri-ve-anahtar-kelimeler">
+<span id="index-3"></span><h2>2.3. Değişken isimleri ve anahtar kelimeler<a class="headerlink" href="#degisken-isimleri-ve-anahtar-kelimeler" title="Permalink to this headline">¶</a></h2>
+<p><strong>Değişken isimleri</strong> istenildiği kadar uzun olabilir. Hem harf hem de rakam
+içerebilir, ancak mutlaka bir harfle veya altçizgi <tt class="docutils literal"><span class="pre">_</span></tt> ile başlamaları
+gerekir. Her ne kadar büyük harf kullanmak geçerli olsa da, geleneksel olarak
+kullanmıyoruz. Unutulmaması gereken <tt class="docutils literal"><span class="pre">Emre</span></tt> ve <tt class="docutils literal"><span class="pre">emre</span></tt> farklı
+değişkenlerdir.</p>
+<p>Altçizgi karakteri (<tt class="docutils literal"><span class="pre">_</span></tt>) bir isimde yeralabilir. Genellikle birden fazla
+harf içeren <tt class="docutils literal"><span class="pre">benim_ismim</span></tt> veya <tt class="docutils literal"><span class="pre">çinde_çayın_fiyatı</span></tt> gibi kelimelerde
+kullanılmaktadır.</p>
+<p>Bazı durumlarda altçizgi ile başlayan isimlerin özel bir anlamı vardır. Bu
+yüzden Python&#8217;u yeni öğrenmeye başlayanların isimlere harf ile başlaması
+güvenli bir seçenektir.</p>
+<p>Eğer bir değişkene geçerli olmayan bir değişken verirseniz, bir sözdizimi
+hatasıyla karşılaşırsanız.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre>&gt;&gt;&gt; 76insan = &quot;Çok Kalabalik&quot;
+SyntaxError: invalid syntax
+&gt;&gt;&gt; more$ = 1000000
+SyntaxError: invalid syntax
+&gt;&gt;&gt; class = &quot;Bilgisayar Dersi&quot;
+SyntaxError: invalid syntax
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">76insan</span></tt> geçersizdir çünkü harft ile başlamamaktadır. <tt class="docutils literal"><span class="pre">more$</span></tt> geçersizdir
+çünkü geçerli olmayan <tt class="docutils literal"><span class="pre">$</span></tt> karakteri içermektedir. Fakat <tt class="docutils literal"><span class="pre">class</span></tt> ile yanlış
+olan ne?</p>
+<p><tt class="docutils literal"><span class="pre">class</span></tt> isminin Python&#8217;un <strong>anahtar kelimeleriden</strong> biri olması nedeniyle bu
+ismi değişken olarak kullanamıyoruz. Anahtar kelimeler genellikle dilin
+sözdizim kuralını ve yapısını tanımlar ve değişken isimleri olarak
+kullanılamazlar.</p>
+<p>Python otuza yakın anahtar kelimeye sahiptir ( Python&#8217;un sürekli gelişmesi
+sonucu bazı kelimeler eklenmekte veya çıkarılmaktadır.)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>and</td>
+<td>as</td>
+<td>assert</td>
+<td>break</td>
+<td>class</td>
+<td>continue</td>
+</tr>
+<tr class="row-even"><td>def</td>
+<td>del</td>
+<td>elif</td>
+<td>else</td>
+<td>except</td>
+<td>exec</td>
+</tr>
+<tr class="row-odd"><td>finally</td>
+<td>for</td>
+<td>from</td>
+<td>global</td>
+<td>if</td>
+<td>import</td>
+</tr>
+<tr class="row-even"><td>in</td>
+<td>is</td>
+<td>lambda</td>
+<td>nonlocal</td>
+<td>not</td>
+<td>or</td>
+</tr>
+<tr class="row-odd"><td>pass</td>
+<td>raise</td>
+<td>return</td>
+<td>try</td>
+<td>while</td>
+<td>with</td>
+</tr>
+<tr class="row-even"><td>yield</td>
+<td>True</td>
+<td>False</td>
+<td>None</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Bu listeyi erişebileceğiniz yerde tutabilirsiniz  Eğer yorumlayıcı
+değişkenlerinizin birinden şikayet eder ve siz nedeninin bulamazsanız,
+değişkeninizin bu listedikilerle kontrol ediniz.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>Python&#8217;u yeni öğrenenler, &#8220;insanlara anlamlı gelen&#8221; değişkenlerin
+&#8220;bilgisayarlara da anlamlı&#8221; geleceğini sanabilirler. Örnek olarak bir
+değişkeninin ismini <tt class="docutils literal"><span class="pre">ortalama</span></tt> veya <tt class="docutils literal"><span class="pre">pi</span></tt> olarak isimlendirdiklerinde,
+bunların bir sihirbazlıkla ortalamayı hesaplıyacağını veya <tt class="docutils literal"><span class="pre">pi</span></tt>&#8216;nin
+değerinin 3.14159 olabileceğini düşünebilirler. Bilgisayar kafanızda
+değişkene verdiğiniz anlamı bilmez.</p>
+<p class="last">Bazı öğretmenlerin yeni başlayanlara Python&#8217;u öğretirken  bilerek anlamlı değişken
+ismi seçmemelerinin nedeni iyi bir alışkanlık olmadığından değil, fakat
+öğrenenlerin ortalamayı hesaplaması için  mutlaka bir program yazması veya
+<tt class="docutils literal"><span class="pre">pi</span></tt>&#8216;ye mutlaka bir değer aktarması gerektiğini pekiştirmeye çalışmaktır.</p>
+</div>
+</div>
+<div class="section" id="deyimler-komutlar">
+<span id="index-4"></span><h2>2.4. Deyimler (Komutlar)<a class="headerlink" href="#deyimler-komutlar" title="Permalink to this headline">¶</a></h2>
+<p>Deyimler,  Python yorumlayıcısı tarafından çalıştırılabilecek bir komuttur
+(yönergedir.)  Şimdiye kadar atama deyimini (<tt class="docutils literal"><span class="pre">=</span></tt>)  gördük.  Kısa bir süre sonra   <tt class="docutils literal"><span class="pre">while</span></tt>, <tt class="docutils literal"><span class="pre">for</span></tt>, <tt class="docutils literal"><span class="pre">if</span></tt> ve <tt class="docutils literal"><span class="pre">import</span></tt> deyimlerini göreceğiz ( Başka çeşitler de vardır.)</p>
+<p>Eğer bir deyimi komut satırına yazarsanız, python bunu yürütür. Bu deyimler
+herhangi bir sonuç üretmez.</p>
+</div>
+<div class="section" id="ifadelerin-hesaplanmasi">
+<span id="index-5"></span><h2>2.5. İfadelerin hesaplanması<a class="headerlink" href="#ifadelerin-hesaplanmasi" title="Permalink to this headline">¶</a></h2>
+<p>Bir ifade; değerlerden, değişkenlerden, işleçlerden ve fonksiyonlardan oluşan
+yapıdır. Eğer bir ifadeyi komut satırına yazarsanız, yorumlayıcı bu ifadeyi
+değerlendirir ve sonucu gösterir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu örnekteki <tt class="docutils literal"><span class="pre">len</span></tt> yerleşik Python fonksiyonu olup, karakter dizisindeki
+karakter sayısını döndürür. Daha önce biz <tt class="docutils literal"><span class="pre">print</span></tt> ve <tt class="docutils literal"><span class="pre">type</span></tt>
+fonksiyonlarını görmüştük. Bu da bizim üçüncü fonksiyonumuz.</p>
+<p><em>Bir ifadenin değerlendirilmesi</em> bir değer üretir; bu nedenledir ki, ifadeler
+atama deyiminin sağ tarafında gözükür. Bir değerin kendisi basit bir ifadedir.
+Değişken de bir ifadedir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">17</span>
+<span class="go">17</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">3.14</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="islecler-ve-islenenler">
+<span id="index-6"></span><h2>2.6. İşleçler ve İşlenenler<a class="headerlink" href="#islecler-ve-islenenler" title="Permalink to this headline">¶</a></h2>
+<p><strong>İşleçler</strong> toplama, çarpma ve bölme gibi hesaplamaları temsil eden özel
+sembollerdir. İşleçler tarafından kullanılan değerler <strong>işlenen</strong> adını
+almaktadır.</p>
+<p>Aşağıdakilerin hepsi geçerli Python ifadeleridir ( az çok ne anlama
+geldiklerini çıkarabilirsiniz.):</p>
+<div class="highlight-python"><div class="highlight"><pre>20+32   hour-1  hour*60+minute  minute/60   5**2    (5+9)(15-7)
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">+</span></tt>, <tt class="docutils literal"><span class="pre">-</span></tt>, <tt class="docutils literal"><span class="pre">*</span></tt> sembolleri ve gruplama için parantez kullanımı,
+matematikde ne anlam ifade ediyorsa Python&#8217;da da aynı anlamı ifade etmektedir.
+Yıldız işaret <tt class="docutils literal"><span class="pre">*</span></tt> çarpmanın ve <tt class="docutils literal"><span class="pre">**</span></tt> üs almanın sembölleridir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bir işlenenin yerinde bir değişkenin ismi yer aldığında, işlem yapılmadan önce
+bu değişken değeriyle değiştirilir.</p>
+<p>Toplama, çıkarma, çarpma ve üs alma işlemleri neyi bekliyorsanız onu yapan
+işlemledir.</p>
+<p>Örnek: 645 dakikayı saate çevirelim:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dakika</span> <span class="o">=</span> <span class="mi">645</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">saat</span> <span class="o">=</span> <span class="n">dakika</span> <span class="o">/</span> <span class="mi">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">saat</span>
+<span class="go">10.75</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Python 3&#8217;de bölme işlemcisi <tt class="docutils literal"><span class="pre">\</span></tt> her zaman kayan noktalı sonuç verir. Biz bu
+değerin içinde kaç tane saat ve kaç dakika kaldığını bilmek istemiş oluruz. ( yani
+sayının ondalık kısmını kesip atmaz. Python 2&#8217;de ise yalnızca tamsayı değeri
+verir; eğer yukarıdaki ifadeyi Python 2&#8217;de hesaplasaydınız 10 değerini
+bulacaktınız.) Python iki türlü bölme işlemcisini hizmetimize sunar.
+Bunlardan birincisi yukarıdaki <tt class="docutils literal"><span class="pre">\</span></tt> <em>bölme işlemcisi</em>, diğeri de <em>tamsayı bölme
+işlemcisi</em> olan <tt class="docutils literal"><span class="pre">//</span></tt> semboldür. Bunun sonucu her zaman tamsayıdır. Sanki
+ondalık kısmı atıp, ondalık kısmın sol tarafındaki tamsayı değerini veriyormuş
+gibi. Örnek olarak <cite>6//4</cite>&#8216;ün sonucu <cite>1</cite>dir, fakat <cite>-6//4</cite> sonucu sizi
+şaşırtabilir!</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">7</span> <span class="o">/</span> <span class="mi">4</span>
+<span class="go">1.75</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">7</span> <span class="o">//</span> <span class="mi">4</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minutes</span> <span class="o">=</span> <span class="mi">645</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hours</span> <span class="o">=</span> <span class="n">minutes</span> <span class="o">//</span> <span class="mi">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hours</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Hangi bölme işlemcisini seçeceğinize dikkat ediniz. Eğer bölme işlemi
+sonucunda ondalık sayıya da ihtiyacınız varsa (kayan noktalı sayı), bu bölme
+işlemini doğru şekilde yapan <cite>/</cite> <em>bölme işlemcisini</em> kullanın.</p>
+</div>
+<div class="section" id="tur-donusturme-fonksiyonlari">
+<span id="index-7"></span><h2>2.7. Tür dönüştürme fonksiyonları<a class="headerlink" href="#tur-donusturme-fonksiyonlari" title="Permalink to this headline">¶</a></h2>
+<p>Bu kısımda daha başka üç Python fonksiyonuna göz atacağız. Bunlar: <tt class="docutils literal"><span class="pre">int</span></tt>,
+<tt class="docutils literal"><span class="pre">float</span></tt> ve <tt class="docutils literal"><span class="pre">str</span></tt> fonksiyonlarıdır ve bu fonksiyonlar aldıkları
+değişkenleri sırasıyla <tt class="docutils literal"><span class="pre">int</span></tt>, <tt class="docutils literal"><span class="pre">float</span></tt> ve <tt class="docutils literal"><span class="pre">str</span></tt> türlerine dönüştürürler.
+Bu fonksiyonlara <strong>tür dönüştürücü</strong> fonksiyonlar diyeceğiz.</p>
+<p><tt class="docutils literal"><span class="pre">int</span></tt> fonksiyonu kayan noktalı sayı veya karakter dizisi alır ve bunları
+tamsayıya çevirir. Kayan noktalı sayılar için, ondalıklı kısım atılır. Biz bu
+işlemi sayı doğrusunda <em>sıfıra doğru kesme</em> olarak isimlendireceğiz. Bunları
+örnek üzerinde görelim:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.9999</span><span class="p">)</span>             <span class="c"># Bu en yakın tamsayıya yuvarlamaz</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">3.999</span><span class="p">)</span>             <span class="c"># Dikkat ediniz ki sonuç sıfıra yakındır.</span>
+<span class="go">-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">minutes</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s">&quot;2345&quot;</span><span class="p">)</span>             <span class="c"># Karakter dizisini ayrıştırarak tamsayıya</span>
+<span class="go">çevirir.</span>
+<span class="go">2345</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>                 <span class="c"># fonksiyon değişkeni tamsayı olsa da</span>
+<span class="go">çalışır.</span>
+<span class="go">17</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s">&quot;23 bottles&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Son komut bir sayı gibi gözükmüyor &#8212; Ne gibi sonuç beklersiniz?</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="n">File</span> <span class="s">&quot;&lt;interactive input&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">literal</span> <span class="k">for</span> <span class="nb">int</span><span class="p">()</span> <span class="k">with</span> <span class="n">base</span> <span class="mi">10</span><span class="p">:</span> <span class="s">&#39;23 bottles&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">float</span></tt> tür dönüştürücüsü tamsayıyı, kayan sayıyı veya sözdizimsel olarak
+kurala uygun karakter dizisini kayan sayıya çevirir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="go">17.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="s">&quot;123.45&quot;</span><span class="p">)</span>
+<span class="go">123.45</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">str</span></tt> tür dönüştürücüsü ise aldığı değişkeni karakter dizisine çevirir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="go">&#39;17&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="mf">123.45</span><span class="p">)</span>
+<span class="go">&#39;123.45&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="isleclerin-sirasi">
+<span id="index-8"></span><h2>2.8. İşleçlerin sırası<a class="headerlink" href="#isleclerin-sirasi" title="Permalink to this headline">¶</a></h2>
+<p>Bir ifadede birden fazla işleç varsa, bu işleçlerin hasaplama sırası  <strong>öncelik kuralına</strong> göre belirlenir. Matematikte işlemcilerin uyduğu öncelik sırasının aynısını Python&#8217;da kullanır. PÜÇBTÇ kısaltması bu kuralları hatırlamak için kullanabilecek bir kısaltmadır:</p>
+<ol class="arabic">
+<li><p class="first"><strong>P</strong>arantezler en yüksek önceliğe sahiptir ve ifadenin hangi sırada
+değerlendirilmesine yönelik ayarlamaları yapmanızı sağlar. Parantez
+içindeki ifadeler daha önce değerlendirildiği için, <tt class="docutils literal"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">(3-1)</span></tt>&#8216;in sonucu
+4, <tt class="docutils literal"><span class="pre">(1+1)**(5-2)</span></tt>&#8216;in sonucu ise 8&#8217;dir. İfadeleri daha kolay okumak için
+parantezleri kullanabilirsiniz. <tt class="docutils literal"><span class="pre">(minute</span> <span class="pre">*</span> <span class="pre">100)</span> <span class="pre">/60</span></tt> ifadesi daha kolay
+okunduğu gibi, sonucu da değiştirmemiş olursunuz.</p>
+</li>
+<li><p class="first"><strong>Ü</strong>s alma daha az önceliğe sahiptir, <tt class="docutils literal"><span class="pre">2**1+1</span></tt> ifadesinin cevabı
+3&#8217;tür 4 değil ve <tt class="docutils literal"><span class="pre">3*1**3</span></tt> cevabı da 3&#8217;tür 27 değil.</p>
+</li>
+<li><p class="first"><strong>Ç</strong>arpma ve <strong>B</strong>ölme işleçleri aynı önceliğe sahiptir; <strong>T</strong>oplama
+ve <strong>Ç</strong>ıkarmadan (bunlar da aynı önceliğe sahiptir) daha yüksek
+önceliklidir. <tt class="docutils literal"><span class="pre">2*3-1</span></tt> ifadesi 4 yerine 5 ve <tt class="docutils literal"><span class="pre">5-2*2</span></tt> ifadesi 6 değil
+1&#8217;dir.</p>
+</li>
+<li><p class="first">Aynı önceliğe sahip olan işleçlerin değerlendirilmesinde soldan sağa kuralı
+izlenir. Buna cebir derslerinde sol ilişkili bağlantı denir. <tt class="docutils literal"><span class="pre">6-3+2</span></tt>
+ifadesinde, çıkarma işlemi ilk yapılır ve 3 bulunur. Daha sonra 2&#8217;yi
+ekleyerek 5&#8217;i buluruz. Eğer işlemler sağdan sola doğru hesaplansaydı sonuç
+<tt class="docutils literal"><span class="pre">6-(3+2)</span></tt> olurdu, bu da 1&#8217;e eşittir (Yukarıdaki kısaltma sizi
+yanıltmasın. Bu kısaltma sanki çarpmanın, bölmeden daha öncekli olduğu; ya
+da toplamanın, çıkarmadan daha öncelikli olduğuna sizi yanıltabilir. Aynı
+önceliğe sahip işleçler arasında soldan sağa kuralı izlenir.)</p>
+<ul>
+<li><p class="first">Tarihsel garip olay yüzünden, üs alma işleci <tt class="docutils literal"><span class="pre">**</span></tt> soldan sağa kuralına
+uymaz. Üs işleçlerinin yer aldığı bir ifadede, üslerin işlem sırasını
+belirlemek için parentezlerin kullanımı karışıklığı ortadan kaldırır:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span>     <span class="c"># En sağdaki ** işleç önceliğe sahiptir.</span>
+<span class="go">512</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>   <span class="c"># Parentezleri kullanarak istediğiniz sırada</span>
+<span class="go">işlemleri yapabilirsiniz.</span>
+<span class="go">64</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<p>Yukarıdaki işlemler gibi kısa ifadeleri keşfetmek ve deney yapmak için Python
+emir istemcisi çok faydalıdır.</p>
+</div>
+<div class="section" id="karakter-dizisi-uzerindeki-islemler">
+<span id="index-9"></span><h2>2.9. Karakter dizisi üzerindeki işlemler<a class="headerlink" href="#karakter-dizisi-uzerindeki-islemler" title="Permalink to this headline">¶</a></h2>
+<p>Genel olarak, karakter dizileri üzerinde matematiksel işlemler
+uygulayamazsınız; karakter dizileri sayı gibi gözükse bile! Aşağıdaki ifadeler
+geçersizdir ( mesaj&#8217;ın karakter dizisine ait bir tür olduğunu varsayalım.)</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mesaj</span> <span class="o">-</span> <span class="mi">1</span>        <span class="c"># Hata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;Merhaba&quot;</span> <span class="o">/</span> <span class="mi">123</span>  <span class="c"># Hata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesaj</span> <span class="o">*</span> <span class="s">&quot;Hello&quot;</span>  <span class="c"># Hata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;15&quot;</span> <span class="o">+</span> <span class="mi">2</span>         <span class="c"># Hata</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Ancak <tt class="docutils literal"><span class="pre">+</span></tt> işleci karakter dizileriyle çalışmaktadır. Fakat karakter dizileri
+için <tt class="docutils literal"><span class="pre">+</span></tt>&#8216;nın anlamı toplamayı değil, <strong>birleştirmeyi</strong> ifade etmektedir.
+Bunun anlamı iki karakter dizisini uç uca bağlamaktır. Örneğin:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">meyve</span> <span class="o">=</span> <span class="s">&quot;muz&quot;</span>
+<span class="n">iyi_pişirilmis</span> <span class="o">=</span> <span class="s">&quot; fındık ekmeği&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meyve</span> <span class="o">+</span> <span class="n">iyi_pisirilmis</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Programın çıktısı <tt class="docutils literal"><span class="pre">muz</span>&nbsp; <span class="pre">fındık</span> <span class="pre">ekmeği</span></tt> olacaktır. Fındıktan önceki boşluk
+karakter dizisinin bir parçasıdır ve birleştirilmiş karakter dizileri arasında
+boşluk yaratmak için gereklidir.</p>
+<p><tt class="docutils literal"><span class="pre">*</span></tt> işleci de karakter dizileri üzerinde çalışır. Tekrarlama işlemini
+gerçekleştirir. Örneğin, <tt class="docutils literal"><span class="pre">Neşe*3</span></tt>&#8216;ün değeri <tt class="docutils literal"><span class="pre">NeşeNeşeNeşe</span></tt> sonucunu
+verecektir. İşlenenlerden biri karakter dizisi, diğeri de tamsayı olmalıdır.</p>
+<p>Diğer bir taraftan, <tt class="docutils literal"><span class="pre">+</span></tt> ve <tt class="docutils literal"><span class="pre">*</span></tt> işleçlerinin yukarıdaki yorumu, toplama ve
+çarpma işleçlerinin amacı düşünüldüğünde bir anlam ifade etmektedir.
+<tt class="docutils literal"><span class="pre">4*3</span></tt>&#8216;ün <tt class="docutils literal"><span class="pre">4+4+4</span></tt>&#8216;e eşit olması gibi, <tt class="docutils literal"><span class="pre">Neşe*3</span></tt> ifadesinin
+<tt class="docutils literal"><span class="pre">Neşe+Neşe+Neşe</span></tt>&#8216; ifadesiyle aynı olmasını bekleriz. Ancak, karakter
+dizileri birleştirme ve tekrarlama ile tamsayılar arasındaki toplama ve çarpma
+arasında önemli bir fark vardır. Toplama ve çarpma işleminin sahip olduğu
+ancak karakter dizisi birleştirme ve tekrarlama işleminin sahip olmadığı bir
+özellik düşünebiliyor musunuz?</p>
+</div>
+<div class="section" id="girdi">
+<span id="index-10"></span><h2>2.10. Girdi<a class="headerlink" href="#girdi" title="Permalink to this headline">¶</a></h2>
+<p>Klavyeden girdi alabilmek için Python içerisinde tanımlı iki fonksiyon vardır:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot; Lütfen isminizi giriniz: &quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Eğer bu betiği PyScripter içinde çalıştırırsanız, aşağıdaki bir küçük pencere
+açılacak ve sizden girdiyi bekleyecektir:</p>
+<blockquote>
+<div><img alt="input dialog" src="_images/enter_name_dialog.png" />
+</div></blockquote>
+<p>Program kullanıcısı bir isim girip, <cite>OK</cite> tuşuna bastığında, girilen metin
+<tt class="docutils literal"><span class="pre">input</span></tt> fonksiyonu tarafından döndürülür ve <tt class="docutils literal"><span class="pre">n</span></tt> değişkenine atanır.</p>
+<p>Eğer kullanıcıya yaşını sorsaydınız ve kullanıcıda 17 cevabını girseydi, siz
+sonuçta <tt class="docutils literal"><span class="pre">&quot;17&quot;</span></tt> olan karakter dizisini alacaktınız. Bir programcı olarak
+sizin işiniz, daha önce gördüğümüz <tt class="docutils literal"><span class="pre">int</span></tt> veya <tt class="docutils literal"><span class="pre">float</span></tt> tür çevirici
+fonksıyonlarını kullanarak bu karakter dizisini tamsayı veya kayan sayı türüne
+çevirmektir.</p>
+</div>
+<div class="section" id="kompozisyon">
+<span id="index-11"></span><h2>2.11. Kompozisyon<a class="headerlink" href="#kompozisyon" title="Permalink to this headline">¶</a></h2>
+<p>Şimdiye kadar bir programın öğelerini &#8212; değişkenler, ifadeler ve deyimler
+&#8212; ayrı ayrı inceledik, bunları nasıl birleştireceğimizden bahsetmedik.</p>
+<p>Programlama dillerinin en kullanışlı özelliklerinden biri, küçük yapısal
+blokları birleştirilebilmesine ve  bu parçaları <strong>kompozisyon</strong>lamasına (birleştirebilme)  izin vermesidir.</p>
+<p>Örneğin, kullanıcıdan nasıl girdi alacağımızı; karakter dizisini
+nasıl kayan noktalı sayıya çevireceğimizi; nasıl karmaşık bir ifade
+yazacağımızı; ve değişkenleri nasıl ekrana yazdıracağımız biliyoruz. Bütün bu
+işlemleri 4 adımlık bir programın içine koyalım. Programımız, kullanıcıya
+çemberin yarıçapını kullanıcıya sorsun ve dairenin alanını   hesaplasın.</p>
+<div class="math">
+\[\text{Alan} = \pi r^2\]</div>
+<p>Öncelikle, bu dört adımı teker teker yapacağız:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cevap</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Dairenin yarıçapı nedir? &quot;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cevap</span><span class="p">)</span>
+<span class="n">alan</span> <span class="o">=</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Dairenin alanı =&quot;</span><span class="p">,</span> <span class="n">alan</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Yukarıdaki kodun ilk iki satırını tek bir satıra  ve son iki satırı
+da tek bir satıra birleştirelim.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Dairenin yarıçapı nedir? &quot;</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Dairenin alanı =  &quot;</span><span class="p">,</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Eğer biraz el çabukluğu yapmak isterseniz, yukarıdaki bütün ifadeleri bir
+ifade içinde yazabilirsiniz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">print</span><span class="p">(</span><span class="s">&quot;Dairenin alanı =  &quot;</span><span class="p">,</span> <span class="mf">3.14159</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&quot;Dairenin yarıçapı nedir?&quot;</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>İnsanlar böyle tümleşik kodu anlıyamıyabilir, ancak birçok program satırını
+nasıl tek bir satıra indirebileceğimizi gösterir.</p>
+<p>Bir program kodunu veya parçasını daha küçük parçalara ayırıp ayırmamada şüphe
+içinde iseniz, bunu insanların anlayabileceği kadar basit hale getirmeye
+çalışın. Benim tercihim dört ayrı adımda yazdığımız ilk durum olacaktır.</p>
+</div>
+<div class="section" id="moduler-islemcisi">
+<span id="index-12"></span><h2>2.12. Modüler işlemcisi<a class="headerlink" href="#moduler-islemcisi" title="Permalink to this headline">¶</a></h2>
+<p><strong>Modüler işlemci</strong> tamsayılar veya tamsayılar ifadeleri üzerinde çalışır. İlk
+sayının ikinci sayıya bölünmesiyle kalanı verir. Python&#8217;da, modüler işlemcisi
+yüzdelik işareti <tt class="docutils literal"><span class="pre">%</span></tt> ile gösterilir. Sözdizimi diğer işlemciler gibidir.
+Çarpma işlemcisi ile aynı önceliğe sahiptir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">//</span> <span class="mi">3</span>     <span class="c"># Bu bir tamsayı bölme işlemcisidir.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>  <span class="o">=</span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Böylece 7&#8217;nin 3&#8217;e bölümündenden, bölümün 2 ve kalanın da 1 olduğu görülür.</p>
+<p>Modüler işlemcisi görüldüğünden çok daha faydalılır. Örneğin, bir sayının
+diğer bir sayıya bölünebilir olup olmadığını kontrol edebilirsiniz. Eğer
+<tt class="docutils literal"><span class="pre">x%y</span></tt>&#8216;nin cevabı sıfır ise, <tt class="docutils literal"><span class="pre">x</span></tt>, <tt class="docutils literal"><span class="pre">y</span></tt> tarafından bölünebilir.</p>
+<p>Aynı zamanda, bir sayının en sağındaki rakam veya rakamları elde etmek içinde
+kullanabilirsiniz. Örneğin, <tt class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">10</span></tt> ifadesi <tt class="docutils literal"><span class="pre">x</span></tt>&#8216;in en sağındaki rakamı
+(10&#8217;luk tabanda) elde ederiz. Benzer olarak, <tt class="docutils literal"><span class="pre">x%100</span></tt> ifadesi son iki rakamı
+verir.</p>
+<p>Ayrıca çevirme işlemleri yapmada da oldukça faydalıdır. Örneğin saniyenin; saate,
+dakikaya ve saniye çevrilmesi işlemi gibi. Kullanıcıdan, saniye olarak değer
+girmesini isteyen bir program yazalım. Biz bu saniyeyi, saat, dakika ve kalan
+saniyeye çevireceğiz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">toplam_san</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&quot;Kaç saniye?&quot;</span><span class="p">))</span>
+<span class="n">saat</span> <span class="o">=</span> <span class="n">toplam_san</span> <span class="o">//</span> <span class="mi">3600</span>
+<span class="n">hala_kalan_san</span> <span class="o">=</span> <span class="n">toplam_san</span> <span class="o">%</span> <span class="mi">3600</span>
+<span class="n">dakika</span> <span class="o">=</span>  <span class="n">hala_kalan_san</span> <span class="o">//</span> <span class="mi">60</span>
+<span class="n">son_kalan_san</span> <span class="o">=</span> <span class="n">hala_kalan_san</span>  <span class="o">%</span> <span class="mi">60</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Saat=&quot;</span><span class="p">,</span> <span class="n">saat</span><span class="p">,</span> <span class="s">&quot;  dakika=&quot;</span><span class="p">,</span> <span class="n">dakika</span><span class="p">,</span>
+                         <span class="s">&quot;saniye=&quot;</span><span class="p">,</span><span class="n">hala_kalan_san</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="sozluk">
+<h2>2.13. Sözlük<a class="headerlink" href="#sozluk" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-atama-komutu">atama komutu</dt>
+<dd><p class="first">Bir değeri,  bir isme (değişkene) atayan komuttur. <tt class="docutils literal"><span class="pre">=</span></tt> atama komutunun
+solunda isim vardır. Atama komutunun sağında ise, Python tarafından
+değerlendirilip, isme atanacak bir ifade vardır. Atama işlecinin
+sağ ve sol tarafları arasındaki fark
+programcılar için kafa karıştırıcı olabilir. Aşağıdaki örnekte:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p class="last"><tt class="docutils literal"><span class="pre">=</span></tt>&#8216;nın her iki tarafındaki <tt class="docutils literal"><span class="pre">n</span></tt> değişkeni farklı görevler
+üstlenir. Sağ tarafta bir değerdir  ve Python yorumlayıcısı tarafından
+sol taraftaki isme atanmadan önce değerlendirilecek ifadenin kısmını
+oluşturur.</p>
+</dd>
+<dt id="term-atama-isleci">atama işleci</dt>
+<dd><tt class="docutils literal"><span class="pre">=</span></tt> Python&#8217;un atama işlecidir. Bunu matemikte kullanılan ve
+değerleri birbirleriyle karşılaştıran <em>eşittir</em> işleci ile
+karşılaştırın.</dd>
+<dt id="term-kompozisyon">kompozisyon</dt>
+<dd>Basit ifadeleri ve komutları, karmaşık hesaplamaları temsil etmek için
+bir araya getirip birleşik ifadeler ve komutlar oluşturma özelliğidir.</dd>
+<dt id="term-birlestirme">birleştirme</dt>
+<dd>İki dizi katarının uç uca eklemedir.</dd>
+<dt id="term-veri-tipi">veri tipi</dt>
+<dd>Değerler kümesidir. Bir değerin tipi, bir ifade içinde nasıl
+kullanılabileceğini belirler. Şu ana kadar tamsayılar ( <tt class="docutils literal"><span class="pre">int</span></tt>), kayan
+noktalı sayılar (<tt class="docutils literal"><span class="pre">float</span></tt>) ve dizi katarları (<tt class="docutils literal"><span class="pre">str</span></tt>) tiplerini
+gördük.</dd>
+<dt id="term-hasaplama">hasaplama</dt>
+<dd>Bir ifadeyi basitleştirmek ve tek bir değer üretmek için sırasıyla
+işlemleri gerçekleştirmektir.</dd>
+<dt id="term-ifade">ifade</dt>
+<dd>Tek bir sonuç değerini temsil eden değişken, işleç ve değerlerin bir
+birleşimidir.</dd>
+<dt id="term-float-kayan-noktali-sayi">float (kayan noktalı sayı)</dt>
+<dd>Kayan noktalı sayıları saklayan Python veri tipleridir. Kayan noktalı
+sayılar bilgisayarda iki parça olarak saklanır: bir <em>taban</em> ve <em>üst</em>.
+Bunlar normal şekilde görüntülendiğinde, ondalık sayılar gibi gözükürler.
+Float sayılar kullandığınızda yuvarlama hatalarına dikkat etmeniz
+gerekirmektedir ve yaklaşık değer barındırırlar.</dd>
+<dt id="term-tamsayi-bolme-isleci">tamsayı bölme işleci</dt>
+<dd><tt class="docutils literal"><span class="pre">//</span></tt> işleci  bir sayıyı diğer bir sayıya böler ve sonucu tamsayı
+olarak verir. Eğer bölme işleminin sonucu tamsayı değilse, bu sonuçtan
+küçük en yakın tamsayıyı sonuç olarak atar.</dd>
+<dt id="term-int-tam-sayi">int (tam sayı)</dt>
+<dd>Pozitif veya negatif tamsayıyı ifade eden Python veri tipi.</dd>
+<dt id="term-anahtar-kelime">anahtar kelime</dt>
+<dd>Derleyici tarafından programı ayrıştırmak için kullanılan Python&#8217;a
+özgü kelimeler. Örneğin <tt class="docutils literal"><span class="pre">if</span></tt>, <tt class="docutils literal"><span class="pre">def</span></tt> ve <tt class="docutils literal"><span class="pre">while</span></tt> kelimelerin
+değişken olarak kullanamazsınız.</dd>
+<dt id="term-moduler-isleci">mödüler işleci</dt>
+<dd>Yüzdelik (<tt class="docutils literal"><span class="pre">%</span></tt>) işareti ile ifade edilen ve iki sayının birbirine
+bölümünde kalanı veren işleç.</dd>
+<dt id="term-islenen">işlenen</dt>
+<dd>İşleç&#8217;in üzerine etkidiği değerlerden biri.</dd>
+<dt id="term-oncelik-sarisi">öncelik sarısı</dt>
+<dd>Birden fazla işleç ve işlenin bulunduğu bir ifadede hesaplama sırasını
+belirten kurallar kümesi.</dd>
+<dt id="term-durum-diyagrami">durum diyagramı</dt>
+<dd>programın bir anındaki eğişkenlerin ve referans ettikleri değerlerin
+grafiksel gösterimidir.</dd>
+<dt id="term-komut-deyim">komut (deyim)</dt>
+<dd>Python yorumlayıcı tarafından yürütülebilecek yönergedir. Şimdiye kadar
+atama komutunu gördük, fakat yakında <tt class="docutils literal"><span class="pre">import</span></tt> ve <tt class="docutils literal"><span class="pre">for</span></tt> komutlarını
+göreceğiz.</dd>
+<dt id="term-str-karakter-dizisi">str (Karakter dizisi)</dt>
+<dd>Karakter dizisini (string) tutan Python veri tipidir.</dd>
+<dt id="term-deger">değer</dt>
+<dd>Bir değişkende veya hesaplanan bir ifadede sakla bir sayı veya karakter dizisi ( veya daha sonra isimlendirilecek başka şeyler)</dd>
+<dt id="term-degisken">değişken</dt>
+<dd>Bir değeri temsil eden isimdir.</dd>
+<dt id="term-degisken-ismi">değişken ismi</dt>
+<dd>Bir değişkene verilen isimdir. Pyton&#8217;daki değişken isimleri bir harf (a..z, A...Z ve _) veya bir rakam (0..9) ile başlayabilir. Tercih edilen programlama pratiğinde, değişken ismi öyle seçilmeli ki; kullanım amaçları açık olsun, program içinde kendi kendini belgelendirsin.</dd>
+</dl>
+</div>
+<div class="section" id="alistirmalar">
+<h2>2.14. Alıştırmalar<a class="headerlink" href="#alistirmalar" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">&#8221; Hep iş ve hiç oyun oynamamak kişiyi sıkıcı yapar.&#8221; cümlesindeki her bir
+kelimeyi farklı bir değişkende saklayın; sonra <tt class="docutils literal"><span class="pre">print</span></tt> deyimi yardımıyla
+bu cümleyi tek bir satırda yazdırın.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">6</span> <span class="pre">*</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">2</span></tt> ifadesine parentez ekleyerek, değerini 4&#8217;ten -6&#8217;ya
+değiştirin.</p>
+</li>
+<li><p class="first">Daha önce üzerinde çalıştığınız bir programa yorum ekleyerek tekrar
+çalıştırın ve sonucu gözlemleyin.</p>
+</li>
+<li><p class="first">Python yorumcusunu başlatın ve <tt class="docutils literal"><span class="pre">ahmet</span> <span class="pre">+</span> <span class="pre">4</span></tt> ifadesini girin. Bu size bir
+hata verecektir:</p>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s">&#39;ahmet&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">ahmet</span></tt> ismine bir değer atayın, böylece <tt class="docutils literal"><span class="pre">ahmet+4</span></tt> 10 değerini
+üretebilsin.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Bileşik faiz hesabı yapılırken kullanılan denklem</p>
+<blockquote>
+<div><div class="math">
+\[\begin{split}A = P\big(1+r/n\big)^{nt} \\\end{split}\]</div>
+<ul class="simple">
+<li>P = ilk yatırım</li>
+<li>r = yıllık cari (nominal)  faiz oranı ( ondalıklı girilecek. Örnek: yıllık  %10 faiz getiriyorsa, 0.1
+girilir.)
+olarak giriniz.)</li>
+<li>n = faizin yılda kaç kere ana paraya eklendiği (Örnek: eğer banka
+size 3 aylık faiz miktarını veriyorsa, bu değer 4 olacak. )</li>
+<li>t = yıl miktarı</li>
+</ul>
+</div></blockquote>
+<p>ile verilir.</p>
+<p>10000 TL&#8217;lik ana parayı <cite>P</cite> değişkenine; 12 değerini <cite>n</cite> değişkenine; %8 faiz oranını
+<cite>r</cite> değişkenine atayınız. Kullanıcıdan yatırımın kaç
+sene bankada tutulacağını komut satırından soranve bunu <cite>t</cite>&#8216;ye atayan
+Python programı yazın. <cite>t</cite> yıl sonra bankadaki birikiminizi hesaplayın.</p>
+</li>
+<li><p class="first">Aşağıdaki sayısal ifadeleri kafanızdan hesaplayınız ve sonra Python
+yorumlayıcısı kullanarak sonuçlarınızı karşılaştırınız:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">5</span> <span class="pre">%</span> <span class="pre">2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">9</span> <span class="pre">%</span> <span class="pre">5</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">15</span> <span class="pre">%</span> <span class="pre">12</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">12</span> <span class="pre">%</span> <span class="pre">15</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">6</span> <span class="pre">%</span> <span class="pre">6</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">0</span> <span class="pre">%</span> <span class="pre">7</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">7</span> <span class="pre">%</span> <span class="pre">0</span></tt></li>
+</ol>
+<p>Son örnek doğru çıktı mı? Niçin? Eğer son örnek hariç diğer butün örnekleri
+doğru tahmın etmişseniz, şimdi ilerliyebilirsiniz. Eğer doğru tahmin edememiş
+iseniz, kendi kendinize yeni örnekler üretin. Kendinizi rahat hisseden
+kadar Mödüler işlemcisi üzerine çalışıp, nasıl çalıştığını anlayın.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Saate bakıyorsunuz ve öğleden sonra 2 olduğunu görüyorsunuz. Alarımınızı 51
+saat sonrasına kuruyorsunuz. Hangi saatte alarımınız çalışır? (İpucu:
+Parmaklarınızla sayma yapabilirsiniz, fakat bu bizim amacımız değil. Eğer
+hala parmaklarınızla hesap yapmaya yöneliyorsunuz, 51&#8217;i 5100&#8217;e çevirin.)</p>
+</li>
+<li><p class="first">Yukarıdaki programı çözecek genel bir Python programı yazın. Kullanıcıya
+saat cinsinden şimdiki zamanı  ve kaç saat beklenmesini soran bir program
+yazınız. Programınız, alarm çaldığında saatin kaç olduğunu gösteren bir
+çıkış vermelidir.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hello_little_turtles-tr.html" title="3. Merhaba, küçük kaplumbağlar"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="way_of_the_program-tr.html" title="1. Programlama Yolu"
+             >previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Name prefix for templates and static dir [_].
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

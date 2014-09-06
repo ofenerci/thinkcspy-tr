@@ -1,0 +1,748 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3. Merhaba, küçük kaplumbağlar &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="4. Functions" href="functions-tr.html" />
+    <link rel="prev" title="2. Değişkenler, ifadeler ve deyimler (komutlar)" href="variables_expressions_statements-tr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="functions-tr.html" title="4. Functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="variables_expressions_statements-tr.html" title="2. Değişkenler, ifadeler ve deyimler (komutlar)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="merhaba-kucuk-kaplumbaglar">
+<h1>3. Merhaba, küçük kaplumbağlar<a class="headerlink" href="#merhaba-kucuk-kaplumbaglar" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Kendi programlarımız içinde kullanabileceğimiz Python modülleri, oldukça
+fazladır ve birçok önemli özellikler sunar. E-posta veya bir ev sayfasının
+içeriğini indirmek gibi. Bu bölümde bakacağımız modül, bize ekranda
+kaplumbağalar yaratmamamızı; bu kaplumbağaları kullanarak ekranda şekiller ve
+desenler çizmemizi sağlayacak.</p>
+<p>Kamplumbağalar oldukça eğlendiricidir, fakat bu bölümün gerçek amacı: Biraz
+daha Python öğrenmek, hesaplamalı düşünmeyi geliştirmek veya &#8220;bir bilgisayar
+bilimcisi gibi düşünmeyi&#8221; öğrenmektir. Bu bölümde işlenen Python&#8217;un büyük bir
+kısmı daha sonra derinlemesine tekrar incelenecektir.</p>
+<div class="section" id="ilk-kamplumbaga-programimiz">
+<span id="index-1"></span><h2>3.1. İlk kamplumbağa programımız<a class="headerlink" href="#ilk-kamplumbaga-programimiz" title="Permalink to this headline">¶</a></h2>
+<p>Bir kamplumbağa yaratan ve bununla bir dikdörtgen çizen birkaç satırlık Python
+programı yazalım. (İlk yarattığımız kamplumbağaya  atayacağımız değişkeni
+<tt class="docutils literal"><span class="pre">ahmet</span></tt> olarak adlandıracağız. Daha önceki bölümdeki değişken isimlendirme
+kurallarını kullanarak eğer istersek farklı bir isimde seçebiliriz.)</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">turtle</span>             <span class="c"># Kamplumbağalar yaratmamazı sağlar.</span>
+ <span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>      <span class="c"># Kamplumbağalar için bir pencere aç (oyun alanı)</span>
+ <span class="n">yaratır</span><span class="o">.</span>
+ <span class="n">ahmet</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>    <span class="c"># Bir tane kamplumbağa yarat ve bunu  ahmet&#39;e</span>
+ <span class="n">ata</span>
+
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>          <span class="c"># ahmet&#39;e 50 birim ilerlemesini söyle</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>             <span class="c"># ahmet&#39;in 90 derece dönmesini söyle</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>          <span class="c"># Dikdörtgenin ikinci kenarını tamamla.</span>
+
+ <span class="n">wn</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>             <span class="c"># Kullanıcının pencereyi kapatmasını bekle.</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu programı çalıştırdığınızda, aşağıdaki gibi yeni bir pencere çıkacaktır:</p>
+<blockquote>
+<div><img alt="_images/tess01.png" src="_images/tess01.png" />
+</div></blockquote>
+<p>Bu progamı anlayabilmemiz için birkaç şeyi açıklayalım:</p>
+<p>İlk satır bize <tt class="docutils literal"><span class="pre">turtle</span></tt> isimli modülü Python&#8217;a yüklememizi söyler. Bu modül
+bize iki yeni farklı yeni tür kullanmamıza izin verir: <tt class="docutils literal"><span class="pre">Turtle</span></tt> ve
+<tt class="docutils literal"><span class="pre">Screen</span></tt> type. <tt class="docutils literal"><span class="pre">turtle.Turtle</span></tt> içindeki nokta bize, <em>&#8220;Turtle türü turtle
+modülü içinde tanımlanmıştır&#8221;</em> anlamını verir. ( Unutmayınız ki Python büyük
+harf ve küçük harf ayrımı yapar; bu yüzden, küçük harfle (<cite>t</cite>) başlayan modül ismi
+, büyük harfle başlayan <cite>Turtle</cite> modül isminden farklıdır. Şansımıza
+<cite>Turtle</cite> isimli bir modül Python&#8217;da yoktur.)</p>
+<p>Eğer screen (ekran) denilen şeyi yaratır ve bunu açarsak (ekran yerine,
+pencere demeyi tercih edeceğim), bu pencereye <tt class="docutils literal"><span class="pre">wn</span></tt> değişkenini atar.
+Her pencerenin  içinde çizim yapabileceğimiz alana <strong>kanvas</strong> (tuval) denir.</p>
+<p>3&#8217;üncü satırda bir kamplumbağa oluştururuz. <tt class="docutils literal"><span class="pre">ahmet</span></tt> değişkeni bu
+kamplumbağaya işaret eder.</p>
+<p>Bu üç satırı halllettikten sonra, kamplumbağımıza kanvas üzerinde çizim
+yaptırabiliriz.</p>
+<p>5-7 satırlar arasında, <tt class="docutils literal"><span class="pre">ahmet</span></tt> <strong>nesne</strong>sini hareket ettiriyoruz ve
+döndürüyoruz. Biz bunu yaparken <tt class="docutils literal"><span class="pre">ahmet</span></tt>&#8216;in <strong>yöntem</strong>lerini çalıştırıyoruz
+(C.n: yöntemi bir fonksiyon gibi düşünebilirsiniz.)
+ya da etkinleştiriyoruz. Bütün kamplumbağalar bütün bu komutlara nasıl cevap
+vereceğini biliyor.</p>
+<p>Son satırında bir amacı vardır: <tt class="docutils literal"><span class="pre">wn</span></tt> değişkeni yukarıda gösterilen pencereye
+işaret eder. <tt class="docutils literal"><span class="pre">mainloop</span></tt> yöntemini etkinleştirdiğimizde, pencere bir
+kullanıcıdan bir eylem bekleyen konuma girer ( bu bir düğmeye basma, fareyi
+hareket ettirip, düğmeye basmak olabilir.) Kullanıcı pencereyi kapattığında
+program sona erecektir.</p>
+<p>Bir nesne farklı yöntemlere &#8212; birşey yapabilen şeyler&#8212; ve <strong>nitelik</strong>lere (bazen özellik diye de isimlendirilir.) Örneğin, her kamplumbağa bir
+<em>renk</em> özelliğine sahiptir. <tt class="docutils literal"><span class="pre">ahmet.color(&quot;red&quot;)</span></tt> ise bir yöntem
+etkinleştirmesi ile, <tt class="docutils literal"><span class="pre">ahmet</span></tt>i ve çizimleri kırmızı yapacaktır. (Dikkat
+ediniz ki <cite>color</cite>&#8216;un hecelenmesi Amerikan İngilizcesi gibidir. Ç.n: İngiliz
+İngilizcesinde <cite>color</cite> , <cite>colour</cite> diye yazılır.)</p>
+<p>Kamplumbağ&#8217;nın rengi. pencere içindeki yeri, hangi yöne baktığı ve diğer
+özellikleri;   kalemin çizgi genişliği gibi parçalar kamplumbağa&#8217;nın anlık
+<strong>durumu</strong>dur. Benzer olarak, pencere nesnesinin bir rengi, başlık çubuğunda
+bir ismi, büyüklüğü ve ekran üzerinde bir yeri vardır. Bunlar, pencere
+nesnesinin durumunun bölümleridir.</p>
+<p>Kamplumbağa ve pencere nesnesini değiştirmeye yarayan epeyce yöntem vardır.
+Biz şimdilik birkaçını göstereceğiz. Diğer önceki örnekten  farklı olan
+satırları aşağıdaki programda yorumladık ( ve bu kamplumbağa için farklı bir
+değişken ismi kullandık.)</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">turtle</span>
+ <span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>
+ <span class="n">wn</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">(</span><span class="s">&quot;lightgreen&quot;</span><span class="p">)</span>      <span class="c"># Pencerenin rengini ayarla</span>
+ <span class="n">wn</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;Hello, tamer!&quot;</span><span class="p">)</span>      <span class="c"># Pencerenin başlığını ayarla</span>
+
+ <span class="n">tamer</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>            <span class="c"># tamer&#39;a rengini değiştirmesini söyle</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>               <span class="c"># tamer&#39;a kalem genişliğini ayarlamasını</span>
+ <span class="n">söyle</span>
+
+ <span class="n">tamer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+
+ <span class="n">wn</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu programı çalıştırdığımızda yeni bir pencere ortaya çıkar ve bu pencereyi
+kapatana kadar ekranda kalmaya devam eder.</p>
+<blockquote>
+<div><img alt="_images/tess02.png" src="_images/tess02.png" />
+</div></blockquote>
+<div class="admonition-bu-programi-genisletelim admonition">
+<p class="first admonition-title">Bu programı genişletelim ...</p>
+<ol class="last arabic simple">
+<li>Komut satırından kullanıcıya pencerenin rengini soracak şekilde
+programı değiştirin. Kullanıcının cevabının bir değişken içinde
+saklamalı ve kullanıcının isteğine göre pencerenin rengini
+değiştirebilmelidir.
+(İpucu: İzin verilen renklerin isimlerini <a class="reference external" href="http://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm</a> adresinden bulabilirsiniz.
+Bu sayfa bazı garip isimler ile  renkleri isimlendirmektedir. Sıcak
+pembe &#8220;HotPink&#8221; ve şeftali esintisi &#8220;peach puff&#8221;)</li>
+<li>Kullanıcının, ali&#8217;nin rengini değiştirebilmesine izin verecek benzer
+değişiklikleri yapın.</li>
+<li>tamer&#8217;ın kaleminin genişliği için benzer değişikleri yapın. <em>Yardım:</em>
+diyalog ekranınız kullanıcıdan aldığı cevabı karakter dizisi olacak
+döndürecektir, fakat <tt class="docutils literal"><span class="pre">tamer</span></tt>&#8216;in <tt class="docutils literal"><span class="pre">pensize</span></tt> (genişlik) yöntemi
+kullanıcıdan int (tamsayı) bir değişken bekler. Bu yüzden,
+<tt class="docutils literal"><span class="pre">pensize</span></tt>&#8216;ın değerini kullanmadan önce onu string&#8217;den int&#8217;e
+çevirmeniz gerekecek.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="orneklemeler-kamplumbaga-suruleri">
+<span id="index-2"></span><h2>3.2. Örneklemeler &#8211; Kamplumbağa sürüleri<a class="headerlink" href="#orneklemeler-kamplumbaga-suruleri" title="Permalink to this headline">¶</a></h2>
+<p>Bir program içinde birçok farklı tamsayı olabileceği gibi, birçok
+kamplumbağa&#8217;da olabilir. Bunlardan herbirine <strong>örnek</strong> (instance) denir. Her
+örnek&#8217;in kendine ait nitelikleri (özellikleri ) ye yöntemleri vardır. Böylece,
+<tt class="docutils literal"><span class="pre">ahmet</span></tt> siyah ince bir kalem ile çizebilir ve kanvas üzerinde bir konum üzerinde
+olabilir, bunun gibi <tt class="docutils literal"><span class="pre">tamer</span></tt>&#8216;de kalın bir pembe ile kendi yönünde gidebilir.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">turtle</span>
+ <span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>         <span class="c"># Pencereyi ve özelliklerini oluştur.</span>
+ <span class="n">wn</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">(</span><span class="s">&quot;lightgreen&quot;</span><span class="p">)</span>
+ <span class="n">wn</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;Ahmet ve Tamer&quot;</span><span class="p">)</span>
+
+ <span class="n">tamer</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>       <span class="c"># tamer&#39;i ve ona ait özellikleri oluştur.</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s">&quot;hotpink&quot;</span><span class="p">)</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+ <span class="n">ahmet</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>       <span class="c"># ahmet&#39;i oluştur.</span>
+
+ <span class="n">tamer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>             <span class="c"># tamer&#39;e eşkenarlı üçgen çizdir.</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>               <span class="c"># üçgen&#39;i tamamla.</span>
+
+ <span class="n">tamer</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>              <span class="c"># tamer&#39;i kendi çevresinde 180 derece</span>
+ <span class="n">döndür</span><span class="o">.</span>
+ <span class="n">tamer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>             <span class="c"># onu origin&#39;den uzaklaştır.</span>
+
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>             <span class="c"># ahmet&#39;e kara çizdir.</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+ <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+
+ <span class="n">wn</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Aşağıdaki şekil, <tt class="docutils literal"><span class="pre">ahmet</span></tt>&#8216;in dikdörtgeni tamamladığında ve <tt class="docutils literal"><span class="pre">tamer</span></tt>&#8216;ın da
+üçgeni tamamladığındaki resmi göstermektedir.</p>
+<blockquote>
+<div><img alt="_images/tess03.png" src="_images/tess03.png" />
+</div></blockquote>
+<p>Burda bazı <em>Bir bilgisayar bilimcisi gibi nasıl düşünülür</em> gözlemleri:</p>
+<ul class="simple">
+<li>Bir tam çemberde 360 derece vardır. Bir kamplumbağ&#8217;nın yaptığı bütün
+dönüşleri bir araya getirirsek, <em>dönüşler sırasında hangi adımlar
+olmuşsa olsun</em>, biz kolayca bunların 360 derecenin katları olup olmadığını
+anlayabiliriz. <tt class="docutils literal"><span class="pre">ahmet</span></tt> ilk anda yaratıldığında hangi yöne işareti
+ediyorsa, en son halinin de aynı yöne işaret ettiğini bize gösterir.
+Geometri&#8217;nin geleneklerine göre, oluşturulan kurbağaların yönleri doğuya 0
+derece yönlenir.</li>
+<li><tt class="docutils literal"><span class="pre">ahmet</span></tt>&#8216;in son dönüşünü yapmayabilirdik, fakat bu pek tatmin edici
+olmayabilirdi. Eğer bize kare veya dikdörtgen gibi kapalı şekiller çizilmesi
+sorulursa, başladığı ilk durumdaki yöne bakması ve bütün dönüşlerini
+tamamlamış olması iyi bir fikirdir. Bu, küçük programların büyük programlara
+çevrilmesinı ve bu programların insanlar tarafından daha kolay anlaşılmasını
+sağlar.</li>
+<li><tt class="docutils literal"><span class="pre">tamer</span></tt> ile aynısını yaptık: O, bir üçgen çizdi ve 360 derece tam dönüş
+yaptı. Daha sonra kendi çevresinde 180 derece döndürdük ve onu kenera
+çektik. 18&#8217;inci satır bile programcının akıl yürütmesi hakkında bir verir.
+Daha geniş anlamda, <tt class="docutils literal"><span class="pre">tamer</span></tt>&#8216;in üçgen çizme eylemi (12-17 satırlar) ve
+başlangıç noktasından uzaklaşması ( 19 ve 20&#8217;inci satırlar ) biraraya
+toplanmıştır.</li>
+<li>Programdaki yorumlar kullanılmasının başlıca nedeni düşünce yapımızı ve
+büyük fikirlerimizi kaydetmektir. Bunlar her zaman kodun içinde açık
+olmayabilir.</li>
+<li>Sürünüz için iki kamplumbağa yeterli olmayabilir. Burdaki önemli fikir: İhtiyacınız olduğu kadar
+kamplumbağ yaratabilmeniz için, turtle modülü size bir fabrika verir. Her
+örneklemenin kendisine ait durum ve davranışları vardır.</li>
+</ul>
+</div>
+<div class="section" id="for-dongusu">
+<span id="index-3"></span><h2>3.3. <em>for</em> döngüsü<a class="headerlink" href="#for-dongusu" title="Permalink to this headline">¶</a></h2>
+<p>Bir kare çizmek bile, oldukça sıkıcıydı. Hareket etme ve dönme adımlarını
+dörtkere açıkça tekrar etmek zorunda kaldık. Eğer bir altıgen, sekizgen veya
+42 kenarı olan bir poligon çizmek isteseydik, bu çok daha kötü olurdu.</p>
+<p>Bir kodu alıp  onu tekrar ettirmek (döngüye koymak)  programların temel yapı taşıdır.</p>
+<p>Python&#8217;un <strong>for</strong> döngüsü bunu bizim için çözer. Örneğin, arkadaşlarımızın
+herbirini partimize davet edecek bir e-posta göndermek istiyoruz. Henüz
+nasıl e-posta göndereceğimizi bilmiyoruz, şimdilik herbir arkadaşımız için bir
+mesajı ekranda yazacağız.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;Ahmet&quot;</span><span class="p">,</span><span class="s">&quot;Aysun&quot;</span><span class="p">,</span><span class="s">&quot;Burak&quot;</span><span class="p">,</span><span class="s">&quot;Ayşe&quot;</span><span class="p">,</span><span class="s">&quot;Zeki&quot;</span><span class="p">,</span><span class="s">&quot;Temel&quot;</span><span class="p">,</span><span class="s">&quot;Perihan&quot;</span><span class="p">]:</span>
+    <span class="n">davet</span> <span class="o">=</span> <span class="s">&quot;Merhaba &quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="o">+</span> <span class="s">&quot;.  lütfen Cumartesi günü partime gelin.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">davet</span><span class="p">)</span>
+<span class="c"># daha fazla kod buraya eklenebilir.</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu kodu çalıştırdığımızda, aşağıdaki çıktı gibi olur:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">Merhaba Ahmet.  lütfen Cumartesi günü partime gelin.</span>
+<span class="go">Merhaba Aysun.  lütfen Cumartesi günü partime gelin.</span>
+<span class="go">Merhaba Burak.  lütfen Cumartesi günü partime gelin.</span>
+<span class="go">Merhaba Ayşe.  lütfen Cumartesi günü partime gelin.</span>
+<span class="go">Merhaba Zeki.  lütfen Cumartesi günü partime gelin.</span>
+<span class="go">Merhaba Temel.  lütfen Cumartesi günü partime gelin.</span>
+<span class="go">Merhaba Perihan.  lütfen Cumartesi günü partime gelin.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li>1&#8217;inci satırdaki <tt class="docutils literal"><span class="pre">for</span></tt>&#8216;un önündeki <tt class="docutils literal"><span class="pre">f</span></tt> değişkenine <strong>döngü değişkeni</strong>
+denir. Biz burada değişken olarak <tt class="docutils literal"><span class="pre">f</span></tt> harfini kullandık, siz isterseniz
+bir başka harf veya kelime de kullanabilirsiniz.</li>
+<li>2. ve 3. satırlar  <strong>döngü gövdesini</strong> oluşturur. Döngü gövdesi her zaman
+girintili yazılır. Herbir girinti, gövde içindeki her bir satırı tam olarak
+belirler.</li>
+<li>Herbir <em>tekrak</em>&#8216;da veya döngüyü her <em>geciş</em>&#8216;te  ilk yapılan şey, işlenecek
+madde kalıp kalmadığını kontrol etmektir. Eğer işlenecek hiçbir madde
+kalmamış ise (bu <strong>sonlandırma koşulu</strong> olarak isimlendirilir)  döngü
+sonlandırılır. Program yürümeye  gövde bitiminden sonraki
+satırlardan devem eder( bu durumda, 4&#8217;üncü satırdaki yorumdan sonraki
+satır.)</li>
+<li>Eğer daha işlenecek maddeler varsa, listede sonra gelen maddeye işaret
+edecek şekilde döngü değişkeni güncellenir. Bu durum şu anlama gelir: Döngü
+gövdesi üzerinden 7 kez yürü ve  her yürümede <tt class="docutils literal"><span class="pre">f</span></tt> değişkeni farklı bir
+arkadaşa atamasını yap.</li>
+<li>Döngünün içindeki gövde üzerinden her yürüme  sonunda, Python <tt class="docutils literal"><span class="pre">for</span></tt>
+deyimine geri döner. Daha fazla madde kalıp kalmadığı kontrol edilir; eğer
+listenin içinde işlenecek daha madde varsa, f değişkeni sonraki maddeye
+işaret eder.</li>
+</ul>
+</div>
+<div class="section" id="for-dongusunun-yurutme-akisi">
+<span id="index-4"></span><h2>3.4. For döngüsünün yürütme akışı<a class="headerlink" href="#for-dongusunun-yurutme-akisi" title="Permalink to this headline">¶</a></h2>
+<p>Program çalışırken, Python hangi çümlenin işleneceğini takip eder. Biz buna
+programın <strong>yürütme akışı</strong>nın  <strong>kontrol akışı</strong> diyeceğiz. insanlar
+programı çalıştırdıklarında, sıradaki her bir cümleye parmağıyla işaret eder.
+Kontrol akışını, &#8220;Python&#8217;un hareket eden parmağı&#8221; olarak düşünebilirsiniz.</p>
+<p>Şimdiye kadar program akışının yukarıdan aşağıya doğru satır satır olduğunu
+görmüştük. <tt class="docutils literal"><span class="pre">For</span></tt> döngüsü bunu değiştirir.</p>
+<div class="admonition-for-dongusunun-akis-diyagrami admonition">
+<p class="first admonition-title"><em>for</em> döngüsünün akış diyagramı</p>
+<blockquote>
+<div>Eğer bir akış diyagramı çizersek, kontrol akışını gözünde canlandırmak ve
+anlamak daha kolay olur. Bu şekil, <tt class="docutils literal"><span class="pre">for</span></tt> deyiminin kesin
+basamaklarını ve nasıl yürüdüğünü göstermektedir.</div></blockquote>
+<a class="last reference internal image-reference" href="_images/flowchart_for.png"><img alt="_images/flowchart_for.png" src="_images/flowchart_for.png" style="height: 420px;" /></a>
+</div>
+</div>
+<div class="section" id="dongu-bizim-kamplumbaga-programimizi-basitlestirir">
+<span id="index-5"></span><h2>3.5. Döngü bizim kamplumbağa programımızı basitleştirir<a class="headerlink" href="#dongu-bizim-kamplumbaga-programimizi-basitlestirir" title="Permalink to this headline">¶</a></h2>
+<p>Bir kare çizmek için, aynı şeyi dört kere yapmamız gerekebilir&#8212;
+kamplumbağayı hareket ettir ve döndür. <tt class="docutils literal"><span class="pre">ahmet</span></tt>&#8216;in bir karenin dört kenarını
+çizmesini sağlamak için 8 satır yazdık. Yalnızca 3 satır kullanarak, aynı şeyi
+yapabiliriz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bazı gözlemler:</p>
+<ul>
+<li><p class="first">Bazı satırlardan tasarruf etmemiz kolaylık olmasına rağmen, bu çok önemli
+değildir. Bundan çok daha önemlisi, kendini tekrarlayan bir kalıp bulduk ve
+kalıbı tekrar kullanmak için programımızı yeniden düzenledik. Bu kalıpları
+bulmak ve bu kalıplar etrafında programımızı düzenlemek hesaplamalı
+düşünmede can alıcı yetenektir.</p>
+</li>
+<li><p class="first">[0,1,2,3] değerleri döngü gövdesinin 4 kere yürütülmesi için verilmiştir.
+Biz herhangi dört değerde kullanabilirdik, fakat bunlar genelde kullanılan
+değerlerdir. Gerçekte o kadar yaygındırlar ki, Python&#8217;un kendine ait
+<tt class="docutils literal"><span class="pre">range</span></tt> fonksiyonu vardır.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="c"># i=0, sonra 1, sonra 2 ve 3 için gövde yürütülür (çalıştırılır.)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c">#  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]&#39;ın herbir değerini x&#39;e atar.</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</li>
+<li><p class="first">Bilgisayar programcıları saymaya 0&#8217;dan başlamayı severler.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">range</span></tt> fonksiyonu, <tt class="docutils literal"><span class="pre">for</span></tt> içideki döngü değişkeni için bir değerler
+dizisi oluşturur. Her zaman 0&#8217;dan başlarlar ve yurakıdaki durumlar için 4 ve
+10&#8217;u bu diziye dahil etmezler.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ahmet</span></tt>&#8216;in en son dünüşünde 360 dereceyi tamamlaması için yaptığımız küçük
+kurnazlık bize şimdi karşılığını verdi. Eğer bunu yapmamış olsaydık, karenin
+dördüncü kenarı için döngüyü kullanamamış olacaktık. Diğer kenarlardan
+farklı bir durum oluşacaktı. Mümkün olduğunca kodumuzu özel bir durum için
+değil, genel bir motife uyacak şekilde yazmaya çalışmalıyız.</p>
+</li>
+</ul>
+<p>Birşeyi dört kere tekrar etmek için, iyi bir Python programcısı şunu
+yapacaktı:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">tamer'in</span></tt> de eşkenar üçgen çizmesi için <tt class="docutils literal"><span class="pre">for</span></tt> döngüsünü de kullanabilir. Bu
+programda hangi değişikleri yapmanız gerektiğini görebilmeniz gerekir.</p>
+<p>Fakat şimdilik, eğer aşağıdaki değişikliği yapsaydanız, ne görürdünüz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;purple&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">]:</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Değişken listeyede atanabilir. Böylece listeler yalnızca <tt class="docutils literal"><span class="pre">for</span></tt> döngüsü için
+değil, daha genel durumlar için kullanılabilir. Yukarıdaki kode şu şekilde
+yazılabilir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Assign a list to a variable</span>
+<span class="n">clrs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;purple&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">clrs</span><span class="p">:</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">ahmet</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="birkac-tane-daha-kamplumbaga-yontemleri-fonksiyonlari">
+<h2>3.6. Birkaç tane daha kamplumbağa yöntemleri (fonksiyonları)<a class="headerlink" href="#birkac-tane-daha-kamplumbaga-yontemleri-fonksiyonlari" title="Permalink to this headline">¶</a></h2>
+<p>Kamplumbağ yöntemleri negatif açı veya uzaklık kullanabilir. Örneğin,
+<tt class="docutils literal"><span class="pre">tamer.forward(-100)</span></tt> tamer&#8217;i geriye doğru hareket ettirecek ve
+<tt class="docutils literal"><span class="pre">tamer.left(-30)</span></tt> ise tamer&#8217;i sağ döndürecektir. Ayrıca, bir çemberde 360
+derece olduğundan, onu 30 derece sola döndürmek, <tt class="docutils literal"><span class="pre">tamer</span></tt>&#8216;i aynı yöne
+çevirecek ve bu sanki onu 330 derece sağ&#8217;a çevirmek ile aynı anlama
+gelecektir (Ekrandaki canlandırmayı kullanarak, <tt class="docutils literal"><span class="pre">tamer</span></tt>&#8216;in saat yönününde mi
+yoksa saat yönünün tersin de mi hareket ettiğini söyleyebileceksiniz.)</p>
+<p>Bu size, hem sağa hem de sola dönme yöntemlerinin ikisine birden ihtiyacınız
+olmadığını aklınıza getirir. Aynı zamand <tt class="docutils literal"><span class="pre">backward</span></tt> yöntemi de vardır (Eğer
+biraz uçuk iseniz, <tt class="docutils literal"><span class="pre">ahmet.backward(-100)</span></tt> komutunu <tt class="docutils literal"><span class="pre">ahmet</span></tt>&#8216;i ileriye
+hareket ettirmek için kullanabilirsiniz).</p>
+<p>Bizim konumuzda yapıyı ve aralarındaki bağlantıları daha iyi anlamak, <em>Bilgisayar bilimcisi gibi düşünmenin</em> bir parçasıdır. Eğer kamplumbağalar ile oynayacaksak, geometri ve sayı düzlemi hakkında basit temel konulara bir göz atmak; sol, sağ, ileri, geri, negatif ve pozitif açılar arasındaki bağlantıları farketmek iyi bir başlangıç olabilir.</p>
+<p>Kamplumbağ kalemi çizgi çizmek için  kullanabileceği gibi( pendown: kalem aşağı) , isterse kullanmayabilir de (penup: kalem yukarı) . Bu,
+kamplumbağanın çizgi çizmeden başka yerlere hareket etmesine olanak verir. Bu
+yöntemler:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ahmet</span><span class="o">.</span><span class="n">penup</span><span class="p">()</span>          <span class="c"># kalem kaldırıldı.</span>
+<span class="n">ahmet</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>     <span class="c"># Çizgi çizilmeden ahmet&#39;i hareket ettirir.</span>
+<span class="n">ahmet</span><span class="o">.</span><span class="n">pendown</span><span class="p">()</span>        <span class="c"># kalem yeniden konuldu.</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Her kamplumbağaya farklı bir şekil verebiliriz. Halihazırda tanımlanmış
+yöntemler: <tt class="docutils literal"><span class="pre">arrow</span></tt>, <tt class="docutils literal"><span class="pre">blank</span></tt>, <tt class="docutils literal"><span class="pre">circle</span></tt>, <tt class="docutils literal"><span class="pre">classic</span></tt>, <tt class="docutils literal"><span class="pre">square</span></tt>,
+<tt class="docutils literal"><span class="pre">triangle</span></tt>, <tt class="docutils literal"><span class="pre">turtle</span></tt> bunlardan birkaçıdır.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ahmet</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="s">&quot;turtle&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="_images/alex06.png" src="_images/alex06.png" />
+</div></blockquote>
+<p>Kamplumbağanın canlandırmasını (animasyon) hızlandırabilir veya
+yavaşlatabiliriz ( Canlandırma, kamplumbağanın ne kadar hızlı döneceğini veya
+ileri hareket edeceğini kontrol eder.) Hızlandırma ayarlamaları 1 (en yavaş)
+ve 10 (en hızlı) arasında ayarlanabilir. Eğer biz hızı 0&#8217;a ayarlarsak, bunun
+özel bir anlamı vardır: Canlandırma yapma ve en hızlı gidebileceğin kadar
+hızlı git.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ahmet</span><span class="o">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Kamplumbağa kendi ayakizini  kanvas üzerinde oluşturabilir ve başka bir yere
+hareket ettiğinde bu ayakizi kalacaktır. Kalem yukarı (penup)   olsa bile, iz
+bırakma çalışır.</p>
+<p>Bu yeni özellikleri gösteren bir örnek yapalım:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">turtle</span>
+<span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>
+<span class="n">wn</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">(</span><span class="s">&quot;lightgreen&quot;</span><span class="p">)</span>
+<span class="n">tess</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
+<span class="n">tess</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="s">&quot;turtle&quot;</span><span class="p">)</span>
+<span class="n">tess</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="n">tess</span><span class="o">.</span><span class="n">penup</span><span class="p">()</span>                <span class="c"># This is new</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+   <span class="n">tess</span><span class="o">.</span><span class="n">stamp</span><span class="p">()</span>             <span class="c"># Leave an impression on the canvas</span>
+   <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">3</span>          <span class="c"># Increase the size on every iteration</span>
+   <span class="n">tess</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>       <span class="c"># Move tess along</span>
+   <span class="n">tess</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>           <span class="c">#  ...  and turn her</span>
+
+<span class="n">wn</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="_images/tess07.png" src="_images/tess07.png" />
+</div></blockquote>
+<p>Dikkatli olun! Kaçkere döngü gövdesi yürütüldü? Ekranda kaç tane kamplumbağa
+resmi görüyorsunuz. Bir tanesi hariç bütün ekranda gördüğünüz kamplumbağa
+izleri <tt class="docutils literal"><span class="pre">stamp</span></tt> yönergesi tarafından oluşturulmuştur. Fakat program yalnızca
+bir tane kamplumbağa örneklemesi içerir. Hangisinin gerçek <tt class="docutils literal"><span class="pre">tamer</span></tt> olduğunu
+bulabilir misiniz? (İpucu: Eğer emin değilseniz, <tt class="docutils literal"><span class="pre">for</span></tt> döngüsünden sonra
+<tt class="docutils literal"><span class="pre">tamer</span></tt>&#8216;in rengini değiştiren bir satırlık kod yazın; veya kalemi aşağıya
+indiren ve çizgi çizen, veya onun şeklini değiştiren bir kod yazın.)</p>
+</div>
+<div class="section" id="glossary">
+<h2>3.7. Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-nitelik-ozellik-attribute">nitelik, özellik (attribute)</dt>
+<dd>Belirli bir nesneye ait olan durum veya özellik. Örneğin, <tt class="docutils literal"><span class="pre">tamer</span></tt>
+bir renge sahiptir. Renk burda <tt class="docutils literal"><span class="pre">tamer</span></tt> nesnesinin bir özelliğidir.</dd>
+<dt id="term-kanvas-tuval">kanvas (tuval)</dt>
+<dd>Çizimin gerçekleştiği pencere yüzeyi</dd>
+<dt id="term-kontrol-akisi">kontrol akışı</dt>
+<dd>Sonraki bölümdeki <em>yürütme akışına</em> bakınız.</dd>
+<dt id="term-for-dongusu">for döngüsü</dt>
+<dd>Döngü içindeki gövdede bulunan ifadeleri tekrarlamayı kolaylaştıran
+Python deyimi.</dd>
+<dt id="term-dongu-govdesi">döngü gövdesi</dt>
+<dd>Döngü içinde içeriye girintilenmiş ifadeler. Döngü içindeki ifadelerin
+içeriye doğru girintilenmesi, bir gruplandırmayı ifade eder.</dd>
+<dt id="term-dongu-degiskeni">döngü değişkeni</dt>
+<dd><tt class="docutils literal"><span class="pre">for</span></tt> döngüsü içinde kullanılan değişken. Döngü&#8217;nün herbir
+tekrarında farlı bir değere işaret eder.</dd>
+<dt id="term-ornek">örnek</dt>
+<dd>Bir sınıfa ait olan nesne. <tt class="docutils literal"><span class="pre">ahmet</span></tt> ve <tt class="docutils literal"><span class="pre">tamer</span></tt> kamplumbağa
+sınıfının farklı örnekleridir.</dd>
+<dt id="term-yontem">yöntem</dt>
+<dd>Bir nesne ile ilişiklendirilen fonksiyon. Bir yöntemi çağırıldığında
+veya etkinleştirildiğinde, nesne buna karşılık verir. Örneğin,
+<cite>tess.forward(100)`</cite> dediğimizde, <tt class="docutils literal"><span class="pre">forward</span></tt> bir yöntemdir.</dd>
+<dt id="term-cagirmak">çağırmak</dt>
+<dd>Bir nesneye ait yöntemler vardır. <cite>Çağırmak</cite> fiilini kullanarak, bu
+yöntemi etkinleştirdiğimizi ifade ederiz. Bir yöntemi çağırmak için,
+yöntemden sonra, içinde bir komut içeriği olan  bir çift parantez <cite>()</cite>
+koyarız. Örneğin <tt class="docutils literal"><span class="pre">tamer.forward()</span></tt>, <tt class="docutils literal"><span class="pre">forward</span></tt> yönteminin
+çağırılmasıdır.</dd>
+<dt id="term-modul">modül</dt>
+<dd>Diğer Python programları içinde kullanılmak amacıyla Python
+tanımlamaları ve komutlarını tutan dosya. <tt class="docutils literal"><span class="pre">import</span></tt> deyimi
+kullanarak, modül&#8217;ün içeriği diğer programlara açık hale getirilir.</dd>
+<dt id="term-nesne">nesne</dt>
+<dd>Bir değişkenin işaret edebileceği <tt class="docutils literal"><span class="pre">şey.</span></tt> Bu bir ekran penceresi veya
+yarattığımız bir kamplumbağa olabilir.</dd>
+<dt id="term-range-aralik">range (aralık)</dt>
+<dd>Bir tamsayı dizisi yaratmak için Python&#8217;da tanımlanmış fonksiyon. Bir
+ifadeyi belirli bir sayıda yürütmek istediğimizde, yazdığımız <tt class="docutils literal"><span class="pre">for</span>
+<span class="pre">döngüsü</span></tt> için yararlı bir fonksiyondur.</dd>
+<dt id="term-sonlandirma-kosulu">sonlandırma koşulu</dt>
+<dd>Bir döngü içindeki gövdedeki ifadelerin yürütmesini durduran
+koşuldur. Örneğin bu koşul; Bu bölümde gördüğümüz <tt class="docutils literal"><span class="pre">for</span> <span class="pre">döngüsü</span></tt> içinde, döngü
+değişkenine artık atayacağımız daha fazla madde kalmadığında oluşur.</dd>
+</dl>
+</div>
+<div class="section" id="alistirmalar">
+<h2>3.8. Alıştırmalar<a class="headerlink" href="#alistirmalar" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">`` Biz Python&#8217;un kamplumbağlarından hoşlanırız`` cümlesini 1000 kere yazan
+program yazınız.</p>
+</li>
+<li><p class="first">Cep telefonunuza ait 3 tane özellik ve 3 tane yöntem veriniz.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Aşağıdaki çıktıyı yazan <tt class="docutils literal"><span class="pre">for</span> <span class="pre">döngüsü</span></tt> yazın:</dt>
+<dd><div class="first last line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">Ocak</span> <span class="pre">yılın</span> <span class="pre">bir</span> <span class="pre">ayıdır.</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">Şubat</span> <span class="pre">yılın</span> <span class="pre">bir</span> <span class="pre">ayıdır.</span></tt></div>
+<div class="line">...</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">tamer</span></tt> kamplumbağınız yüzünü doğuya doğru 0 derecee ile çevirmiş olsun.
+Eğer <tt class="docutils literal"><span class="pre">tamer.left(3645)</span></tt> komutu verirsek, <tt class="docutils literal"><span class="pre">tamer</span></tt> ne yapar ve hangi yöne
+doğru bakar?</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">xs</span> <span class="pre">=</span> <span class="pre">[12,</span> <span class="pre">10,</span> <span class="pre">32,</span> <span class="pre">3,</span> <span class="pre">66,</span> <span class="pre">17,</span> <span class="pre">42,</span> <span class="pre">99,</span> <span class="pre">20]</span></tt> şeklinde bir atama yaptığınızı
+düşünelim.</p>
+<ol class="loweralpha simple">
+<li>Herbir sayıyı yeni bir satırda ekrana yazdıran bir döngü yazın.</li>
+<li>Herbir sayıyı ve onun karesini yeni bir satırda ekrana yazdıran bir
+döngü yazınız.</li>
+<li>Listedeki bütün sayıları toplayıp, sonucu <cite>toplam</cite>  değişkenine atayan
+bir döngü yazınız. Bu sayıları toplamadan önce <cite>toplam</cite> değişkenini 0
+sayısına atayın. Döngü tamamlandıktan sonra, <cite>toplam</cite>&#8216;ı yazdırın.</li>
+<li>Listedeki bütün sayıların çarpımlarını yazdırın.</li>
+</ol>
+</li>
+<li><p class="first">Aşağıdaki düzgün çokgenleri <tt class="docutils literal"><span class="pre">for</span></tt> döngüsü kullanarak kamplumbağaya
+çizdiriniz  ( düzgün çokgen her kenarı ve her açısı aynı olan demektir.)</p>
+<ul class="simple">
+<li>Eşkenar üçgen</li>
+<li>Kare</li>
+<li>Altıgen</li>
+<li>Sekizgen</li>
+</ul>
+</li>
+<li><p id="sarhos-korsan-problemi">Bir sarhoş karson rastgele bir dönüş yapıyor ve 100 adım atıyor; daha sonra
+yeniden rastgele dönüş yapıyor ve 100 adım atıyor; ve bu böyle devam
+ediyor. Bir sosyal bilim öğrencisi, 100 adım alınmadan herbir dönüş öncesi
+bu açıları kaydediyor. Onun deneysel veriler: <tt class="docutils literal"><span class="pre">[160,</span> <span class="pre">-43,</span> <span class="pre">270,</span> <span class="pre">-97,</span> <span class="pre">-43,</span> <span class="pre">200,</span> <span class="pre">-940,</span> <span class="pre">17,</span> <span class="pre">-86]</span></tt>. Kamplumbağayı kullanarak sarhoş arkadaş tarafından alınan yolu çiziniz.</p>
+</li>
+<li><p class="first">Yukarıdaki programı zenginleştirin: Sarhoş korsan etrafta gezindikten
+sonra, yöneldiği yönü söyleyen bir program yazınız ( Onun 0 dereceden
+başladığını farzedin.)</p>
+</li>
+<li><p class="first">Eğer 18 kenarı olan bir düzgün çokgen çizerseniz, kamplumbağa her köşede
+kaç derecelik bir açıyla dönmelidir?</p>
+</li>
+<li><p class="first">Aşağıdaki herbir satırı,  Python&#8217;un etkileşimli komut satırından girerek ne
+yapacağını tahmin ediniz ve sonucu kaydediniz:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">turtle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">3600</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">3600</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">3645</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tess</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Aşağıdaki şekli çizen bir Python programı yazınız:</p>
+<blockquote>
+<div><img alt="_images/star.png" src="_images/star.png" />
+</div></blockquote>
+<p>İpucu:</p>
+<ul class="simple">
+<li>Cep telefonunuzu sanki bir kamplumbağaymış gibi bir kağıt parçası
+üzerinde hareket ettirip, döndürün. Yıldızı tamamlamadan önce,
+telefonunuzun kaçkere tam dönüş yaptığını gözlemleyiniz. Herbir tam dönüş
+360 derece olduğundan, cep telefonunuzun kaç derece döndürüldüğünü
+bulabilirsiniz. Yıldızda 5 köşe olduğündan, bunu beşe bölerseniz
+kamplumbağanızı her köşede kaç derece döndürdüğünüzü bulabilirsiniz.</li>
+<li>Eğer kamplumbağanızın görünmesini istemiyorsanız onu görünmez
+yapabilirsiniz. Eğer kalem aşağıda ise  hala çizim yapmaya devam edecek.
+Bu yöntem <tt class="docutils literal"><span class="pre">tamer.hideturtle()</span></tt> ile çağrılır. Kamplumbağayı yeniden
+görünür yapmak istiyorsanız, <tt class="docutils literal"><span class="pre">tamer.showturtle()</span></tt>&#8216;ı kullanın.</li>
+</ul>
+</li>
+<li><p class="first">Aşağıdaki şekle benzer bir yüz çizecek program yazınız.</p>
+<blockquote>
+<div><img alt="_images/tess_clock1.png" src="_images/tess_clock1.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Bir kamplumbağa yaratınız ve bu kamplumbağayı bir değişkene atayınız. Bu
+değişkenin tipini komut satırından sorunuz. Ne cevap alıyorsunuz?</p>
+</li>
+<li><p class="first">Kamplumbağaların hangi takıma aittirler?  Kamplumbağa&#8217;nın Anadolu&#8217;da yaşayan cinsine ne denir?</p>
+</li>
+<li><p class="first">Python hangi takıma aittir? Bir yıla mıdır? Zehirli midir?</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="functions-tr.html" title="4. Functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="variables_expressions_statements-tr.html" title="2. Değişkenler, ifadeler ve deyimler (komutlar)"
+             >previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Name prefix for templates and static dir [_].
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

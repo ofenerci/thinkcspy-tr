@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1. Programlama Yolu &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="2. Değişkenler, ifadeler ve deyimler (komutlar)" href="variables_expressions_statements-tr.html" />
+    <link rel="prev" title="How to Think Like a Computer Scientist" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="variables_expressions_statements-tr.html" title="2. Değişkenler, ifadeler ve deyimler (komutlar)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="How to Think Like a Computer Scientist"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="programlama-yolu">
+<h1>1. Programlama Yolu<a class="headerlink" href="#programlama-yolu" title="Permalink to this headline">¶</a></h1>
+<p>Bu kitabın amacı size bilgisayar bilimcisi gibi düşünmeyi öğretmektir. Bu
+düşünme şekli matematiğin, mühendisliğin ve doğal bilimlerin bazı en iyi
+özelliklerini birleştirir. Matematikçiler gibi, bilgisayar bilimcileri
+fikirlerini ifade etmek için biçimsel dilleri kullanırlar. Onlar mühendisler
+gibi, birşeyler tasarlar, parçaları birleştirip sistem haline getirirler;
+avantaj ve dezavantajlarını değerlendirirler. Onlar bilimciler gibi karmaşık
+sistemlerin davranışlarını gözlemler, hipotezler oluştururlar ve
+varsayımlarını sınarlar.</p>
+<p>Bir bilgisayar bilimcisi için tek ve  en önemli yetenek <strong>problem çözmedir</strong>.
+Problem çözme, problemleri formüle edebilme, çözümler hakkında yaratıcı
+düşünebilme, çözümü kesin ve doğru olarak ifade edebilme yeteniğidir. Görüleceği
+üzere, programlamayı öğrenme süreci, problem çözme yeteneklerininin
+uygulamasını yapmak için mükemmel bir fırsattır. Bu bölüme bu yüzden
+&#8220;Programlama Yolu&#8221; adı verilmiştir.</p>
+<p>Bir yönden yararlı bir yetenek olan proglamayı öğrenirken, diğer bir yönden de
+sonuca ulaşmak için bir yol olarak kullanacaksınız.</p>
+<div class="section" id="python-programla-dili">
+<span id="index-0"></span><h2>1.1. Python programla dili<a class="headerlink" href="#python-programla-dili" title="Permalink to this headline">¶</a></h2>
+<p>Öğreneceğiniz progralama dili Python olacaktır. Python bir <strong>yüksek seviyeli
+dil</strong> örneğidir; Daha önce duymuş olabileceğiniz C++, PHP, Pascal, C ve Java
+yüksek seviyeli dillere örnektir.</p>
+<p>&#8220;Yüksek seviyeli dil&#8221; ifadesinden anlamı çıkarabileceğiniz gibi,  ayrıca <strong>yüksek
+seviyeli diller</strong> vardır, bunlar bazen &#8220;makine dili&#8221; veya &#8220;birleştirici dili
+(assemble)&#8221; şeklinde isimlendirilir. Kabaca söylersek, bilgisayarlar yalnızca
+düşük seviyeli dillerde yazılmış programları çalıştırabilirler. Bu yüzden,
+yüksek seviyeli dillerde yazılmış programlar çalıştırılmadan önce bir işlemden
+geçmelidir. Bu ek işlem biraz zaman alır, bu da yüksek seviyeli dillerin
+dezavantajıdır.</p>
+<p>Hemen hemen bütün programlar avantajlı olmasından dolayı yüksek seviyeli
+dillerde yazılır. Bu avantajlar: daha kısa sürede yazılması; daha kısa olması;
+okunmasının daha kolay olması; doğru olma olasılıklarnın daha yüksek
+olmasıdır. İkincil olarak, yüksek seviyeli diller <strong>taşınabilirlik</strong> özelliği
+gösterir. Bunun anlamı, farklı bilgisayarlarda biraz değişikle veya değişiklik
+yapmadan çalışabilirler.</p>
+<p>Python&#8217;u okuyan ve onu işleten sanal makinaya <strong>Python Yorumlayıcısı</strong> denir. Bunu
+kullanmanın kullanmanın iki yolu vardır: <em>kabuk modu</em> ve <em>betik modu.</em> Kabuk
+modunda Python kabuğuna Python cümlelerini yazıp, yorumlayıcının hemen
+sonuçları göstermesi sağlanır:</p>
+<img alt="Screen shot of interpreter" src="_images/interpreter_sshot.png" />
+<p>Ekranda <tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></tt> ile başlayan satırlar <strong>Python İstemcisi</strong>dir. Yorumlayıcı,
+bilgi istemini komutlar için hazır olduğunu belirtmek için kullanmaktadır. Biz
+<tt class="docutils literal"><span class="pre">2+2</span></tt> yazdık ve yorumlayıcı yanıt olarak <tt class="docutils literal"><span class="pre">4</span></tt> dönürdü. Sonraki satırda yeni
+bir istemci, bize yeni bir giriş için hazır olduğunu belirtmektedir.</p>
+<p>Alternatif olarak, programı bir dosya içine yazıp, yorumlayıcının dosya
+içeriğini çalıştırmasını sağlıyabiliriz. Bu tip dosyaya <strong>betik</strong> adı
+verilmektedir. Betik dosyasının diske yazdırma, yazıcıdan çıktısının
+alınabilmesi gibi avantajları vardır.</p>
+<p>Bu kitapda <strong>PyScripter</strong> adlı program geliştirme ortamını kullanacağız (Bu
+programı <a class="reference external" href="http://code.google.com/p/pyscripter">http://code.google.com/p/pyscripter</a> adresinde bulabilirsiniz.) Daha
+farklı geliştirme ortamları da vardır. Eğer siz başka birisini
+kullanıyorsanız (örneğin <strong>idle</strong> ya da <strong>spyderlib</strong> , burda gösterilen
+örnekleri kendi ortamınıza uyarlamak zor olmayacaktır.</p>
+<p>Örnek olarak, PyScripter kullanarak <tt class="docutils literal"><span class="pre">firstprogram.py</span></tt> adlı dosyayı
+yaratalım. Kural olarak, Python programlarını içeren dosyalar <tt class="docutils literal"><span class="pre">.py</span></tt>
+uzantısıyla biter.</p>
+<p>Programı çalıştırmak, için PyScripter içindeki <strong>Run</strong> düğmesine basalım:</p>
+<img alt="first program screenshot" src="_images/my_first_program.png" />
+<p>Çoğu program verilen bu örnekten daha ilginçtir.</p>
+<p>Kabuk modunda çalışmak küçük kod parçalarını sınamak için uygundur, çünkü
+anında sonucu alırsınız. Bunu sanki bir problemi çözmeden önce bir kağıt
+parçası üzerinde karalama yapmaya benzetebilirsiniz. Birkaç satırdan daha uzun
+herşey betik içine koyulmalıdır.</p>
+</div>
+<div class="section" id="program-nedir">
+<span id="index-1"></span><h2>1.2. Program nedir?<a class="headerlink" href="#program-nedir" title="Permalink to this headline">¶</a></h2>
+<p>Program, hesaplamayı gerçekleştirmek için birbirini izleyen komutlardan
+(yönergelerden) oluşan yapıdır. Hesaplama matematiksel olabilir, örneğin bir
+denklem sisteminin çözülmesi veya bir polinomun köklerini bulmak gibi. Fakat
+bu bir belgenin içindeki metni arama ve değiştirme veya programı derleme
+(yeterince ilginç) gibi sembolik hesaplama da olabilir.</p>
+<p>Ayrıntılar farklı programlama dillerinde farklı gözükebilir, fakat bazı basit
+komutlar her dilde gözükür:</p>
+<dl class="docutils">
+<dt>girdi</dt>
+<dd>Klavyeden, dosyadan veya başka bir aygıttan veri alma.</dd>
+<dt>çıktı</dt>
+<dd>Ekranda veriyi görüntüleme veya veriyi dosyaya veya başka bir aygıta
+gönderme.</dd>
+<dt>matematik</dt>
+<dd>Toplama, çarpma gibi bazı temel matematiksel işlemleri gerçekleştirme.</dd>
+<dt>koşullu yürütme</dt>
+<dd>Belirli durumları sınamak ve komutları uygun bir sıraya göre çalıştırmak.</dd>
+<dt>tekrarlama</dt>
+<dd>Bazı eylemleri genellikle ufak tefek değişikliklerle tekrar tekrar
+yürütme.</dd>
+</dl>
+<p>İnanın veya inanmayın, var olanların hepsi bu kadardır. Şu ana kadar
+kullandığınız bütün programlar, ne kadar karmaşık olursa olsun, az yada çok
+yukarıda verilen benzeyen komutlardan yapılmıştır. Bu yüzden programlamayı,
+büyük ve karmaşık bir görevi yukarıdaki temel komutlarla gerçekleştirebilecek
+kadar basit olan küçük alt görevlere parçalama süreci olarak tanımlıyabiliriz.</p>
+<p>Bu size  biraz belirsiz gelebilir, ancak bu konuya <strong>algoritmalar</strong> hakkında
+konuşurken tekrar geleceğiz.</p>
+</div>
+<div class="section" id="hata-ayiklama-debugging-nedir">
+<span id="index-2"></span><h2>1.3. Hata ayıklama (Debugging ) nedir?<a class="headerlink" href="#hata-ayiklama-debugging-nedir" title="Permalink to this headline">¶</a></h2>
+<p>Programlama karmaşık bir süreçtir ve insanlar tarafından yapıldığı için
+sıklıkla hatalara yol açar. Programlama hataları <strong>bugs</strong> (böcek,hata) adı
+verilir. Bu hataları bulma ve düzeltme işlemine ise <strong>debugging</strong> (böcekten
+arındırma) adı verilmektedir. <em>Bug</em> terimi, Thomas Edison tarafından gramafon
+makinasından oluşan hata sonucu, mühendislikte küçük mühendislik
+zorluklaklarını tanımlamak için kullanılmıştır. Kullanım tarihi 1889 yılına
+kadar uzanmaktadır. <a class="footnote-reference" href="#bocek" id="id1">[1]</a></p>
+<p>Bir programda üç tür hata oluşabilir: <a class="reference external" href="http://en.wikipedia.org/wiki/Syntax_error">sözdizimsel hatalar</a>, <a class="reference external" href="http://en.wikipedia.org/wiki/Runtime_error">çalışma zamanı hataları</a>, and <a class="reference external" href="http://en.wikipedia.org/wiki/Logic_error">anlambilimsel hatalar</a>. Bu hataları daha hızlı
+belirliyebilmek için aralarındaki farkları bilmek faydalıdır.</p>
+<table class="docutils footnote" frame="void" id="bocek" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Çeviren Notu (Çn): <em>Bug</em>, İngilizce&#8217;de halk arasında böcek anlamına gelmektedir. Bilgisayar
+bilimlerinde hata anlamında kullanılmaktadır. Biz türkçedeki karşılığı
+olarak <em>hatadan arındırma</em> olarak kullanacağız.  Niçin <em>böcekten arındırma</em>  anlamında
+kullanıldığını anlamak için  <a class="reference external" href="http://tr.wikipedia.org/wiki">http://tr.wikipedia.org/wiki</a>/Yazılım_hatas
+sayfasına bakınız.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sozdizimsel-hatalar">
+<span id="index-3"></span><h2>1.4. Sözdizimsel hatalar<a class="headerlink" href="#sozdizimsel-hatalar" title="Permalink to this headline">¶</a></h2>
+<p>Python bir programı yalnızca sözdizimsel olarak doğru ise çalıştırabilir; aksi
+halde, bu işlem başarısız olur ve bir hata mesajı verir. <strong>Sözdizimi</strong>
+programın yapısını ve bu yapı hakkındaki kuralları kasteder. Örneğin,
+Türkçe&#8217;de bir cümle büyük bir harfle başlamalı ve nokta işaretiyle sona
+ermelidir. bu cümle <strong>sözdizimi</strong> hatası içermektedir. Bu cümle de öyle</p>
+<p>Birçok okuyucu için, bazı sözdizimi hataları önemli değildir. Bu yüzden E.E.
+Cumings&#8217;in şiirlerini bir sorun olmadan okuyabiliriz. Python ise bu kadar
+affedici değildir. Programınızın herhangi bir yerinde tek bir sözdizimi hatası
+olduğunda bile, Python bir hata mesajı verip çıkacaktır ve programı
+çalıştırmanız mümkün olmayacaktır. Programlama kariyenizin ilk birkaç
+haftasını sözdizilim hatalarınızın izini sürmekle geçireceksiniz. Deneyim
+kazandıkça, daha az hata yapmaya ve bu hataları daha hızlı bulmaya
+başlayacaksınız.</p>
+</div>
+<div class="section" id="calisma-zaman-hatalari">
+<span id="index-4"></span><h2>1.5. Çalışma zaman hataları<a class="headerlink" href="#calisma-zaman-hatalari" title="Permalink to this headline">¶</a></h2>
+<p>İkinci tür hata çalışma zamanı hatalarıdır; böyle bir ismin verilmesinin
+nedeni program çalıştırılana kadar bu hataların ortaya çıkmamasıdır. Bu
+hatalara ayrıca <strong>istisna</strong> adı da verilmektedir, çünkü istisnai (ve kötü) bir
+kötü durumun ortaya çıktığını belirtirler.</p>
+<p>İlk bölümlerdeki basit programlarda çalışma zamanı hatalarıyla karşılaşmanız
+düşük bir ihtimaldir. Bu yüzden bu hatalarla karşılaşılana kadar biraz zaman
+geçebilir.</p>
+</div>
+<div class="section" id="anlambilimsel-hatalar">
+<span id="index-5"></span><h2>1.6. Anlambilimsel hatalar<a class="headerlink" href="#anlambilimsel-hatalar" title="Permalink to this headline">¶</a></h2>
+<p>Üçüncü tür hata <strong>anlambilimsel hata</strong>lardır. Programınızda anlambilimsel
+hata var ise, programınız başarıyla çalışacaktır. Bundan kastedilen,
+bilgisayar herhangi bir hata mesajı üretmiyecek, ancak doğru şeyi
+yapmayacaktır. Beklenilenden farkıl bir şey yapacaktır. Siz ona ne yapmasını
+söylemişseniz, o da onu yapacaktır.</p>
+<p>Sorun, yazdığınız program yazmak istediğiniz program değildir. Programın
+anlamı (anlambilimi) hatalıdır. Anlambilim hatalarını belirlemek ustalık
+ister, çünkü programın çıktısına bakarak geriye doğru yönelik çalışmanızı ve
+ne yaptığını anlamaya çalışmanızı gerektirir.</p>
+</div>
+<div class="section" id="deneysel-hata-ayiklama">
+<span id="index-6"></span><h2>1.7. Deneysel hata ayıklama<a class="headerlink" href="#deneysel-hata-ayiklama" title="Permalink to this headline">¶</a></h2>
+<p>Kazanabileceğiniz en önemli yeteneklerden biri hata ayıklamadır. Sinir bozucu
+olmasına rağmen, hata ayıklama programlamının zihinsel zenginlik gerektiren,
+zorlayıcı ve ilginç bir parçasıdır.</p>
+<p>Birkaç yönden, hata ayıklama sanki bir dedektif çalımasıdır. Bazı ipuçlarıyla
+karşılaşırsınız; gördüğünüz sonuçlara size götürmüş olan süreçleri ve
+olaylardan anlam çıkarmanız gerekir.</p>
+<p>Hata ayıklama deneysel bilim dalı gibidir. Neyin hatalı gittiğine dair bir
+fikriniz oluştuğunda, programınızı değiştir ve tekrar denersiniz. Eğer sizin
+hipoteziniz doğru ise, değişikliğin sonucunu tahmin edebilir ve çalışan bir
+programa bir adım daha yaklaşmış olursunuz. Eğer hipoteziniz yanlış ise, yeni
+bir tane hipotez üretmeniz gerekir. Sherlock Holmes&#8217;un işaret ettiği gibi &#8221;
+imkansızı elediğinizde elinizde kalan şey, ne kadar olasılık dışı olsa bile
+gerçek olmak zorundadır.&#8221; (A. Conan Doyle, <em>The Sign of Four</em>)</p>
+<p>Bazı kişiler için, programlama ve hata ayıklama aynı şeyleydir. Yani
+Programlama, programın istediğiniz şeyi yapana kadar aşamalı olarak hata
+ayıklama sürecidir. Bu fikir, <em>bir şey</em> yapan bir program ile başlamınızı,
+ilerledikçe programda küçük değişikler yaparak hataları ayıklamanızı tavsiye
+eder. Böylece her zaman çalışan bir programa sahip olursunuz.</p>
+<p>Örneğin, Linux bir işletim sistemi çekirdeğidir  ve binlerce kaynak kod
+içerir, fakat Linus Torvalds tarafından Intel 80386 yongasını keşfetmek için
+basit bir program olarak başlatılmıştır. Larry Greenfield&#8217;a göre, Linus&#8217;un
+başlangıç projelerinden biri AAAA ve BBBB arasında seçim yaparak bunu ekranda
+gösteren programdı. Bu program daha sonra Linux&#8217;a evrilmiştir ( <em>The Linux
+Users&#8217;s Guide Version 1</em>.)</p>
+<p>Kitabın  sonraki bölümleri hata ayıklama ve diğer programlama
+pratikleri hakkında daha fazla önerilerde bulunacaktır.</p>
+</div>
+<div class="section" id="bicimsel-ve-dogal-diller">
+<span id="index-7"></span><h2>1.8. Biçimsel ve doğal diller<a class="headerlink" href="#bicimsel-ve-dogal-diller" title="Permalink to this headline">¶</a></h2>
+<p><strong>Doğal diller</strong> konuştuğumuz dillerdir; Türkçe, İngilizce, İspanyolca ve
+Fransızca gibi. Doğal diller insanlar tarafından tasarlanmamıştır (insanlar
+bunlar için kurallar koymaya çalışsa bile), doğal olarak evrilmişlerdir.</p>
+<p><strong>Biçimsel diller</strong> insanlar tarafından özel uygulamalar için geliştirilmiş
+dillerdir. Örneğin, matematikçilerin kullandığı gösterim (notasyon), sayılar
+ve semboller arasındaki ilişkiyi göstermek için iyi bir biçimsel dildir.
+Kimyacılar,  moleküllerün kimyasal yapısını göstermek için biçimsel dili
+kullanırlar. Ve en önemlisi:</p>
+<blockquote>
+<div><em>Programlama dilleri hesaplamaları ifade etmek için tasarlanmış biçimsel
+dillerdir.</em></div></blockquote>
+<p>Biçimsel diller sözdizimi açısından katı kurallara sahip olma eğilimindedir.
+Örneğin <tt class="docutils literal"><span class="pre">3+3=6</span></tt> ifadesi matematiksel sözdizimsel ifadedir, ancak <tt class="docutils literal"><span class="pre">3=+6$</span></tt>
+değildir. H<sub>2</sub>0 sözdizimi kimya için doğrudur, fakat <sub>2</sub>Zz
+geçerli değildir, çünkü <tt class="docutils literal"><span class="pre">Zz</span></tt> kısaltmasına sahip bir element yoktur.</p>
+<p>Sözdizimsel kurallar <strong>token</strong>lere ve yapıya ait olmak üzere iki türdedir.
+Token&#8217;lar dilin temel öğeleridir; kelimeler, sayılar, parantezler, virgül,
+gibi. Python&#8217;da, <tt class="docutils literal"><span class="pre">print</span> <span class="pre">(&quot;Hoşgeldin</span> <span class="pre">Yeni</span> <span class="pre">Yıl&quot;,</span> <span class="pre">2013)</span></tt> gibi bir ifade 6 tane
+token vardır. Bunlar: fonksiyon ismi, açılış parentezi, cümle, virgül, sayı ve
+kapanış parentezi dir.</p>
+<p>Tokenlar dizilirknhata yapılabilir. <tt class="docutils literal"><span class="pre">3=+6$</span></tt> ifadesiyle ilgili bir sorun, <tt class="docutils literal"><span class="pre">$</span></tt> sembolü
+matematikte geçerli bir token değildir (bildiğim kadarıyla.) Benzer olarak,
+<sub>2</sub>Zz ifadesi de geçerli değildir çünkü Zz  kısaltmasına sahip bir
+element yoktur.</p>
+<p>İkinci tür sözdizimi kuralı cümlelerin yapısıyla &#8212;tokenların nasıl
+dizildiği&#8212;
+ile ilgilidir. <tt class="docutils literal"><span class="pre">3=+6$</span></tt> yapısal olarak geçersizdir cünkü eşittir işaretinden
+hemen sonra artı işareti gelemez. Benzer olarak, molekül formüllerinde de alt
+işaretler element sonra gelmelidir; önce gelemezler. Bizim Python örneğimizde,
+eğer virgülü ihmal etseydik; veya sol ve sağ parantezlerin yerlerini
+değiştirseydik, <tt class="docutils literal"><span class="pre">print)&quot;</span> <span class="pre">Hoşgelding</span> <span class="pre">Yeni</span> <span class="pre">Yıl&quot;,</span> <span class="pre">2013(</span></tt> elde ederdik. Bu komut
+altı tane geçerli tokenlara sahip olmasına rağmen, bu yapı geçerli değildir.</p>
+<p>Biçimsel bir dildeki veya Türkçe&#8217;deki bir cümleyi okuduğunuzda, cümlenin
+yapısını çözmek gerekir (doğal dillerde bunu bilinçiz bir şekilde yaparız.) Bu
+sürece <strong>ayrıştırma</strong> ( parsing) denir.</p>
+<p>Örneğin, &#8220;Ayaklarıma kara sular indi&#8221; cümlesini dudyuğunuzda, &#8220;ayaklarıma&#8221;nın
+özne, &#8220;indi&#8220;&#8216;nin de yüklem olduğunu anlarsınız. Cümleyi ayrıştırdığınızda,
+cümlenin ne anlama geldiğini ( cümlenin anlambilimini) çözersiniz. &#8220;Ayak&#8221;ın en
+olduğunu ve &#8220;indi&#8221; eyleminin anlamını bildiğinizi varsayarsak, bu cümleyle
+kastedilen anlamı ortaya çıkarabilirsiniz.</p>
+<p>Her ne kadar biçimsel ve doğal diller birçok ortak özelliğe &#8212;tokenlar, yapı,
+sözdizimi, anlambilim&#8212; sahip olsa da, birçok farklılıkları da vardır:</p>
+<dl class="glossary docutils">
+<dt id="term-belirsizlik">belirsizlik:</dt>
+<dd>Doğal diller belirsizlikle doludur, kişiler bağlamsal ipuçları ve
+diğer bilgilerden yararlanarak bu belirsizliği aşarlar. Biçimsel
+diller neredeyse veya tamamen belirli olmak üzere tasarlanmıştır.
+Bunun anlamı cümlenin sadece bir anlamı vardır, bağlam ne olursa
+olsun.</dd>
+<dt id="term-fazlalik">fazlalık:</dt>
+<dd>Belirsizliği önlemek ve yanlış anlamaları azaltmak için, doğal diller
+birçok gereksiz içeriğe sahiptir. Bu yüzden birçok fazlalık
+barındırır. Biçimsel diller daha az belirsiz ve özdür.</dd>
+<dt id="term-gercekcilik">gerçekçilik:</dt>
+<dd>Biçimsel diller ne söylüyorsa onu kasteder. Diğer bir yandan, doğal
+diller deyim ve mecazlarla doludur. Eğer bir kişi, &#8221; Ayaklarıma kara
+sular indi.&#8221; diyorsa, bu ayaklarına kara sular indi ( sanki çamurlu
+bir suda yürüyormuşta, ayakkabılarına kara sular doldu.) anlamına
+gelmez. Bunun gizli bir anlamı vardır ve kişinin yorgun olduğunu
+belirtir. Biçimsel dillerde cümlenin gerçeği aynen yansıtması gerekir,
+anlamı yazılanla aynı olmalıdır.</dd>
+</dl>
+<p>Doğal dilleri konuşarak büyüyen kişiler &#8212;herkes&#8212; biçimsel dillere
+alışmaktar zorlanabilirler. Bu bazı yönlerden, biçimsel dil ile doğal dil
+arasındaki fark, düzyazı ile şiir arasındaki fark gibidir. Ancak:</p>
+<dl class="glossary docutils">
+<dt id="term-siir">şiir:</dt>
+<dd>Kelimeler anlamları olduğu kadar sesleri için de kullanılır ve tüm
+şiir bir etki veya duygusal bir tepki yaratır. Belirsizlik yaygın
+olmasının yanında, sıklıkla bir gerekliliktir.</dd>
+<dt id="term-duzyazi">düzyazı:</dt>
+<dd>Kelimelerin gerçek anlamı daha önemlidir ve yapı anlama daha fazla
+katkı sağlar. Düzyazının çözümlenmesi şiire göre daha kolaydır ancak
+yine de belirsizlik içerebilir.</dd>
+<dt id="term-program">program:</dt>
+<dd>Bilgisayar programının anlamı belirli (tek anlamlı) ve gerçek
+olmalıdır; token ve yapının çözümlenmesi ile tamamen anlaşılmalıdır.</dd>
+</dl>
+<p>Programları (ve diğer biçimsel dilleri) bazı öneriler şu şekildedir: İlk
+olarak, biçimsel dillerin doğal dillerden daha youn olduğunu hatırlamak
+gerekir. Bu yuzden bunları okumak daha uzun zaman alır. Ayrıca yapı oldukça
+önemlidir, bu yüzden yukarıdan aşağıya soldan sağa okumak iyi bir fikir
+değildir. Bunun yerine, programı kafanızda ayrıştırmayı, tokenları belirlemeyi
+ve yapıyı yorumlamayı öğrenmemiz gerekir. Son olarak, ayrıntılar önemlidir.
+Yazım yanlışları ve noktalama hataları gibi küçük şeyler, doğal dillerde
+yakanızı kurturabilir, fakat  biçimsel dillerde büyük farklılıklar
+yaratabilir.
+.. index:: İlk Program</p>
+</div>
+<div class="section" id="ilk-program">
+<h2>1.9. İlk program<a class="headerlink" href="#ilk-program" title="Permalink to this headline">¶</a></h2>
+<p>Geleneksel olarak, yeni bir dilde yazılan ilk program <em>Merhaba, Dünya!</em> adı
+verilen programdır, çünkü ekranda &#8220;Merhaba, Dünya!&#8221; kelimelerini gösterir.
+Python&#8217;da aşağıdaki şekilde yazılmaktadır ( Betikler için, python komutlarının
+sol tarafında satır numaralarını göstereceğiz.)</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">print</span> <span class="p">(</span><span class="s">&quot;Merhaba, Dünya!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu print fonksiyonunun bir örneğidir; bu fonksiyon kağıt üzerine birşey
+yazmaz, ekranda bir değer gösterir. Yukarıdaki örnekte, sonuç aşağıdaki gibi
+olur:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>Merhaba, Dünya!
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Programdaki tırnak işaretleri değerin başlangıç ve bitiş değerini gösterir;
+ekranda tırnak işaretleri gözükmez.</p>
+<p>Bazı kişiler programlama dilinin kalitesini &#8220;Merhaba, Dünya!&#8221; programının
+basitliğiyle değerlendirirler. Bu standarta göre, Python oldukça iyi sonuç
+üretir.</p>
+</div>
+<div class="section" id="yorumlamalar">
+<span id="index-8"></span><h2>1.10. Yorumlamalar<a class="headerlink" href="#yorumlamalar" title="Permalink to this headline">¶</a></h2>
+<p>Programlar, büyüdükçe ve daha karmaşık hal aldıkça okunmaları zorlaşır.
+Biçimsel diller oldukça yoğundur. Koda bakarak, kodun ne yaptığını ve niçin
+yazıldığını kavramak genellikle zordur.</p>
+<p>Bu yüzden, programınıza doğal dillerde notlar ekleyerek, programınızın ne
+yaptığını açıklıyabilirsiniz.</p>
+<p>Programda yazılan <em>açıklamalar</em> yalnızca onu okuyan kişi için amaçlanmıştır.
+Python yorumcusu tarafından dikkate alınmaz.</p>
+<p>Python&#8217;da açıklama <cite>#</cite> tokenı ile başlar. Geri kalan satır ihmal edilir. Şimdi
+<em>Merhaba, Dünya!</em> programının açıklamalı haline bakalım:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#-------------------------------------------------------------</span>
+<span class="c">#Bu program Python&#39;un ne kadar güzel bir dil olduğunu gösterir!</span>
+<span class="c">#Joe Soap tarafından Aralık 2010 tarihinde yazılmıştır.</span>
+<span class="c">#Herhangi biri bu programı kopyalayabilir veya değiştirebilir.</span>
+<span class="c">#-------------------------------------------------------------</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s">&quot;Merhaba, Dünya!&quot;</span><span class="p">)</span> <span class="c"># Kolay değil mi?</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Ayrıca programda bir satırı boş bıraktığımızı dikkat edin. Boş satırlar,Python
+Yorumlayıcısı tarafından dikkate alınmaz. Fakat açıklamalar ve boş satırlar,
+insanların programı okumasını kolaylaştırır. Bunları cömert şeklinde
+kullanmaktan kaçınmayınız.</p>
+</div>
+<div class="section" id="glossary">
+<h2>1.11. Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-algoritma">algoritma</dt>
+<dd>Bir problem kategorisini çözmek için tanımlanmış adımlar</dd>
+<dt id="term-bug">bug</dt>
+<dd>Programdaki bir hata</dd>
+<dt id="term-aciklama">açıklama</dt>
+<dd>Programdaki açıklama programcılar (veya onu okuyan herhangi birisi)
+için yazılmıştır ve programın çalışmasında herhangi bir etkisi yoktur.</dd>
+<dt id="term-hata-ayiklama">hata ayıklama</dt>
+<dd>Herhangi üç hatadan birini bulma ve onu ortadan kaldırma sürecidir.</dd>
+<dt id="term-istisna">istisna</dt>
+<dd>Çalışma zamanı hatasının diğer bir adı</dd>
+<dt id="term-bicimsel-dil">biçimsel dil</dt>
+<dd>Bazı özel amaçlar için, matematiksel fikirlerin temsili ve bilgisayar
+programları gibi, insanlar tarafından tasarlanmış herhangi bir dildir.
+Bütün programlama dilleri biçimsel dillerdir.</dd>
+<dt id="term-yuksek-seviyeli-dil">yüksek seviyeli dil</dt>
+<dd>İnsanlar tarafından rahat okunabilmesi, yazılması ve anlaşılması için
+geliştirilmiş Python benzeri programlama dili</dd>
+<dt id="term-dolaysiz-kip-mod">dolaysız kip (mod)</dt>
+<dd>Python komut istemcisine yazılan ifadele sonuçlarının hemen
+gösterilmesini sağlayan Python tarzı.</dd>
+<dt id="term-yorumlayici">yorumlayıcı</dt>
+<dd>Python betiklerini ve ifadelerini çalıştıran bilgisayar programı</dd>
+<dt id="term-dusuk-seviyeli-dil">düşük seviyeli dil</dt>
+<dd>Bilgisayarın programları hızlı ve kolay şekilde çalıştırabilmesi için
+tasarlanmış program. &#8220;Makina dili&#8221; veya &#8220;birleştirici dil&#8221; adı da
+verilmektedir.</dd>
+<dt id="term-dogal-dil">doğal dil</dt>
+<dd>İnsanların konuştuğu doğal olarak gelişmiş herhangi bir dil.</dd>
+<dt id="term-nesne-kodu">nesne kodu</dt>
+<dd>Programı bilgisayarın anlayacağı şekilde çevirme yapan derleyici
+sonucundaki çıktı.</dd>
+<dt id="term-ayristirma">ayrıştırma</dt>
+<dd>Bir programı inceleme ve sözdizimsel yapısını çözümleme işlemi</dd>
+<dt id="term-tasinabilirlik">taşınabilirlik</dt>
+<dd>Bir programın birden fazla bilgisayar türünde çalıştırılabilmesi
+özelliği</dd>
+<dt id="term-print-fonksiyonu">print fonksiyonu</dt>
+<dd>Python yorumlayıcısının bir değeri ekranda göstermesini sağlayan
+fonksiyon</dd>
+<dt id="term-problem-cozme">problem çözme</dt>
+<dd>Problemi formüle etme, buna çözüm bulma ve çözümü ifade etme süreci</dd>
+<dt id="term-22">program</dt>
+<dd>Bilgisayar tarafından gerçekleştirilecek eylemleri ve hesaplamaları
+belirten art arda gelen komutlar</dd>
+<dt id="term-python-kabugu">Python kabuğu</dt>
+<dd>Python yorumlayıcısının etkileşimli kullanıcı arayüzü. Python kabuğu
+kullancısı bilgi istemcisine ( &gt;&gt;&gt;) komutları yazar ve ENTER tuşuna
+başarak bu komutları  Python yorumlayıcısına gönderir. Kabuk kelimesi
+Unix&#8217;ten gelmektedir. Kitabın bu versiyonunda kullanılan Pyscripter&#8217;in
+penceresinde yazacağınız komutlar ile &#8220;hemen cevap kipinde&#8221;
+çalışabiliriz.</dd>
+<dt id="term-calisma-zamani-hatasi">çalışma zamanı hatası</dt>
+<dd>Program çalıştırılana kadar ortaya çıkmayan, çalıştırıldıktan sonra
+oluşan ve programın çalışmasına devam etmesini engelleyen hata.</dd>
+<dt id="term-betik">betik</dt>
+<dd>Bir dosyada saklanmış program ( genellikle yorumlayıcıya gönderilecek
+olan)</dd>
+<dt id="term-anlambilimsel-hata">anlambilimsel hata</dt>
+<dd>Programcının yapmak istediğinden farklı birşey yapmasına neden olan
+hata</dd>
+<dt id="term-anlambilim">anlambilim</dt>
+<dd>Programın anlamı</dd>
+<dt id="term-kaynak-kod">kaynak kod</dt>
+<dd>Yüksek seviyeli bir dildeki  programın derlenmeden önceki hali</dd>
+<dt id="term-sozdizimi">sözdizimi</dt>
+<dd>Programın yapısı</dd>
+<dt id="term-sozdizimi-hatasi">sözdizimi hatası</dt>
+<dd>Programın ayrıştırılmasını imkansız hale getiren hata (dolayısıyla
+yorumlanmanın imkansız olduğu hal)</dd>
+<dt id="term-token">token</dt>
+<dd>Programın sözdizimsel yapısının temel öğelerinden biri, doğal
+dillerdeki kelimeye benzetilebilir.</dd>
+</dl>
+</div>
+<div class="section" id="alistirmalar">
+<h2>1.12. Alıştırmalar<a class="headerlink" href="#alistirmalar" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Anlaşılabilir anlama sahip ama sözdizimsel olarak yanlış olan Türkçe bir
+cümle yazınız. Sözdizimsel olarak doğru ancak anlambilimsel hatalara sahip
+bir başka cümle yazınız.</p>
+</li>
+<li><p class="first">Python kabuğunu başlatın ve <tt class="docutils literal"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span></tt> yazıp, ENTER tuşuna basın. Python bu
+ifadeyi <em>hesaplar</em>, sonucu ekranda gösterir ve başka bir bilgi istemi
+yazar. <tt class="docutils literal"><span class="pre">*</span></tt> işareti <em>çarpma işlecidir; ``**`` ise *üs alma işlecidir.</em>
+Farklı ifadeler girerek denemeler yapın. Sonuçları kaydedin.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">1</span> <span class="pre">2</span></tt> yazıp, ENTER tuşuna basın. Python bu ifadeyi hesaplamaya çalışır
+ancak yapamaz çünkü bu ifade sözdizimsel olarak geçerli değildir. Bunun
+yerine, aşağıdaki hata mesajını gösterir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="n">File</span> <span class="s">&quot;&lt;interactive input&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="mi">1</span> <span class="mi">2</span>
+      <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Birçok durumda, Python sözdizimsel hatanın nerde oluştuğunu belirtir, fakat
+bu her zaman için doğru değildir; Ve genelde neyin yanlış olduğu hakkında
+fazla bilgi vermez.</p>
+<p>Bu yüzden, genellikle, sözdizim kurallarını öğrenmek size düşen bir yüktür.</p>
+<p>Bu örnekte, sayılar arasında bir işleç olmadığı için Python şikayet
+etmektedir.</p>
+<p>Python bilgi istemcisine birkaç örnek girip, ENTER tuşuna basınız. Hata
+mesajları üretmeye çalışınız. Girdiğiniz ifadeyi ve Python&#8217;un size geri
+verdiği son satırdaki hata mesajını defterinize yazınız.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">print(&quot;Merhaba&quot;)</span></tt> yazınız. Python bunu çalıştırır ve sonuçta m-e-r-h-a-b-a
+harflerini ekranda gösterir. Cümlede kullandığınız tırnak işaretlerinin
+çıktıda olmadığına dikkat edin. Şimdi ise <tt class="docutils literal"><span class="pre">&quot;Merhaba&quot;</span></tt> yazın ve sonucu
+tanımlayınız. Tırnak işareti kullandığızda ve kullanmadığınızda oluşan
+etkiyi not ediniz.</p>
+</li>
+<li><p class="first">Şimdi <tt class="docutils literal"><span class="pre">peynir</span></tt> kelimesini tırnak işareti olmadan yazınız. Çıktı aşağıdaki
+gibi birşey olacaktır:</p>
+<div class="highlight-python"><div class="highlight"><pre>Traceback (most recent call last):
+  File &quot;&lt;interactive input&gt;&quot;, line 1, in ?
+NameError: name &#39;peynir&#39; is not defined
+</pre></div>
+</div>
+<p>Bu bir çalışma zamanı hatasıdır; daha doğrusu <em>NameError ( Değişken İsim
+Hatası)</em> dır. Burda peynir kelimesi tanımlanmadığından dolayı bir hata
+vermiştir. Eğer bunun ne anlama geldiğini bilmiyorsanız, yakında
+öğreneceksiniz.</p>
+</li>
+<li><p class="first">Python istemcisine <tt class="docutils literal"><span class="pre">6</span> <span class="pre">+</span> <span class="pre">4</span> <span class="pre">*</span> <span class="pre">9</span></tt> yazıp, ENTER tuşuna basınız. Çıkan sonucu
+kaydediniz.</p>
+<p>test1.py adlı dosya (betik)  oluşturun ve bu dosyanın içine aşağıdaki
+içeriği yazın:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="mi">6</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="mi">9</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu betiği çalıştırdığınızda ne oluyor? Şimdi içeriği aşağıdaki şekilde
+değiştirin:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">print</span><span class="p">(</span><span class="mi">6</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>ve yeniden çalıştırın. Bu sefer ne oldu?</p>
+<p>Ne zaman bir ifade Python bilgi istemcisine yazılırsa, bu hesaplanır ve
+sonuç <em>otomatik</em> olarak bir satır aşağıya yazılır. ( Sanki hesap makinanız
+gibi; eğer bu ifadeyi (deyimi)  yazarsanız,42 sonucunu bulursunuz.)</p>
+<p>Betik ise farklıdır. Hesaplanan ifadeler <em>otomatik</em> olarak ekrana yazılmaz,
+bu yüzden cevabın ekranda gözükmesini istiyorsanız, <strong>print</strong> fonksiyonunu
+kullanmanız gerekir.</p>
+<p>Python kabuğunda  print fonksiyonunu kullanma ihtiyacınız hemen hemen yok
+gibidir.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="variables_expressions_statements-tr.html" title="2. Değişkenler, ifadeler ve deyimler (komutlar)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="How to Think Like a Computer Scientist"
+             >previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Name prefix for templates and static dir [_].
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

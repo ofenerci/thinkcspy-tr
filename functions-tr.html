@@ -1,0 +1,763 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4. Functions &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="5. Koşul İfadeleri" href="conditionals-tr.html" />
+    <link rel="prev" title="3. Merhaba, küçük kaplumbağlar" href="hello_little_turtles-tr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="conditionals-tr.html" title="5. Koşul İfadeleri"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hello_little_turtles-tr.html" title="3. Merhaba, küçük kaplumbağlar"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="functions">
+<h1>4. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="fonksiyonlar">
+<span id="index-0"></span><h2>4.1. Fonksiyonlar<a class="headerlink" href="#fonksiyonlar" title="Permalink to this headline">¶</a></h2>
+<p>Belli bir işlemi gerçekleştirmek için gruplandırılmış komut (cümle) serisidir.
+Fonksiyonların temel amacı üzerine düşündüğümüz programı parçalara ayırmada
+bize yardım etmektir.</p>
+<p><strong>Fonksiyon tanımı</strong>nın söz dizimi şu şekildedir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="k">def</span> <span class="nf">ISIM</span><span class="p">(</span> <span class="n">PARAMETRE</span> <span class="n">LİSTESİ</span> <span class="p">):</span>
+    <span class="n">KOMUTLAR</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Fonksiyonlar için dilediğiniz ismi kullanabilirsiniz, ancak değişkenlerde  de
+olduğu gibi Python anahtar kelimeleri kulannamazsınız. Değişkenlerde
+kullandığımız isimleme kuralları fonksiyonlar için de geçerlidir.</p>
+<p>Fonksiyon içinde herhangi bir sayıda cümle olabilir, fakat bu cümleler
+<tt class="docutils literal"><span class="pre">def</span></tt>&#8216;den sonra girintili olmak zorundadır. Kitaptaki örneklerde, standart
+olan dört boşluk kullanacağız. Fonksiyon tanımlamaları gruplandırılmış cümlelerin
+ikinci örneğidir ( ilk örneğimiz daha önceki bölümde gördüğümüz <tt class="docutils literal"><span class="pre">for</span></tt>
+deyimiydi.) Hepsinin de kalıbı aynıdır.</p>
+<ol class="arabic simple">
+<li>Bir <strong>başlık</strong> bir anahtar kelime ile başlar ve iki nokta üst üste ile biter.</li>
+<li>Bir <strong>gövde</strong>, bir veya daha fazla Python cümlesi içerir ve bu cümleler başlıktan aynı
+miktarda içeriye  girintilidir (<em>Python yazı rehberi 4 boşluk tavsiye eder.</em>)</li>
+</ol>
+<p>Daha önce <tt class="docutils literal"><span class="pre">for</span></tt> döngüsünün bu kalıbı izlediğini gördünüz.</p>
+<p>Fonksiyon tanımlanmasına yeniden bakarsak: Baştaki anahtar kelime <tt class="docutils literal"><span class="pre">def</span></tt>
+ifadesidir. Bu ifade, fonksiyonun ismi ve parantezin içine alınmış
+parametreler izler. Parametre listesi boş olabilir veya birbirinden
+virgüllerler ayrılmış herhangi bir sayıda parametre içerebilir. Her iki
+durumda da parantezler gereklidir. Bir fonksiyonumuzu bir parametre yardımıyla
+kullanıyorsak,  bu fonksiyona ne gibi bilgi sağlamamız gerektiğini gösterir.</p>
+<p>Varsayalam ki, biz kamplumbağalar ile çalışıyoruz ve yaptığımız işlem onlara
+bir kare çizdirmek olsun. &#8220;Kare Çizdirme&#8221;, küçük adımları olan bir
+<strong>soyutlama</strong> veya zihinsel parçadır. Bu yapıtaşının kalıbını anlamak için bir
+fonksiyon yazalım:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">turtle</span>
+
+ <span class="k">def</span> <span class="nf">kare_ciz</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
+     <span class="sd">&quot;&quot;&quot;t isimli bir kamplumbağa&#39;nın sz boyutunda bir kare çizmesi&quot;&quot;&quot;</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+         <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
+         <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+
+
+ <span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>        <span class="c"># Pencere oluştur ve özelliklerini gir.</span>
+ <span class="n">wn</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">(</span><span class="s">&quot;lightgreen&quot;</span><span class="p">)</span>
+ <span class="n">wn</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;Ahmet fonksiyon ile buluşuyor&quot;</span><span class="p">)</span>
+
+ <span class="n">ahmet</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>      <span class="c"># ahmet adlı kamplumbağa oluştur.</span>
+ <span class="n">kare_ciz</span><span class="p">(</span><span class="n">ahmet</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>       <span class="c"># Fonksiyonu çağır ve kare çiz.</span>
+ <span class="n">wn</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="_images/alex04.png" src="_images/alex04.png" />
+</div></blockquote>
+<p>Fonksiyonumuz <tt class="docutils literal"><span class="pre">kare_ciz</span></tt> olarak isimlendirdik. İki tane parametresi vardır:
+Birincisi hangi hangi kamplumbağa&#8217;nın haraket edeceğini; diğeri ise çizilecek
+karenin boyutunu verir. Fonksiyonun gövdesinin nerde bittiğine dikkat edin. Bu
+tamamen girintiye bağlıdır ve boşluk olan satırın bununla ilgisi yoktur.</p>
+<div class="admonition-belgelendirme-icin-docstring-belge-aciklar admonition">
+<p class="first admonition-title">Belgelendirme için <em>docstring (belge açıklar) *</em></p>
+<p>Fonksiyon başlığından sonkaki ilk satır bir karakter dizisidir ve bir
+<strong>docstring</strong>  (belgeaçıklar) olarak değerlendirilir; Python tarafından ve bazı
+programlama dilleri tarafından bunlar özel olarak değerlendirilir.
+Örneğin, Python&#8217;da tanımlanmış bir fonksiyonu PyScripter&#8217;da yazdığımızda
+&#8212; parantezi kapatmadan önce &#8212; bir ipucu penceresi gözükür ve bize
+fonksiyonun hangi argümanları aldığını (Ç.n: Argüman ile parametre hemen
+hemen  aynı
+anlama gelmektedir. Daha kesin dille,  bir fonksiyonu çağırıp fonksiyonun
+içindeki  parametreye
+bir değer atadığımızda, bu parametre artık  argüman olarak adlandırılır.)  ve docstringler içindeki metini gösterir.</p>
+<p><cite>Docstring&#8217;ler</cite> belgemizin içindeki fonksiyonları belgelendirmek için
+önemlidir. Çünkü kim bir fonksiyonu çağırırsa, fonksiyonun nasıl
+çalıştığını veya fonksiyon içinde neler olduğunu bilmek zorunda değildir.
+Bilmeleri gereken; fonksiyonun hangi argümanları aldığı, bunların ne
+yaptığı ve bu fonksiyonun beklenen sonucudur. Bu fonksiyonun içeriğine
+bakmadan, bu fonksiyonu kullanmamıza yeterli olmalıdır. Bu kavram, daha
+sonraki bölümlerde deneceğimiz <em>soyutlamaya</em> dayanır.</p>
+<p>Docstring&#8217;ler genelde üçlü tırnak içine alınırlar. Bunun nedeni daha
+sonra bu docstring&#8217;leri genişletmek istdeğimizde, bize kolaylık sağlar.</p>
+<p class="last">Docstring, belge yorumları ile karıştırmamak  gerekir. Bir
+docstring,  Python&#8217;un çalışma zamanı sırasında işlenir. Belge yorumları ise,  program     yorumlandığı sırada bu belge yorumları ihmal edilir.</p>
+</div>
+<p>Bir fonksyionu tanımlamak, fonksiyonu çalıştırmak için yeterli değildir. Bu
+fonksiyonu çalıştırmak için <strong>fonksiyonu çağırmak</strong> gerekir. Örneğin
+<strong>print</strong>, <strong>range</strong> ve <strong>int</strong> gibi Python&#8217;da tanımlanmış bazı fonksiyonları
+nasıl çağıracağımızı gördük. Fonksiyonu çağırma, işlenecek fonksiyon ismi ve
+arkasından bu fonksiyona verilecek <em>argüman</em> denen değerler listesinin
+parametrelere atanmasıyla olur. Yukarıdaki örnekte sondan ikinci satırda, bir
+fonksiyon çağırıyoruz; görev verilen kamplumbağa olarak <tt class="docutils literal"><span class="pre">ahmet'i</span></tt> seçiyoruz  ve 50&#8217;yi
+ise istedğimiz karenin boyutu olarak atıyoruz. Fonksiyon çalışırken, <tt class="docutils literal"><span class="pre">sz</span></tt>
+değşikeni 50&#8217;ye işaret eder; <tt class="docutils literal"><span class="pre">t</span></tt> değişkeni ise <tt class="docutils literal"><span class="pre">ahmet</span></tt>&#8216;in işaret ettiği
+kamplumbağaya işaret eder.</p>
+<p>Bir kere fonksiyonu tanımladığımızda, bu fonksiyonu istediğiniz kadar
+çağırabilirsiniz. Bu fonksiyonu herbir çağırışımızda, onun cümleleri her
+defasında yürütülecektir. Biz bu fonksiyonu, herhangi bir kamplumbağanın kare
+çizmesi için kullanabiliriz. Sonraki örnekte, <tt class="docutils literal"><span class="pre">kare_ciz</span></tt> fonksiyonunu biraz
+değiştirelim. Bu sefer <tt class="docutils literal"><span class="pre">tamer'in</span></tt> 15 tane farklı çeşitlilikte (renkleri ve
+boyutları)  kare çizmesini
+isteyeceğiz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">turtle</span>
+
+<span class="k">def</span> <span class="nf">renkli_kareler_ciz</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;t kamplumbağasına her kenarı  farklı renklerde ve boyutu birbirinden farklı 15 kare çizdir. &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;purple&quot;</span><span class="p">,</span> <span class="s">&quot;hotpink&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">]:</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>        <span class="c"># Pencereyi oluştur ve özelliklerini</span>
+<span class="n">belirle</span>
+<span class="n">wn</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">(</span><span class="s">&quot;lightgreen&quot;</span><span class="p">)</span>
+
+<span class="n">tamer</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>      <span class="c"># tamer&#39;i oluştur ve özelliklerini ata</span>
+<span class="n">tamer</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">size</span> <span class="o">=</span> <span class="mi">20</span>                   <span class="c"># En küçük boyutlu karenin ölçüsü</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+    <span class="n">draw_multicolor_square</span><span class="p">(</span><span class="n">tess</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">10</span>        <span class="c"># Her keresinde boyutu artır.</span>
+    <span class="n">tess</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>        <span class="c"># tamer&#39;i biraz yerinden oynat</span>
+    <span class="n">tess</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>          <span class="c"># ve biraz döndür.</span>
+
+<span class="n">wn</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="_images/tess05.png" src="_images/tess05.png" />
+</div></blockquote>
+</div>
+<div class="section" id="fonksiyonlar-baska-fonksiyonlari-cagirabilir">
+<h2>4.2. Fonksiyonlar başka fonksiyonları çağırabilir<a class="headerlink" href="#fonksiyonlar-baska-fonksiyonlari-cagirabilir" title="Permalink to this headline">¶</a></h2>
+<p>Şimdi ise fonksiyonumuza bir dikdörtgen çizdirmek istediğimiz varsayalım.
+Genişlik ve yükseklik için farklı argümanlara sahip bir fonksiyonu
+çağırabilmeliyiz. Kareden farklı olarak, aynı şeyi 4 kere tekrar edemeyiz,
+çünkü 4 kenar birbirine eşit değildir.</p>
+<p>Bir dikdörtgen çizebilecek güzel bir kod oluşturalım:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">dikdortgen_ciz</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot; t kamplumbağasına  w genişliğinde ve h yüksekliğinde</span>
+<span class="sd">   dikdörtgen çizdir&quot;&quot;&quot;</span>
+
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Parametre isimleri yanlış anlamaya sebep vermemek için özellikle tek harf
+seçilmiştir. Daha fazla deneyim kazandıkça, gerçek programlarda bu
+parametrelerden daha iyi isimler seçebiliriz. Burdaki temel nokta, program
+bizim bir ne bir dikdörtgen çizdiğimizi; ne de genişlik veya yüksekliği belirten
+parametreleri anlar. Dikdörtgen, genişlik veya yükseklik gibi kavramlar
+insanlar için bir anlam ifade eder. Bilgisayar veya program bu kavramları
+anlayamaz.</p>
+<p><em>Bir bilgisiyar bilimcisi gibi düşünme</em>  örüntü (düzen) ve
+bağıntı bulma gerektirir. Yukarıdaki programda, bunu bir dereceye kadar
+yaptık. Yalnızca 4 kenar çizmedik. Bunun yerine, dikdörgen içinde bir örüntü
+(düzen) baktık ve dikdörtgeni iki parçaya ayırdık. Kendini iki kere
+tekrarlayan bu düzeni, loop döngüsü kullanarak iki kere tekrarladık.</p>
+<p>Fakat şimdi karenin, dikdörtgenin özel bir hali olduğunu görebilirsiniz.
+Halihazırda elimizde dikdörtgen çizen bir fonksiyon olduğundan, bunu bir kare
+çizmek için kullanabiliriz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">kare_ciz</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span><span class="n">sz</span><span class="p">)</span> <span class="c"># kare_ciz&#39;in yeni sürümü</span>
+   <span class="n">dikdortgen_ciz</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span><span class="n">sz</span><span class="p">,</span><span class="n">sz</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Burda dikkat edilmesi gereken birkaç nokta vardır:</p>
+<ul class="simple">
+<li>Bir fonksiyon diğer bir fonksiyonu çağırabilir.</li>
+<li>Yukarıdaki örnekte <tt class="docutils literal"><span class="pre">karce_ciz</span></tt>&#8216;i  yeniden yazarak kare ve dikdörtgen
+arasındaki bir bağıntıyı yakalarız.</li>
+<li>Bu fonksiyonu çağırırken <tt class="docutils literal"><span class="pre">kare_ciz(tamer,50)</span></tt> diyebiliriz. Bu fonsyonun
+parametreleri, <tt class="docutils literal"><span class="pre">tx</span></tt> ve <tt class="docutils literal"><span class="pre">sz</span></tt> sırasıyla tamer nesnesine ve int 50&#8217;ye
+atanmıştır.</li>
+<li><tt class="docutils literal"><span class="pre">diktortgen_ciz</span></tt> fonksiyonuna çağrı yapıldığında, <tt class="docutils literal"><span class="pre">tx</span></tt> ve <tt class="docutils literal"><span class="pre">sz</span></tt>
+değişkenlerindeki değerler ilk önce alınır ve sonrasında fonksiyon çağrılır. Bu fonksiyonun <tt class="docutils literal"><span class="pre">t</span></tt> değişkeni <tt class="docutils literal"><span class="pre">tamer</span></tt> nesnesine; <tt class="docutils literal"><span class="pre">w</span></tt> ve <tt class="docutils literal"><span class="pre">h</span></tt> değişkenlerinin herbiri 50 değerine atanır.</li>
+</ul>
+<p>Şimdiye kadar, bu kadar yeni fonksiyon oluşturmak için katlandığımız bu kadar
+zahmete değip değmeyeceği anlaşılmamış olabilir. Gerçekte, birçok neden
+vardır, fakat şu örnek iki tanesini gösterir:</p>
+<ol class="arabic simple">
+<li>Yeni bir fonksiyon yaratmak, komutlar grubunu isimlendirme fırsatını
+bize verir. Fonksiyon, karışık hesaplamaları saklayarak tek bir komut ile programı
+basitleştirir. Fonksiyon (ismi de dahil olmak üzere) düşünce yapımızı veya
+problemin soyutlanmasına yardım eder.</li>
+<li>Yeni bir fonksiyon yaratmak, kendini tekrarlayan kodları ortadan kaldırmaya
+ve böylece kısa bir program yaratmamızı sağlar.</li>
+</ol>
+<p>Tahmin edebileceğimiz gibi, fonksiyonu çalıştırmadan önce o fonksiyonu
+yaratmalıyız. Diğer bir deyişle, fonksiyon çağrılmadan önce fonksiyonunun
+tanımı çalıştırılmalıdır.</p>
+</div>
+<div class="section" id="yurutme-akisi">
+<span id="index-1"></span><h2>4.3. Yürütme akışı<a class="headerlink" href="#yurutme-akisi" title="Permalink to this headline">¶</a></h2>
+<p>Fonksiyonun ilk kullanımından önce tanımlandığından emin olmak için,
+cümlelerin yürütme sırasını bilmek gerekir. Bu sıraya <strong>yürütme akışı (flow of
+execution)</strong> denir. Daha önceki bölümde bunun hakkında biraz konuşmuştuk.</p>
+<p>Yürütme her zaman programın ilk satırıyla başlar. Cümleler yukarıdan aşağıya
+olmak üzere her seferinde bir kere çalıştırılır.</p>
+<p>Fonksiyon tanımlamaları, programın yürütme akışını değiştirmez, ancak
+fonksiyon içindeki cümlelerin fonksiyon çağrılana kadar yürütülmediğini
+unutmayın. Pek yaygın olmasa bile, bir fonksiyonu diğer bir fonksiyon içinde
+tanımlıyabiliriz. Bu durumda içerideki fonksiyon tanımı, içerisinde
+tanımlandığı fonksiyon çağrılana kadar yürütülmeyecektir.</p>
+<p>Fonksiyon tanımlamaları, yürütme akışındaki sapmalar gibidir. Sonraki cümleye
+gideceğine, akış çağrılan fonksiyonun ilk satırına gider, fonksiyon içindeki
+cümleleri çalıştırır ve daha sonra bıraktığı yerden (fonksiyonun çağrıldığı
+satır) devam eder.</p>
+<p>Bu kolay gibi gözükse de, bir fonksiyonun bir başka fonksiyonu çağırabildiğini
+bildiğimizden dolayı dikkatli olmalıyız. Bir fonksiyonun ortasında, program
+bir başka fonksiyonunun içindeki cümleleri çalıştırmak zorunda kalabilir. Bu
+yeni fonksiyon çalışırken, başka bir fonksiyonu  da çalıştırabilir!</p>
+<p>Şansımız var ki, Python nerde kaldığını tutmada oldukça beceriklidir. Böylece
+fonksiyonun yürütülmesi bittiğinde, program çağırdığı fonksiyon satırına geri
+döner. Programın sonuna geldiğinde, programı sonlandırır.</p>
+<p>Bu sefil hikayenin anafikri nedir? Programı okurken  yukarıdan
+aşağıya doğru okumayın. Bunun yerine, yürütme akışını takip edin.</p>
+<div class="admonition-yurutme-akisini-canli-olarak-izle admonition" id="index-2">
+<p class="first admonition-title">Yürütme akışını canlı olarak izle</p>
+<p>Pyscripter&#8217;in <tt class="docutils literal"><span class="pre">single-stepping</span></tt> (tek adımlama) özelliğini kullanarak
+yürütme akışını adım adım izliyebiliriz. Kodun herbir satırı
+çalıştırılmadan önce Pyscripter tarafından vurgulanır (ışıklandırılır.)</p>
+<p>Pyscripter&#8217;de fareyi programdaki herhangi bir değişkenin üzerine getirerek, o
+değişkenin o andaki değerini görebilirsiniz. Böylece programın anlık durumunu  &#8212;
+o anda değişkenlere atanan değerler &#8212; kontrol etmemiz kolaylaşır.</p>
+<p>Bu, herbir adımda tam  ve derinlemisine  ne olduğunu anlamak için oldukça
+kuvvetli bir mekanizmadır. Tek adımlama özelliğini iyi kullanmayı ve zihinsel
+olarak her zaman ileriyi görmeyi öğrenin. Kod üzerinden çalışırken, herbir adımdan
+önce kendinizi sınayın: <em>&#8220;Bu satırın programdaki değişkenler üzerindeki etkisi ne
+olacak?&#8221;</em> ve <em>&#8220;yürütme akışı bir sonraki adımda nereye gidecek?&#8221;</em></p>
+<p>Geriye gidelim ve 15 tane çeşitli renklerde kare çizen programda bunun nasıl
+çalıştığını görelim. İlk olarak, <tt class="docutils literal"><span class="pre">import</span></tt> deyiminin altına bir satır
+ekleyeceğiz. Bu gerekli olmasa bile  hayatımızı oldukça kolaylaştıracak, çünkü
+<cite>turtle</cite> kodunu içeren modül içine adım atmamazı (girmemizi) önleyecek.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">turtle</span>
+<span class="nb">__import__</span><span class="p">(</span><span class="s">&quot;turtle&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">__traceable__</span> <span class="o">=</span> <span class="k">False</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Şimdi başlamaya hazırsınız. Farenizin imlecini (işaretçisini) kamplumbağa ekranı
+yaratacağımız satırın üstüne yerleştirin ( wn = turtle.Screen() )  ve <em>F4</em> tuşuna
+basın. Bu Python programınızı bu satıra kadar ( imlecin bulunduğu satır dahil
+değil) çalıştıracak. Programımız çalışmaya ara verecek ve çalıştırılacak sonraki
+satırı ışıklandıracaktır. Şu şekil gibi olacaktır:</p>
+<img alt="_images/breakpoint.png" src="_images/breakpoint.png" />
+<p>Bu noktada, <em>F7</em> düğmesine arka arkaya basarak kod üzerinden adım adım gideriz.
+10,11,12, ... satırların nasıl bir kamplumbağa penceresi yarattığı, kanvas
+rengininin nasıl değiştiğini, başlığın nasıl değiştiği ve yürütme akışının nasıl
+döngü içine ve burdan da fonksiyona girdiğini gözlersiniz.</p>
+<p>Biz bunu yaparken, faremizi bazı değişkenler üzerinde gezdirerek, bizim kafamızda
+yarattığımız model ile uyuşup uyuşmadığını onaylarız.</p>
+<p>Birkaç döngü sonrası, programımız 20&#8217;inci satırı çalıştırmaya hazır olur ve
+sıkılmaya başladığımızda, <em>F8</em> düğmesini kullanarak çağırdığımız fonksiyonu
+atlarız. Bu, fonksiyon içindeki her komut üzerinden adım adım gitmemiz yerine,
+bütün bir fonksiyonu bir kerede çalıştırmamızı sağlar. Fonksiyon üzerinden
+&#8220;detaylı olarak&#8221; gidebiliriz veya fonksiyonu tek bir parça gibi çalıştırabiliriz.</p>
+<p class="last">Daha farklı seçenekler vardır; bunlardan birtanesi de çalışmayı durdaran (ara
+veren) <em>Resume</em> düğmesidir. Bunu PyScripter&#8217;in <em>Run</em> sekmesi altında
+bulabilirsiniz.</p>
+</div>
+</div>
+<div class="section" id="bir-deger-donduren-fonksiyonlar">
+<span id="index-3"></span><h2>4.4. Bir değer döndüren fonksiyonlar<a class="headerlink" href="#bir-deger-donduren-fonksiyonlar" title="Permalink to this headline">¶</a></h2>
+<p>Daha önceki kısımdaki bütün fonksiyonlar değer döndürür. Ayrıca <tt class="docutils literal"><span class="pre">range</span></tt>, <tt class="docutils literal"><span class="pre">int</span></tt>
+ve <tt class="docutils literal"><span class="pre">abs</span></tt> gibi fonksiyonlarının döndürdüğü değerler, daha karmaşık ifadeler yaratmak
+için kullanılabilir.</p>
+<p><tt class="docutils literal"><span class="pre">kare_ciz</span></tt> fonksiyonu ile yukarıdaki fonksiyonlar arasındaki fark, <tt class="docutils literal"><span class="pre">kare_ciz</span></tt>
+fonksiyonu bir değer döndürmez çünkü onun bir değeri hesaplamasını istemedik. Tam
+aksine, <tt class="docutils literal"><span class="pre">kare_ciz</span></tt> fonksiyonunun, kamplumbağının çizim yapmasını sağlayan bir dizi
+adımı gerçekleştirmesini istedik.</p>
+<p>Bu kitapta değer döndüren fonksiyonları <strong>ürün veren</strong> fonksiyonlar olarak
+isimlendireceğiz. <strong>ürün veren</strong> fonksiyonun karşıtını ise <strong>void fonksiyon</strong> (ürün
+vermeyen)  adını
+vereceğiz. Bu tür fonksiyonlar, bir değer etmek için çalıştırılmaz fakat yararlı
+şeyler yaptıkları için çalıştırılır ( Java, C#, C ve C++ programlama dilleri ürün
+vermeyen bir fonksiyonu tanımlarken için &#8220;void function&#8221; terimi kullanılır.) Void
+fonksiyonlar dönüş değerleri için çalıştırılmasa bile, Python her zaman birşey
+döndürmek ister. Eğer programcı fonksiyona bir değer döndürmezse, Pyton otomatik
+olarak dönüş değerine <tt class="docutils literal"><span class="pre">None</span></tt> (hiçbir şey) atar.</p>
+<p>Ürün veren bir fonksiyonu nasıl yazarız? İkinci bölümün sonunda bileşik hesap faizi
+yapan formülü görmüştük; bunu şimdi ürün veren bir fonksiyon olarak yazacağız:</p>
+<blockquote>
+<div><img alt="_images/compoundInterest.png" src="_images/compoundInterest.png" />
+<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">son_miktar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      Bileşik fazi formülünün p&#39;ye uygularayak</span>
+<span class="sd">      son miktarı hesapla</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span>         <span class="c"># Bunu yeni görüyoruz; fonksiyonu ürün veren hale getirir.</span>
+
+<span class="c"># Yukarıdaki fonksiyonu</span>
+<span class="n">ilkYatirim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&quot;Ne kadar para yatırmak istiyorsunuz?&quot;</span><span class="p">))</span>
+<span class="n">sonMiktar</span> <span class="o">=</span> <span class="n">son_miktar</span><span class="p">(</span><span class="n">ilkYatirim</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Paranazın son miktarı &quot;</span><span class="p">,</span> <span class="n">sonMiktar</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<ul>
+<li><p class="first"><strong>return</strong> deyimini bir ifade takip eder ( Bu durumda <tt class="docutils literal"><span class="pre">a</span></tt>.) Bu ifade
+hesaplancak ve bu fonksiyonu çağıran fonksiyona bir ürün olarak
+döndürülecektir. <tt class="docutils literal"><span class="pre">ilkYatirim</span></tt>&#8216;in tipi bir karakter dizidir, fakat bunu bir
+sayıya çevirmemiz gereklidir. O bir para olduğundan ve ondalıklı kısma sahip
+olduğundan dolayı, <tt class="docutils literal"><span class="pre">float</span></tt> tip değişkenini kullanarak onu float tipine
+çevirdik.</p>
+</li>
+<li><p class="first">Argümanları fonksiyonlara nasıl girdiğimize dikkat edin. Argümanlarımız:
+yıllık %8 faiz oranı, elde edilen faiz her ay (yılda 12 kere)  hesabımıza ekleniyor ve hesap 5
+yıl boyunca (dönem) açık tutuluyor.</p>
+</li>
+<li><p class="first">Biz bu programı fonksiyonu çalıştırdığımızda, aşağıdaki çıktıyı alırız:</p>
+<blockquote>
+<div><p><em>Paranızın son miktarı dönem sonunda 14898.457083</em></p>
+</div></blockquote>
+<p>Ondalıklı haneler kısmı biraz uzun gibi gözüküyor. Fakat unutmayın ki, Python
+bizim para ile çalışıp çalışmadığımızı anlamaz. Python&#8217;un tek yaptığı, kendi
+imkanları içinde en iyi sayıyı yuvarlamadan en iyi sonucu vermektir. İleride
+bu çıktıyı nasıl biçimlendireceğimiz ve bunu iki basamaklı ondalık sayıya
+yuvarlayacağımızı göreceğiz.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ilkYatirim</span> <span class="pre">=</span> <span class="pre">float(input(&quot;Ne</span> <span class="pre">kadar</span> <span class="pre">para</span> <span class="pre">yatırmak</span> <span class="pre">istiyorsunuz?&quot;))</span></tt> satırı
+kompozisyon özelliğinin bir başka örneğidir. Burda bir kaç fonksiyonu birden
+kompozisyon ( tek satırda birleştirme) yapıyoruz. Yani, <tt class="docutils literal"><span class="pre">input</span></tt>
+fonksiyonunun çıktısı, <tt class="docutils literal"><span class="pre">float</span></tt> fonksiyonun bir argümanı oluyor.</p>
+</li>
+</ul>
+<p>Burda bir şeye dikkat edin. <tt class="docutils literal"><span class="pre">sonMiktar</span></tt> fonksiyonuna argüman olarak girdiğimiz
+<tt class="docutils literal"><span class="pre">ilkYatirim`,</span> <span class="pre">``p</span></tt> değişkeni ile herhangi bir ilgisi yoktur. Bu sanki
+<tt class="docutils literal"><span class="pre">sonMiktar</span></tt> çağırıldığı zaman,  <tt class="docutils literal"><span class="pre">p=ilkYatirim</span></tt> çalıştırılır. Burda
+<tt class="docutils literal"><span class="pre">final_amt</span></tt>&#8216;yi çağıran <tt class="docutils literal"><span class="pre">p</span></tt>&#8216;dir.</p>
+<p>Kısa isimli değişkenler bazen yanıltıcı olabilir. Bu yüzden aşağıdaki sürümü
+tercih etmik uygun olabilir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">son_miktar_v2</span><span class="p">(</span><span class="n">anapara</span><span class="p">,</span> <span class="n">faizOrani</span><span class="p">,</span><span class="n">faizinAnaParayaEklenmeSayisi</span><span class="p">,</span> <span class="n">yilSayisi</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">anapara</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">faizOrani</span> <span class="o">/</span> <span class="n">faizinAnaParayaEklenmeSayisi</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">faizTekrar</span><span class="o">*</span><span class="n">years</span><span class="p">)</span>
+    <span class="s">&quot; Burda faizinAnaParayaYıldaEklenmeSayisi,  edilen faizin  yılda kaç kere  anaparaya</span>
+    <span class="n">eklenme</span> <span class="n">sayısıdır</span><span class="o">.</span>
+
+    <span class="k">return</span> <span class="n">a</span>
+
+<span class="k">def</span> <span class="nf">son_miktar_v3</span><span class="p">(</span><span class="n">anapara</span><span class="p">,</span> <span class="n">oran</span><span class="p">,</span> <span class="n">faizTekrari</span><span class="p">,</span><span class="n">yil</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">anapara</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">oran</span><span class="o">/</span><span class="n">faizTekrari</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">faizTekrari</span><span class="o">*</span><span class="n">yil</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Yukarıdakilerin hepsi aynı şeyi yapar. Sağduyunuzu kullanarak  başka kişiler tarafından anlaşılabilecek bir program yazmayı amaç edinin. Kısa değişken isimleri kodu daha ekonomik yapar  ve bazen kodun okunmasını kolaylaştırır. Eğer Einstein <span class="math">\(E=mc^2\)</span> (m:kütle, c:ı,ışık hızı) formülünde daha uzun değişken isimleri kullansaydı, bu kadar rahat akılda kalmayabilirdi. Eğer kısa isimleri kullanmayı tercih ederseniz, kısa isimlerin ne için kullanıldığını  açıklayan kısa yorumlar ekleyin.</p>
+</div>
+<div class="section" id="degiskenler-ve-parametreler-yereldir">
+<span id="index-4"></span><h2>4.5. Değişkenler ve parametreler yereldir<a class="headerlink" href="#degiskenler-ve-parametreler-yereldir" title="Permalink to this headline">¶</a></h2>
+<p>Bir fonksiyon içerisinde bir <strong>yerel değişken</strong> yarattığımızda, o değişken
+sadece o fonksiyon icinde varolur. Bu değişkeni o fonksiyonun dışında
+kullanamazsınız. Örneğin:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">son_miktar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Eğer <tt class="docutils literal"><span class="pre">a</span></tt> değişkenini bu fonksiyonunun dışında kullanmaya çalışırsak, aşağıdaki
+hatayı alırız:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">NameError: name &#39;a&#39; is not defined</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">a</span></tt> yalnızca fonksiyon çalıştırıldığı sürece varolabilir. Biz buna, <tt class="docutils literal"><span class="pre">a</span></tt>&#8216;nın
+<strong>yaşam süresi</strong> diyeceğiz. Fonksiyonun çalışması sonlandığında, yerel
+değişkenler ( fonksiyonun içindeki değişkenler) yokedilir.</p>
+<p>Parametreler de yereldir ve yerel değişkenler gibi davranır. Örneğin,
+<tt class="docutils literal"><span class="pre">p</span></tt>,``r``, <tt class="docutils literal"><span class="pre">n</span></tt>, <tt class="docutils literal"><span class="pre">t</span></tt>&#8216;nin yaşam süreleri, <tt class="docutils literal"><span class="pre">son_miktar</span></tt> fonksiyonu
+çağrıldığında başlar ve fonksiyonun çalışması durduğunda bu değişkenler
+yokedilir.</p>
+<p>Bu yüzden bir fonksiyon içinde bir yerel değişkene değer atayıp, fonksiyon
+çalışmasını tamamladıktan sonra bu değişkeni başka bir zaman tekrar kullanmak mümkün
+değildir. Fonksiyonunun her çağrılmasında yeni bir yerel değişken yaratır ve
+fonksiyonları çalışması sona erdiğinde, yerel değişkenlerinde ömrü sonra erer.</p>
+</div>
+<div class="section" id="kamplumbaga-programina-yeniden-bakalim">
+<span id="index-5"></span><h2>4.6. Kamplumbağa programına yeniden bakalım<a class="headerlink" href="#kamplumbaga-programina-yeniden-bakalim" title="Permalink to this headline">¶</a></h2>
+<p>Şimdiye kadar ürün veren fonksiyonları gördük. Dikkatimizi kodumuzun yeniden
+düzenlemesine odaklarsak, program parçacıkları aklımıza daha iyi yatar. Bu
+yeniden düzenleme işlemine <strong>refactoring</strong> ( yeniden faktörleme) denir.</p>
+<p>Kamplumbağalar ile çalışırken her zaman yapmak istediğimiz iki şey vardır:
+Kamplumbağalar için pencere oluşturmak; ve bir veya birdan fazla kamplumbağayı
+ekranda yaratmak. Bu işlemleri ileride daha kolay yapabilmek için bazı
+fonksiyonlar yazabiliriz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">pencere_yap</span><span class="p">(</span><span class="n">renk</span><span class="p">,</span><span class="n">baslik</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      İsmi ve başlığı olan bir pencere oluşturalım ve bu pencereyi</span>
+<span class="sd">      fonksiyon içinde döndürelim.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">(</span><span class="n">renk</span><span class="p">)</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">baslik</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">w</span>
+
+<span class="k">def</span> <span class="nf">kamplumbag_yap</span><span class="p">(</span><span class="n">renk</span><span class="p">,</span><span class="n">olcu</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      Rengi ve kalem ölçüsü olan olan bir kamplumbağa yaratalım.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">renk</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="n">olcu</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span>
+
+
+<span class="n">wn</span> <span class="o">=</span> <span class="n">pencere_yap</span><span class="p">(</span><span class="s">&quot;lightgreen&quot;</span><span class="p">,</span> <span class="s">&quot;Ahmet Tamer ve Deniz Dans Ediyor&quot;</span><span class="p">)</span>
+<span class="n">tamer</span> <span class="o">=</span> <span class="n">kamplumbag_yap</span><span class="p">(</span><span class="s">&quot;hotpink&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ahmet</span> <span class="o">=</span> <span class="n">kamplumbag_yap</span><span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">deniz</span> <span class="o">=</span> <span class="n">kamplumbag_yap</span><span class="p">(</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bir kodu yeniden düzenlememizin amacı, bir fonksiyonu çağırdığımızda hangi
+şeyleri değiştirmek istiyebileceğimizi tahmin etmektir. Bunlar yazdığımız
+fonksiyonun
+parametreleri ve değiştirelibecek kısımları  olmalıdır.</p>
+</div>
+<div class="section" id="sozluk">
+<h2>4.7. Sözlük<a class="headerlink" href="#sozluk" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="glossary docutils">
+<dt id="term-arguman">argüman</dt>
+<dd>Bir forksiyon çağrıldığında, bu fonksiyona aktarılan değerdir. Bu değer
+fonksiyonda ilgili parametreye atanır. Bu argüman bir işlemin değerini
+alabilir  veya ürün
+veren bir fonsiyonu çağırabilir.</dd>
+<dt id="term-govde">gövde</dt>
+<dd>Bir birleşik ifadenin ikinci kısmı. Gövdedeki bütün cümleler başlıktan
+itibaren aynı miktarda içeriye doğru girintilidir. Python kullanıcıları
+genelde 4 boşluklu içeriye girinti kullanırlar.</dd>
+<dt id="term-bilesik-deyim">bileşik deyim</dt>
+<dd><p class="first">Bu deyim iki parçadan oluşur:</p>
+<ol class="upperalpha simple">
+<li>başlık (header) - bir deyimin tipini belirleyen anahtar kelime
+başlar ve iki nokta üst üste ile biter.</li>
+<li>gövde- başlıktan itibaren aynı miktarda içeriye doğru girintilenmiş
+ifadeler</li>
+</ol>
+<p>Bir bileşik deyim şu şekilde oluşur:</p>
+<blockquote class="last">
+<div><div class="highlight-python3"><div class="highlight"><pre>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>keyword ... :</dt>
+<dd>deyim
+deyim ...</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt id="term-docstring">docstring</dt>
+<dd>Bir fonksiyona ait olan ve onu belgelendirmede kullanılan bir
+özelliktir. Pyscripter gibi araçlar, docstringleri kullanarak
+programcılara ipucu ve kolaylık sağlar.  Module, sınıf ve yöntemleri
+ilerideki bölümlerde
+gördüğümüzde, docstring&#8217;lerin bunlarda da kullanıldığını göreceğiz.</dd>
+<dt id="term-cerceve">çerçeve</dt>
+<dd>Yığıt (stack) diyagramında bir fonksiyon çağrısını temsil eden
+çerçevedir. Bir fonksiyonunun yerel değişkenlerini ve
+parametrelerini içerir.</dd>
+<dt id="term-fonksiyon">fonksiyon</dt>
+<dd>Bazı yararlı işlemler gerçekleştiren deyimler dizisinin
+isimlendirilmiş halidir. Fonksiyonlar parametre alıp almayacakları
+gibi, bir fonksiyon bir sonuç üretebilir ya da üretemeyebilir.</dd>
+<dt id="term-fonksiyon-cagrici">fonksiyon çağrıcı</dt>
+<dd>Fonksiyonu çalıştıran deyim. Bu deyim fonksiyonun ismi, bu ismi
+izleyen iki parantezin arasına yerleştirilmiş argüman listesinden
+oluşur.</dd>
+<dt id="term-fonksiyon-tanimi">fonksiyon tanımı</dt>
+<dd>Yeni bir fonksiyon yaratan; ismini, parametrelerini ve fonksiyon
+gövdesindeki cümleleri belirten bir deyim.</dd>
+<dt id="term-urun-veren-fonksiyon">Ürün veren fonksiyon</dt>
+<dd>Bir fonksiyon çağrıldığında bir değer döndüren fonksiyon</dd>
+<dt id="term-baslik-satiri">Başlık satırı</dt>
+<dd>Gruplandırılmış deyimlerin başlangıç kısmı. Başlangıç satırı bir
+anahtar kelime ile başlar ve iki nokta üst üste (:) ile biter.</dd>
+<dt id="term-import-deyimi">import deyimi</dt>
+<dd>Bir Python modülü içinde tanımlanmış fonksiyonları ve değişkenleri,
+başka bir betiğin içine getirilmesi için kullanılan deyimdir.</dd>
+<dt id="term-yasam-omru">yaşam ömrü</dt>
+<dd>Değişkenlerin ve nesnelerin bir yaşam ömrü vardır. Programın
+çalışması esnasında bir noktada yaratılır ve bir süre sonra ise
+yokedilirler.</dd>
+<dt id="term-yerel-degisken">yerel değişken</dt>
+<dd>Bir fonksiyon içinde tanımlı değişkenlerdir. Yerel değişken sadece
+kendi fonksiyonu içerisinde kullanabilir. Bir fonksiyonun
+parametreleri de yerel değişkenlerin özel bir türüdür.</dd>
+<dt id="term-parametre">parametre</dt>
+<dd>Bir fonksiyon içinde kullanılan ve fonksiyon içinde kullanılan
+argümanlara işaret eden isim.</dd>
+<dt id="term-refactor-yeniden-yapilandirma">refactor (yeniden yapılandırma)</dt>
+<dd>Bir programı genelde daha anlaşılır yapmak için programın yeniden
+düzenlemesine verilen isim. Çalışan bir programa sahip iken, o
+programa gidip yeniden düzenlemektir. Genelde bu işlem, daha iyi
+değişken isimleri seçmek, kendini tekrar eden kalıpları bulmak ve
+bunları fonksiyon içine yerleştirmektir.</dd>
+<dt id="term-stack-yigit-diyagrami">stack (yığıt) diyagramı</dt>
+<dd>Fonksiyonların, fonksiyon değişkenlerinin ve bu değişkenlerin
+gösterdiği değerlerini gösteren  diyagramı</dd>
+<dt id="term-traceback-geri-izleme">traceback (geri izleme)</dt>
+<dd>Bir çalışma hatası oluştuğunda o anda çalıştırılan fonksiyonların
+listesidir. Geri izleme ayrıca yığıt izleme olarak da adlandırılır.
+<a class="reference external" href="http://en.wikipedia.org/wiki/Runtime_stack">Çalışma zamanı yiğit diyagramında (Runtime Stack)</a> saklandıkları sıraya
+göre bu fonksiyonlar bulunurlar.</dd>
+<dt id="term-void-fonksiyonu">void fonksiyonu</dt>
+<dd>Ürün veren bir fonksiyonun karşıtıdır. Yani bir değer döndürmez.
+Bir değer döndürmek yerine, yapması gereken bir işi çalıştırır.</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="alistirmalar">
+<h2>4.8. Alıştırmalar<a class="headerlink" href="#alistirmalar" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Kare çizen bir void fonksiyon yazınız. Programınızı, aşağıdaki kareyi çizmek
+için kullanınız. Her kenarın 20 birim uzunluğunda olduğunu kabul edin.
+(İpucu: Program sonlandırıldığında, kamplumbağa en son karenin bitiş
+noktasından uzaklaşmıştır. )</p>
+<blockquote>
+<div><img alt="_images/five_squares.png" src="_images/five_squares.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Aşağıdaki şekli çizen bir program yazınız. En içteki karenin 20 birimlik bir
+kenarı olduğunu varsayın ve her ardışık karenin kenarının  kendisinden önce gelen
+kare kenarından 20 birim daha büyük olduğunu varsayın.</p>
+<blockquote>
+<div><img alt="_images/nested_squares.png" src="_images/nested_squares.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Kamplumbağaya düzgün çokgen çizdiren bir fonksiyon <tt class="docutils literal"><span class="pre">cokgen_ciz(t,</span> <span class="pre">n,</span> <span class="pre">sz)</span></tt>
+yazınız. Fonksiyon <tt class="docutils literal"><span class="pre">cokgen_ciz(tamer,</span> <span class="pre">8,</span> <span class="pre">50)</span></tt> olarak çağrıldığında şu şekli
+vermelidir:</p>
+<blockquote>
+<div><img alt="_images/regularpolygon.png" src="_images/regularpolygon.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Bu güzel şekli çizin:</p>
+<blockquote>
+<div><img alt="_images/tess08.png" src="_images/tess08.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Aşağıdaki iki spiral birbirinden dönme açısıyla birbirinden farklıdır.
+İkisini de çiziniz:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/tess_spirals.png"><img alt="_images/tess_spirals.png" src="_images/tess_spirals.png" style="height: 240px;" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">Daha önceki sorudaki <tt class="docutils literal"><span class="pre">cokgen_ciz</span></tt> fonksiyonunu çağıran ve bir eşkanar üçgen
+çizen <tt class="docutils literal"><span class="pre">eskenar_ciz(t,</span> <span class="pre">sz)</span></tt>  bir void fonksiyon yazınız.</p>
+</li>
+<li><p class="first">1&#8217;den <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;e kadar (n dahil) sayıların toplamını yapan bir ürün (sonuç)
+veren bir fonksiyon yazınız. Örneğin <tt class="docutils literal"><span class="pre">toplam(10)</span></tt> yazdığınızda, <cite>1+2+3...
++10</cite> sonucunu 55 olarak döndürsün.</p>
+</li>
+<li><p class="first">Yarıçapı <tt class="docutils literal"><span class="pre">r</span></tt> olan bir çemberin alanını hesaplayan <tt class="docutils literal"><span class="pre">cember_alan(r)</span></tt> bir
+fonksiyon yazınız.</p>
+</li>
+<li><p class="first">Her bir kenarı 100 birim olan bir void fonksiyonu yazınız (İpucu: Her noktada
+kamplumbağayı 144 derece döndürmeniz gerekir.)</p>
+<blockquote>
+<div><img alt="_images/star.png" src="_images/star.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Yukarıdaki programı genişletin. Beş tane yıldız çizin.  Herbir yıldızdan sonra; kalemi yukarı
+kaldırın ( kalemi etkisizleştirin), kalemi 144  derece sağa döndürün ve 350 birim
+ileri götürün, kalemi aşağıya koyun, yeniden bir yıldız çizin. Şekliniz
+aşağıdaki gibi olsun:</p>
+<blockquote>
+<div><img alt="_images/five_stars.png" src="_images/five_stars.png" />
+</div></blockquote>
+<p>Eğer kalemi kaldırmasaydınız, şekliniz nasıl olurdu.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="conditionals-tr.html" title="5. Koşul İfadeleri"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hello_little_turtles-tr.html" title="3. Merhaba, küçük kaplumbağlar"
+             >previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Name prefix for templates and static dir [_].
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

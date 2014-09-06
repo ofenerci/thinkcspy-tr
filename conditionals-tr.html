@@ -1,0 +1,1149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. Koşul İfadeleri &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="6. Ürün veren fonksiyonlar" href="fruitful_functions-tr.html" />
+    <link rel="prev" title="4. Functions" href="functions-tr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fruitful_functions-tr.html" title="6. Ürün veren fonksiyonlar"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="functions-tr.html" title="4. Functions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="kosul-ifadeleri">
+<h1>5. Koşul İfadeleri<a class="headerlink" href="#kosul-ifadeleri" title="Permalink to this headline">¶</a></h1>
+<p>Koşul ifadelerinin kullanımı programları ilginç hale getirir. Programın
+davranışını, bu sınamaların sonucuna göre değiştirebiliriz. Bu bölümün konusu
+işte budur.</p>
+<div class="section" id="boolean-degerler-ve-ifadeleri">
+<span id="index-0"></span><h2>5.1. Boolean değerler ve ifadeleri<a class="headerlink" href="#boolean-degerler-ve-ifadeleri" title="Permalink to this headline">¶</a></h2>
+<p><em>Boolean</em>, doğru ya da yanlış değere sahiptir. Bu isim Boolean Cebrini yaratan
+İngiliz matematikçi George Boole&#8217;dan dolayı verilmiştir. Bu cebir, bu değerleri
+birleştirme ve bu değerler üzerinden mantık yürütmek için bazı kurallarla
+ilgilidir.</p>
+<p>Python&#8217;da iki tür Boolean değer vardır: <tt class="docutils literal"><span class="pre">True</span> <span class="pre">(Doğru)</span></tt> ve <tt class="docutils literal"><span class="pre">False</span> <span class="pre">(Yalnış)</span></tt>.
+Python açısından bu değerler herzaman büyük harfl ile başlar. Python&#8217;un bu veri
+tipine <strong>bool</strong> adı verilir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="k">True</span><span class="p">)</span>
+<span class="go">&lt;class &#39;bool&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;interactive input&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;true&#39; is not defined</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Boolean ifadesi</strong>, sonuç olarak Boolean ifadesi üreten bir ifadedir. Örneğin,
+<tt class="docutils literal"><span class="pre">==</span></tt> işleci iki değeri karşılaştırıp, bir Boolean değer üretir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>   <span class="c"># 3 + 2&#39;nin değeri 5&#39;e mi eşit?</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="s">&quot;hel&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">+</span> <span class="s">&quot;lo&quot;</span> <span class="o">==</span> <span class="s">&quot;hello&quot;</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>İlk cümlede, iki işlenenin eşittir, bu yüzden deyim <tt class="docutils literal"><span class="pre">True</span></tt> sonucunu üretir;
+ikinci cümlede ise 5 ile 6 birbirine eşit değildir ve <tt class="docutils literal"><span class="pre">Falsa</span></tt> sonucu üretir.</p>
+<p><tt class="docutils literal"><span class="pre">==</span></tt> işleci, <tt class="docutils literal"><span class="pre">Boolean</span></tt> değer üreten  altı tane genel karşılaştırma işleçlerinden bir tanesidir. Diğerleri şunlardır:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="n">x</span> <span class="o">==</span> <span class="n">y</span>               <span class="c"># Eğer x, y&#39;ye eşit ise True değeri üretir.</span>
+<span class="n">x</span> <span class="o">!=</span> <span class="n">y</span>               <span class="c"># x, y&#39;ye eşit değil ise True değeri üretir.</span>
+<span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span>                <span class="c"># x, y&#39;den büyük ise True değeri üretir.</span>
+<span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span>                <span class="c"># x, y&#39;den küçük iseTrue değeri üretir.</span>
+<span class="n">x</span> <span class="o">&gt;=</span> <span class="n">y</span>               <span class="c"># x, y&#39;den büyük veya eşit ise True değeri üretir.</span>
+<span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span>               <span class="c"># x, y&#39;den küçük veya eşit ise True değeri üretir.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Her ne kadar bu işlemler size tanıdık gelse bile, Python tarafından kullanılan
+simgeler, matematik simgelerinden farklıdır. Sıklıkla yapılan yapılan hata,
+&#8220;çift eşit&#8221; (<tt class="docutils literal"><span class="pre">==</span></tt>) yerine, &#8220;tek eşit&#8221; (<tt class="docutils literal"><span class="pre">=</span></tt>) simgesi kullanmaktır. Ayrıca,
+<tt class="docutils literal"><span class="pre">=&lt;</span></tt> ve <tt class="docutils literal"><span class="pre">=&gt;</span></tt> simgeleri tanımlı değildir.</p>
+<p>Daha önce gördüğümüz türler gibi, Boolean değerleri değişkenlere atanabilir,
+ekrana basılabilir, vb.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">yas</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">ehliyet_alabilir_miyim</span> <span class="o">=</span> <span class="n">yas</span> <span class="o">&gt;=</span> <span class="mi">18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ehliyet_alabilir_miyim</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">ehliyet_alabilir_miyim</span><span class="p">)</span>
+<span class="go">&lt;class &#39;bool&#39;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="mantiksal-islecler">
+<span id="index-1"></span><h2>5.2. Mantıksal işleçler<a class="headerlink" href="#mantiksal-islecler" title="Permalink to this headline">¶</a></h2>
+<p>Üç adet <strong>mantıksal işleç</strong> vardır: <tt class="docutils literal"><span class="pre">and</span></tt> (ve), <tt class="docutils literal"><span class="pre">or</span></tt> (veya) ve <tt class="docutils literal"><span class="pre">not</span></tt>
+(değil). Bu basit Boolean deyimlerini kullanarak, daha karmaşık <tt class="docutils literal"><span class="pre">Boolean</span></tt>
+ifadeleri üretebiliriz. Bu işleçlerin anlamları, parantez içinde yazılmış olan
+Türkçe anlamlarıyla benzerdir. Örneğin, <tt class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">ve</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">10</span></tt> ifadesi, eğer &#8221; <tt class="docutils literal"><span class="pre">x</span></tt>
+ifadesi 0&#8217;dan büyük <em>ve</em> aynı zamanda <tt class="docutils literal"><span class="pre">x</span></tt> 10&#8217;dan küçük olduğunda&#8221; doğrudur.</p>
+<p><tt class="docutils literal"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span> <span class="pre">or</span> <span class="pre">n%3</span> <span class="pre">==</span> <span class="pre">0</span></tt> ifadesi iki koşuldan biri doğru olduğunda (veya&#8217;dan dolayı) doğrudur. Bunun anlamı <tt class="docutils literal"><span class="pre">n</span></tt> 2 ile bölünebilir <em>veya</em> 3 ile bölünebildiğinde doğrudur ( <tt class="docutils literal"><span class="pre">n</span></tt> hem iki hem de üç ile bölübelirse <tt class="docutils literal"><span class="pre">Boolean</span></tt> değerinin ne olacağını düşününüz? Bu ifade <tt class="docutils literal"><span class="pre">True</span></tt> veya <tt class="docutils literal"><span class="pre">Yalnış</span></tt> bir değer mi üretecek? Bunu Python yorumcusunda çalıştırın.)</p>
+<p>Son olarak, <tt class="docutils literal"><span class="pre">not</span></tt> işleçi bir Boolean değerinin zıttını (negatifi) üretmede
+kullanılır. Böylece <tt class="docutils literal"><span class="pre">not</span> <span class="pre">(</span> <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y)</span></tt>&#8216;nin değeri,  <tt class="docutils literal"><span class="pre">True</span></tt> eğer <tt class="docutils literal"><span class="pre">(x</span> <span class="pre">&gt;</span> <span class="pre">y)</span></tt>
+değeri <tt class="docutils literal"><span class="pre">False</span></tt> olduğunda doğru olacaktır. Başka bir söyleyişle,  u ifade <tt class="docutils literal"><span class="pre">x</span></tt>, <tt class="docutils literal"><span class="pre">y</span></tt>&#8216;ye eşit veya küçük olduğunda doğru olacaktır.</p>
+<p><tt class="docutils literal"><span class="pre">or</span></tt> işlecinin solundaki ifadesi ilk olarak hesaplanacaktır: Eğer sonuç
+<tt class="docutils literal"><span class="pre">True</span></tt> ise, Pyton sağ taraftaki ifadeleri hesaplamaz (hesaplamısına gerek
+yoktur.) Buna <em>short-circuit evaluation</em> (kısa devre hasaplaması) denir. Benzer
+olarak, <tt class="docutils literal"><span class="pre">and</span></tt> işleci için, eğer ifadenin solundaki değer <tt class="docutils literal"><span class="pre">False</span></tt> sonucu
+veriyorsa Python sol taraftaki değeri hesaplamaz.</p>
+<p>Böylece gereksiz hesaplamalar dikkate alınmaz.</p>
+</div>
+<div class="section" id="dogruluk-tablolari">
+<h2>5.3. Doğruluk Tabloları<a class="headerlink" href="#dogruluk-tablolari" title="Permalink to this headline">¶</a></h2>
+<p>Doğrululuk tabloları, bütün muhtemel giriş değerleri üzerine mantıksal işleçleri
+uyguyarak çıktıları listelememize imkan verir. <tt class="docutils literal"><span class="pre">and</span></tt> ve <tt class="docutils literal"><span class="pre">or</span></tt> işleçleri
+yalnızca iki işlenen üzerine etkilediğinden, <tt class="docutils literal"><span class="pre">and</span></tt> işlecinin sonucunu veren
+dört tane satır vardır.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="32%" />
+<col width="36%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">a</th>
+<th class="head">b</th>
+<th class="head">a and b</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="row-odd"><td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="row-even"><td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="row-odd"><td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Herbir Doğruluk tablosunda, bazen T&#8217;yi <tt class="docutils literal"><span class="pre">True</span></tt> ve F&#8217;i <tt class="docutils literal"><span class="pre">False</span></tt> kısaltmaları
+olarak kullanırız. <tt class="docutils literal"><span class="pre">or</span></tt> için doğruluk tablosu ise:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">a</th>
+<th class="head">b</th>
+<th class="head">a or b</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr class="row-odd"><td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr class="row-even"><td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr class="row-odd"><td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Üçüncü mantıksal işlemcisi ise <tt class="docutils literal"><span class="pre">not</span></tt> işlemcisidir. Bu yalnızca tek işlenen
+değeri alır. Bu yüzden doğruluk tablosu yalnızca iki satıra sahiptir.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">a</th>
+<th class="head">not a</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>F</td>
+<td>T</td>
+</tr>
+<tr class="row-odd"><td>T</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">a</th>
+<th class="head">not a</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>F</td>
+<td>T</td>
+</tr>
+<tr class="row-odd"><td>T</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="boolean-ifadelerinin-basitlestirilmesi">
+<h2>5.4. Boolean İfadelerinin basitleştirilmesi<a class="headerlink" href="#boolean-ifadelerinin-basitlestirilmesi" title="Permalink to this headline">¶</a></h2>
+<p>İfadeleri basitleştirme ve yeniden düzenlemek için bir takım kurallara <em>cebir</em>
+denir. Örneğin, okulda gördüğümüz cebir kuralları ile tanışığız. Örneğin:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="n">n</span> <span class="o">*</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Burda ise farklı bir cebir, <em>Boolean</em> cebri, göreceğiz. Bu cebir, Boolean
+değerleri ile çalışmamız için kuralları  belirler.</p>
+<p>İlk olarak, <tt class="docutils literal"><span class="pre">and</span></tt> işlemcisi:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">x and False == False</span>
+<span class="go">False and x == False</span>
+<span class="go">y and x == x and y</span>
+<span class="go">x and True == x</span>
+<span class="go">True and x == x</span>
+<span class="go">x and x == x</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">or</span></tt> işlemcisine karşılık gelen kurallar ise:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">x or False == x</span>
+<span class="go">False or x == x</span>
+<span class="go">y or x == x or y</span>
+<span class="go">x or True == True</span>
+<span class="go">True or x == True</span>
+<span class="go">x or x == x</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>İki <tt class="docutils literal"><span class="pre">not</span></tt> işlemcisi birbirinin etkisin yok eder.</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">not (not x) == x</span>
+</pre></div>
+</div>
+</div></blockquote>
+<span class="target" id="index-2"></span></div>
+<div class="section" id="kosullu-yurutme">
+<span id="index-3"></span><h2>5.5. Koşullu yürütme<a class="headerlink" href="#kosullu-yurutme" title="Permalink to this headline">¶</a></h2>
+<p>Yararlı programlar yazabilmek için, neredeyse her zaman koşulları sınamamız ve
+programın davranışlarını bu sınamaların sonucuna göre değiştirebilmemiz gerekir.
+<strong>Koşul deyimleri</strong> bize bu yeteneği kazandırır. En basit örneği <strong>if</strong>
+deyimidir.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre>if x % 2 == 0:
+    print(x, &quot; çift sayıdır.&quot;)
+    print(&quot;2&#39;nin asal sayı olan yalnız çift sayı olduğunu biliyor
+    musunuz?&quot;)
+else:
+    print(x, &quot;tek sayıdır.&quot;)
+    print(&quot; İki tek sayının çarpımının her zaman tek sayı sonucu
+    verdiğini biliyor muydunuz?&quot;)
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">if</span></tt> deyiminden sonra yazılmış olan Boolean deyimine <strong>koşul</strong> adı verilir.
+Eğer bu koşul doğru ise, bu deyimin altındaki  girintilenmiş bütün deyimler
+çalıştırılır. Eğer değilse, <tt class="docutils literal"><span class="pre">else</span></tt> deyiminin altındaki girintilenmiş deyimler
+çalışır.</p>
+<div class="admonition-if-deyiminin-else-cumlesiyle-akis-diyagrami admonition">
+<p class="first admonition-title">if deyiminin else cümlesiyle akış diyagramı</p>
+<img alt="_images/flowchart_if_else.png" class="last" src="_images/flowchart_if_else.png" />
+</div>
+<p>if cümlesinin sözdizimi şu şekildedir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">BOOLEAN</span> <span class="n">İFADESİ</span><span class="p">:</span>
+    <span class="n">DEYİMLER</span>         <span class="c"># Eğer koşul doğru ise hesaplanır</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">DEYİMLER</span>        <span class="c"># Eğer koşul yalnış ise hesaplanır</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bir önceki bölümde gördüğümüz fonksiyon tanımlaması ve diğer bileşik deyimler
+gibi, <tt class="docutils literal"><span class="pre">if</span></tt> deyimi bir başlık ve bir gövdeden oluşur. Başlık <tt class="docutils literal"><span class="pre">if</span></tt> anahtar
+kelimesi ile başlar ve bir boolean deyimiyle devam eder. Sonu yine iki nokta
+üstüste (:) ile belirlenmiştir.</p>
+<p>Takip eden girintili deyimlere <strong>blok</strong> adı verilir. İlk girintisiz deyim bloğun
+sonunu belirler.</p>
+<p>Eğer Boolean ifadesi <tt class="docutils literal"><span class="pre">True</span></tt> ise ilk bloktaki  deyimlerin her biri sırasıyla
+yürütülür. Eğer Boolean ifadesi <tt class="docutils literal"><span class="pre">False</span></tt> ise ilk blok atlanır ve <tt class="docutils literal"><span class="pre">else</span></tt>
+cümlesi altındaki girintili bütün deyimler çalıştırılır.</p>
+<p><tt class="docutils literal"><span class="pre">if</span></tt> deyiminin altında oluşan iki cümlenin altındaki deyim sayısında bir
+sınırlama yoktur. Fakat Her bir bir blokta en az bir deyim olması gereklidir.
+Bazen boş <tt class="docutils literal"><span class="pre">if</span></tt> cümlesi yazmak (mesela daha sonra yazmak üzere alanı ayırmak
+için) gerekebilir. Bu durumda <tt class="docutils literal"><span class="pre">pass</span></tt> deyimini, ki bu cümle hiç bir şey yapmaz,
+kullanabilirsiniz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="k">True</span><span class="p">:</span>          <span class="c"># Bu her zaman doğrudur. Her zaman işletilir.</span>
+    <span class="k">pass</span>          <span class="c"># Fakat hiçbir şey yapmaz.</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="else-cumlecigini-ihmal-etme">
+<span id="index-4"></span><h2>5.6. <tt class="docutils literal"><span class="pre">else</span></tt> cümleciğini ihmal etme<a class="headerlink" href="#else-cumlecigini-ihmal-etme" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-flowchart-of-an-if-statement-with-no-else-clause admonition">
+<p class="first admonition-title">Flowchart of an if statement with no else clause</p>
+<img alt="_images/flowchart_if_only.png" class="last" src="_images/flowchart_if_only.png" />
+</div>
+<p><tt class="docutils literal"><span class="pre">if</span></tt> deyiminin başka bir türü <tt class="docutils literal"><span class="pre">else</span></tt> cümleceğini ihmal etmektir. Bu durumda,
+koşul durumu <tt class="docutils literal"><span class="pre">True</span></tt> ise, <tt class="docutils literal"><span class="pre">if</span></tt> deyiminin altındaki deyimler yürütülür; aksi
+takdirde, <tt class="docutils literal"><span class="pre">if</span></tt> bloğunun altındaki girintili deyimler çalıştırılmadan diğer
+deyimlerden yürümeye devam eder.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;negati sayı  &quot;</span><span class="p">,</span>  <span class="n">x</span><span class="p">,</span> <span class="s">&quot; geçerli değildir.&quot;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Bunun yerine 42 sayısını kullanmayı tercih ettim. &quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Karekök x = &quot;</span> <span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu durumda, eğer program başında verilen <tt class="docutils literal"><span class="pre">x</span></tt>&#8216;in değeri pozitif bir sayı ise,
+if deyiminin altındaki girintili deyimler çalıştırılmadan atlanacak ve sonraki
+girintili olmayan <tt class="docutils literal"><span class="pre">print</span></tt> deyimi çalıştırılacaktır. Dikkat ediniz ki <tt class="docutils literal"><span class="pre">if</span></tt>
+deyiminden sonra hemen <tt class="docutils literal"><span class="pre">print</span></tt> deyiminin çalıştırılması kendinden önce gelen
+deyimler arasında boşluk bırakılmasından değil, kendisinden önce gelen
+deyimlerin girintili olmasından dolayıdır. Bir önemli nokta da,  <tt class="docutils literal"><span class="pre">math.sqrt(x)</span></tt> fonksiyonunu çağrabilmek  için <tt class="docutils literal"><span class="pre">import</span> <span class="pre">math</span></tt> deyimini betik kodumuzun ilk satırlarına koymaktır.</p>
+<div class="admonition-python-terminolojisi admonition">
+<p class="first admonition-title">Python Terminolojisi</p>
+<p>Python belgelerinde bazen <em>block (blok)</em> terimi yerine <strong>suite (takım)</strong>
+terimi kullanılır. Her ikisi de aynı anlama gelir. Fakat biz diğer
+programlama dillerinde sık kullanılan <em>blok</em> terimini kullanacağız.</p>
+<p class="last">Dikkat ediniz ki, <tt class="docutils literal"><span class="pre">else</span></tt> bir deyim değildir. <tt class="docutils literal"><span class="pre">if</span></tt> deyimi <em>iki cümleye</em>
+sahiptir. Bunlardan biri seçmeli <tt class="docutils literal"><span class="pre">else</span></tt> cümlesidir.</p>
+</div>
+</div>
+<div class="section" id="zincirleme-kosul-ifadeler">
+<span id="index-5"></span><h2>5.7. Zincirleme koşul ifadeler<a class="headerlink" href="#zincirleme-kosul-ifadeler" title="Permalink to this headline">¶</a></h2>
+<p>Bazen ikiden fazla olasılık vardır ve iki dallanmadan fazlasına gereksinim
+duyarız. Bunun gibi bir hesaplamayı ifade etmek için <strong>zincirleme koşul
+ifadelerini</strong> kullanırız:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">:</span>
+    <span class="n">STATEMENTS_A</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">:</span>
+    <span class="n">STATEMENTS_B</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">STATEMENTS_C</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<div class="admonition-zincirleme-kosul-ifadesinin-akis-diyagrami admonition">
+<p class="first admonition-title">Zincirleme koşul ifadesinin akış diyagramı</p>
+<img alt="_images/flowchart_chained_conditional.png" class="last" src="_images/flowchart_chained_conditional.png" />
+</div>
+<p><tt class="docutils literal"><span class="pre">elif</span></tt>, <tt class="docutils literal"><span class="pre">else</span> <span class="pre">if</span></tt> ifadesinin kısaltılmışıdır. Daha öncede olduğu gibi sadece
+bir dal (yol) yürütülecektir. <tt class="docutils literal"><span class="pre">elif</span></tt> deyimlerinin sayısında bir sınırlama
+yoktur fakat tek ( ve isteğe bağlı) <tt class="docutils literal"><span class="pre">else</span></tt> deyimine izin vardır ve bunun son
+deyim (son dal) olması gereklidir.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">secim</span> <span class="o">==</span> <span class="s">&quot;a&quot;</span><span class="p">:</span>
+    <span class="n">function_one</span><span class="p">()</span>
+<span class="k">elif</span> <span class="n">secim</span> <span class="o">==</span> <span class="s">&quot;b&quot;</span><span class="p">:</span>
+    <span class="n">function_two</span><span class="p">()</span>
+<span class="k">elif</span> <span class="n">secim</span> <span class="o">==</span> <span class="s">&quot;c&quot;</span><span class="p">:</span>
+    <span class="n">function_three</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Geçersiz seçim.&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Herbir koşul sırası ile sınanır. Eğer ilki yanlış ise bir sonraki kontrol edilir
+ve böyle gider. Eğer herhangi bir tanesi doğru ise ilgili dal yürütülür ve
+deyimin işlevi biter. Eğer birden fazla koşul doğru olsa bile, sadece ilk
+karşılaşılan doğru dal çalışır.</p>
+</div>
+<div class="section" id="icice-kosullar">
+<span id="index-6"></span><h2>5.8. İçiçe koşullar<a class="headerlink" href="#icice-kosullar" title="Permalink to this headline">¶</a></h2>
+<p>Bir koşul deyimi bir başka koşul deyimiyle içiçe olabilir. Bir önceki örneği
+aşağıdaki gibi yazabildik:</p>
+<div class="admonition-bu-icice-kosulun-akis-diyagrami admonition">
+<p class="first admonition-title">Bu içiçe koşulun akış diyagramı</p>
+<img alt="_images/flowchart_nested_conditional.png" class="last" src="_images/flowchart_nested_conditional.png" />
+</div>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">:</span>
+    <span class="n">DEYİMLER_A</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">:</span>
+        <span class="n">DEYİMLER_B</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">DEYİMLER_C</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Dışarıdaki koşul deyimi iki dal içermektedir. ikinci dal başka bir <tt class="docutils literal"><span class="pre">if</span></tt>
+cümlesi içerir ve bu cümle iki dal barındırır. Bu iki dal  da koşul deyimleri
+içermelidir.</p>
+<p>Her ne kadar deyimlerin girintisi yapıyı açık bir şekilde gösterse de, içiçe
+geçmiş koşul deyimlerinin okunması gittikçe zorlaşır. Genellikle, bu tür içiçe
+geçmiş koşul deyimlerinden kaçınmak gerekir.</p>
+<p>Mantıksal işleçler içiçe koşul cümlelerini basitleştirmek için bir yöntem
+sağlarlar. Örneğin aşağıdaki kodu tek bir koşul cümlesiyle yazabibilirsiniz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>            <span class="c"># x&#39;in tamsayı olduğunu varsayın.</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;x pozitif ve tek basamaklıdır.&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonu sadece iki koşulu da geçersek çalışır. Yukarıdaki örnekteki
+iki <tt class="docutils literal"><span class="pre">if</span></tt> deyimini kullanmak yerine, <tt class="docutils literal"><span class="pre">and</span></tt> işleci kullanarak daha karmaşık
+koşul deyimi oluşturabiliriz. Tek bir <tt class="docutils literal"><span class="pre">if</span></tt> deyimi</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;x pozitif ve tek basamaklıdır.&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="geri-donus-deyimi">
+<span id="index-7"></span><h2>5.9. Geri dönüş deyimi<a class="headerlink" href="#geri-donus-deyimi" title="Permalink to this headline">¶</a></h2>
+<p>Bir <tt class="docutils literal"><span class="pre">return</span></tt> deyimi bir fonksiyonun sona ulaşmadan bitirilmesini sağlar.
+<tt class="docutils literal"><span class="pre">return</span></tt> deyimini fonksiyon içinde erken kullanmamızın nedeni bir hata
+durumuyla karşılaşmamız olabilir.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">karekok_bas</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Sadece pozitif sayılar lütfen&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;x&#39;in kare kökü&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">karekok</span></tt> fonksiyonu <tt class="docutils literal"><span class="pre">x</span></tt> isimli bir parametreye sahiptir. Bu fonksiyonun ilk
+yaptığı işlem, <tt class="docutils literal"><span class="pre">x</span></tt>&#8216;in 0&#8217;dan küçük veya eşit olması durumunda bir hata mesajını
+ekrana basar ve <tt class="docutils literal"><span class="pre">return</span></tt>&#8216;i kullanarak fonksiyondan çıkar. Yürütme akışı hemen
+çağıran yere geri döner ve fonksiyonun geri kalan satırları çalıştırmaz.</p>
+</div>
+<div class="section" id="mantiksal-isleclerin-karsitlari">
+<h2>5.10. Mantıksal işleçlerin karşıtları<a class="headerlink" href="#mantiksal-isleclerin-karsitlari" title="Permalink to this headline">¶</a></h2>
+<p>altı bağlantı işleçinin her birinin manktıksal karşıtı (zıttı) vardır. Örneğin,
+yaşınız 18 veya 18&#8217;den daha büyük ise ehliyet alabileceğinizi, 18&#8217;den küçük ise
+ehliyet alamıyacağınızı varsayalım.</p>
+<p><tt class="docutils literal"><span class="pre">&gt;=</span></tt>&#8216;in karşıtının <tt class="docutils literal"><span class="pre">&lt;</span></tt> olduğuna dikkat ediniz.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">işleç</th>
+<th class="head">mantıksal karşıtı</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>==</td>
+<td>!=</td>
+</tr>
+<tr class="row-odd"><td>!=</td>
+<td>==</td>
+</tr>
+<tr class="row-even"><td>&lt;</td>
+<td>&gt;=</td>
+</tr>
+<tr class="row-odd"><td>&lt;=</td>
+<td>&gt;</td>
+</tr>
+<tr class="row-even"><td>&gt;</td>
+<td>&lt;=</td>
+</tr>
+<tr class="row-odd"><td>&gt;=</td>
+<td>&lt;</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Bu mantıksal karşıtlıkları anlamanız, bazen size  <tt class="docutils literal"><span class="pre">not</span></tt> işlecini
+kullanmamanıza yardım eder.``not`` işlecini bilgisayar kodunda okumak genelde
+zordur. Eğer <tt class="docutils literal"><span class="pre">not</span></tt> işlecini yok edersek, kod içindeki amacımız daha kolay
+anlaşılacaktır.</p>
+<p>Örneğin, bunu Python&#8217;da yazsaydık:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">yas</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Ehliyet almak için çok gençsiniz!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Eğer basitleştirme kurallarını kullansanız, yukarıdaki kodu daha açık hale
+gelebilir. Şu şekilde yazabiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Ehliyet almak için çok gençsiniz!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Karışık Boolean ifadeleri ile ugraşırken iki basitleştirme kuralı (De Morgan
+kurralları)  oldukça yararlıdır:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">not (x and y)  ==  (not x) or (not y)</span>
+<span class="go">not (x or y)   ==  (not x) and (not y)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Örneğin, bilgisayar oyunumuzdaki bir canavarı ancak ışık kılıcımız %90 veya daha
+yüksek seviyede ve savunma kalkanımızda tam dolu (%100) ise öldürebileceğimizi
+varsayalım. Python ile yazılmış oyun kodunda bunu aşağıdaki gibi bulabiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">isin_kilici</span> <span class="o">&gt;=</span> <span class="mf">0.90</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">kalkan_enerjisi</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Saldırmanız faydasız; canavar sizi perişan eder. &quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Canavar parçalarına ayrılır. Prensesi kurtarıyorsunuz!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Mantıksal karşıt ifadeleri ile De Morgan kuralları bize koşulları yeniden
+düzenlemeye imkan vererek daha anlaşılır ifadeler yaratmamamıza imkan verir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">isin_kilici</span> <span class="o">&lt;</span> <span class="mf">0.90</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">kalkan_enerjisi</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Saldırmanız faydasız; canavar sizi perişan eder. &quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Canavar parçalarına ayrılır. Prensesi kurtarıyorsunuz!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">then</span></tt> ve <tt class="docutils literal"><span class="pre">else</span></tt> içindeki <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonunun yerlerini değiştirerek
+<tt class="docutils literal"><span class="pre">not</span></tt> işlecini yukarıdaki örnekten kaldırabiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">isin_kilici</span> <span class="o">&gt;=</span> <span class="mf">0.90</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">kalkan_enerjisi</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Canavar parçalarına ayrılır. Prensesi kurtarıyorsunuz!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Saldırmanız faydasız; canavar sizi perişan eder.&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu sürüm, olasılıkla yukarıdaki üç sürümün en iyisidir, çünkü başlangıçtaki
+İngilizce duruma en yakın olanıdır. Kodunuz anlaşılır olması ( diğer kişiler
+için) ve kodunuzun ne yaptığını kolayca görebilmek sizin yüksek önceliğiniz
+olmalıdır.</p>
+<p>Programlama yeteneklerimiz geliştikçe herhangi bir problemin çözümünün birkaç
+yolunu bulacağız. Böylece iyi programlar <em>tasarlanır.</em> Programlarda, açıklık, basitlik ve güzellik ararız. Bizler bir mimar gibi, ürünlerimizde güzellik, işlerlik, basitlik ve açıklık arasında bir denge kurmaya çalışırız.</p>
+<div class="admonition-ipucu admonition">
+<p class="first admonition-title">ipucu</p>
+<p class="last">Programımız çalışır çalışmaz, o program çevresinde biraz oynayarak
+cilalamalıyız. Programda iyi açıklayıcı bilgiler yazın. Başka değişken
+isimleri kullanarak kodun daha açık olup olmayacağını düşünün. Bunu daha şık
+yapabilir miydiniz? Fonksiyon kullanmamız gerekli midir? Koşul deyimlerini
+basitleştirebilir miyiz?</p>
+</div>
+</div>
+<div class="section" id="tip-donusumu">
+<span id="index-8"></span><h2>5.11. Tip dönüşümü<a class="headerlink" href="#tip-donusumu" title="Permalink to this headline">¶</a></h2>
+<p>Bu konuya daha önceki konularda değinmiş olmalıydık. Burda işlemenin bir zararı
+olmayacaktır!</p>
+<p>Bir değişken tipini kendi tip değişkenine çevirmeye yarayan Python&#8217;da yerleşik
+fonksiyonlar vardır. Örneğin, <tt class="docutils literal"><span class="pre">int</span></tt> fonksiyonu herhangi bir değişkeni alır ve
+onu tam sayıya çevirmeye çalışır. Eğer başarısız olursa hata bildirimi verir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s">&quot;32&quot;</span><span class="p">)</span>
+<span class="go">32</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="go">ValueError: invalid literal for int() with base 10: &#39;Hello&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">int</span></tt> fonksiyonu, kayan noktalı değerleri tam sayıya çevirir. Hatırlayınız ki,
+kesirli kısmı kesip atar:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">2.3</span><span class="p">)</span>
+<span class="go">-2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.99999</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s">&quot;42&quot;</span><span class="p">)</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">float</span></tt> fonksiyonu ise tam sayıları ve karakter dizilerini kayan noktalı
+sayılara çevirir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">2.3</span><span class="p">)</span>
+<span class="go">-2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.99999</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s">&quot;42&quot;</span><span class="p">)</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Python&#8217;un tam sayı olan <tt class="docutils literal"><span class="pre">1</span></tt> ile kayan noktalı sayıl olan <tt class="docutils literal"><span class="pre">1.0</span></tt>ı birbirinden
+farklı değerlendirmesi size garip gelebilir. İki sayı da aynı sayıyı temsil ederler,fakat
+farklı tiplere aittirler. Bunun nedeni bilgisayar içinde farklı biçimlerde
+temsil edilmeliridir.</p>
+<p><tt class="docutils literal"><span class="pre">str</span></tt> fonksiyonu, herhangi bir argümanı karakter dizisine (<tt class="docutils literal"><span class="pre">string</span></tt>)
+çevirir:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="go">&#39;32&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="mf">3.14149</span><span class="p">)</span>
+<span class="go">&#39;3.14149&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="k">True</span><span class="p">)</span>
+<span class="go">&#39;True&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;interactive input&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;true&#39; is not defined</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">str</span></tt> herhangi bir değerle çalışabilir ve o değeri karakter dizisine çevirir.
+Daha önce de bahsedildiği gibi <tt class="docutils literal"><span class="pre">True</span></tt> bir Boolean değerdir; <tt class="docutils literal"><span class="pre">true</span></tt> ise
+herhangi bir değişkendir ve burda tanımlanmamıştır. Bu yüzden hata alırız.</p>
+</div>
+<div class="section" id="kamplumbaga-cubuk-grafikleri">
+<span id="index-9"></span><h2>5.12. Kamplumbağa Çubuk Grafikleri<a class="headerlink" href="#kamplumbaga-cubuk-grafikleri" title="Permalink to this headline">¶</a></h2>
+<p>Şimdi göreceğimiz kamplumbağa daha önce gördüklerimize göre daha çok güce sahip
+olacaktır. Bununla ilgili dökümanlara <a class="reference external" href="http://docs.python.org/py3k/library/turtle.html">http://docs.python.org/py3k/library/turtle.html</a>
+adresinden veya PyScripter&#8217;in içindeki <em>Help</em> menüsünden turtle modülünü
+araştırabilirsiniz.</p>
+<p>Bizim kamplumbağlarımız için birkaç yeni zekice ipuçları vereceğiz:</p>
+<ul class="simple">
+<li>Kamplumbağamızın kanvas üzerindeki mevcut yerini ekranda göstermesini
+sağlayabiliriz. Bunun için kullanacağımız yöntem <tt class="docutils literal"><span class="pre">ahmet.write(&quot;Merhaba&quot;)</span></tt>
+olacaktır.</li>
+<li>Bir şekli (çember, yarım çember, üçgen, vb. ) bir renk ile dolduracağız. Bunu
+iki adımda yapacağız. İlk önce <tt class="docutils literal"><span class="pre">ahmet.begin_fill()</span></tt> yöntemini çağırırız,
+sonra bir şekil çizer ve daha sonrasında <tt class="docutils literal"><span class="pre">ahmet.end_fill()</span></tt> yöntemini
+çağırırız.</li>
+<li>Daha öncesinde kamplumbağamızın rengini belirledik. Biz aynı zamanda şekil
+doldurma rengini belirliyebiliriz. Bu rengin kamplumbağ ve kalem rengi ile
+aynı olması gerekmez. <tt class="docutils literal"><span class="pre">ahmet.color(&quot;blue&quot;,&quot;red&quot;)</span></tt> yöntemini kullanarak
+kamplumbağanın mavi çizmezini ve şeklin içini de kırmızı doldurmasını
+sağlayabiliriz.</li>
+</ul>
+<p>O zaman,  kamplumbağamızın bir çubuk grafik (bar chart) cizmezini   sağlayabilir miyiz? Çizilecek grafik için bazi verileri verelim: <tt class="docutils literal"><span class="pre">xs</span> <span class="pre">=</span> <span class="pre">[48,</span> <span class="pre">117,</span> <span class="pre">200,</span> <span class="pre">240,</span> <span class="pre">160,</span> <span class="pre">260,</span> <span class="pre">220]</span></tt></p>
+<p>Her bir veriye karşılık gelen yükseklikte ve sabit bir genişlikte bir basit
+dikdörtgen çizeceğiz.</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">cubuk_ciz</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">yukseklik</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; t isimli kamplumbağanın verilen yukseklikte bir çubuk çizmesini</span>
+<span class="sd">    sağlar&quot;&quot;&quot;</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">yukseklik</span><span class="p">)</span>     <span class="c"># Draw up the left side</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>         <span class="c"># Width of bar, along the top</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">yukseklik</span><span class="p">)</span>     <span class="c"># And down again!</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>            <span class="c"># Put the turtle facing the way we found it.</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>         <span class="c"># Leave small gap after each bar</span>
+
+<span class="o">...</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>              <span class="c"># xs ve tamer isimli kamplumbağanın hazır</span>
+                          <span class="c"># olduklarını varsayalım.</span>
+    <span class="n">cubuk_ciz</span><span class="p">(</span><span class="n">tamer</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<blockquote>
+<div><img alt="_images/tess_bar_1.png" src="_images/tess_bar_1.png" />
+</div></blockquote>
+<p>Pek etkileyici olmasa bile iyi bir başlangıçtır! Önemli olan zihnimize uyan
+parçalara ayırmak veya problemi daha küçük parçalara ayırmanın yolunu bulmaktır.
+Bizim parçamız burda bir çubuk çizmek ve bunu yapan bir fonksiyon yazmaktır.
+Daha sonra bütün bir grafik için fonksiyonumuzu tekrar tekrar çağırırız.</p>
+<p>Daha sonra, herbir çubuk grafiğin en üstünde verimizin değerini basacağız.
+<tt class="docutils literal"><span class="pre">draw_bar</span></tt> fonksiyonunun içine <tt class="docutils literal"><span class="pre">t.write('</span>&nbsp; <span class="pre">'</span> <span class="pre">+</span> <span class="pre">str(yukseklik))</span></tt> yöntemini
+üçüncü satıra yerleştireceğiz. Ekranda basılacak yüksekliğin önüne biraz boşluk
+koyuyoruz ve yüksekliği <tt class="docutils literal"><span class="pre">string</span></tt>&#8216;e ( karakter dizisi) çeviriyoruz. Bu fazladan
+boşluk olmadan sayılarımız çubukların üstünde sola doğru sıkışmış olur. Sonuç
+şimdi daha güzel olur:</p>
+<blockquote>
+<div><img alt="_images/tess_bar_2.png" src="_images/tess_bar_2.png" />
+</div></blockquote>
+<p>Ve şimdi herbir çubuğun içini doldurmak için iki satır ekleyeceğiz. Programızın
+son hali şu şekilde olur:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">cubuk_ciz</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">yukseklik</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get turtle t to draw one bar, of height. &quot;&quot;&quot;</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">begin_fill</span><span class="p">()</span>           <span class="c"># Bu satır eklendi</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">yukseklik</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;  &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">yukseklik</span><span class="p">))</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">yukseklik</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">end_fill</span><span class="p">()</span>             <span class="c"># Added this line</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>         <span class="c"># Bir pencere ve pencerenin özelliklerini</span>
+                             <span class="c"># oluştur.</span>
+<span class="n">wn</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">(</span><span class="s">&quot;lightgreen&quot;</span><span class="p">)</span>
+
+<span class="n">tamer</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>       <span class="c"># Kamplumbağa Tamer&#39;i oluştur ve</span>
+                             <span class="c"># özelliklerini belirle</span>
+<span class="n">tamer</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">tamer</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">48</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">260</span><span class="p">,</span><span class="mi">220</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+    <span class="n">cubuk_ciz</span><span class="p">(</span><span class="n">tamer</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">wn</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu ise aşağıdaki daha doyurucu grafiği oluşturur:</p>
+<blockquote>
+<div><img alt="_images/tess_bar_3.png" src="_images/tess_bar_3.png" />
+</div></blockquote>
+<p>Belki de çubukların altı birbirleriyle bağlanmasa daha güzel olur. Bunun için, çubuklar
+arasında boşluk bırakırken kalemi kaldırmamız gerekecektir. Bunu size alıştırma
+olarak bırakıyoruz.</p>
+</div>
+<div class="section" id="sozluk">
+<h2>5.13. Sözlük<a class="headerlink" href="#sozluk" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-block">block</dt>
+<dd>Aynı girintiye sahip ardışık deyimler grubudur.</dd>
+<dt id="term-govde">gövde</dt>
+<dd>Bileşik deyimlerdeki başlığı takip eden deyimler bloğudur.</dd>
+<dt id="term-boolean-cebri">Boolean cebri</dt>
+<dd>Boolean ifadelerini birleştirmede ve akıl yürütmede kullanılan kurallar.</dd>
+<dt id="term-boolean-ifadesi">Boolean ifadesi</dt>
+<dd>Sonucu doğru veya yanlış olan ifade</dd>
+<dt id="term-boolean-deger">Boolean değer</dt>
+<dd>İki tane Boolean değeri vardır: <tt class="docutils literal"><span class="pre">True</span></tt> and <tt class="docutils literal"><span class="pre">False</span></tt>. Python yorumcusu
+tarafından Boolean ifadeler üzerinde yapılan hesaplamalar sonucu çıkan
+Boolean değerleridir. Bunlar <tt class="docutils literal"><span class="pre">bool</span></tt> tipindedir.</dd>
+<dt id="term-dal">dal</dt>
+<dd>Bir koşul tarafından belirlenen bir yürütme akış diyagramındaki olasılı yollardan biri.</dd>
+<dt id="term-zincirleme-kosul-ifadesi">zincirleme koşul ifadesi</dt>
+<dd>İkiden fazla yürütme akış olasılığına sahip koşul dallanmasıdır.
+Python&#8217;da koşul ifadeleri <tt class="docutils literal"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">elif</span> <span class="pre">...</span> <span class="pre">else</span></tt> deyimleri ile
+yazılmaktadır.</dd>
+<dt id="term-karsilastirma-islecleri">karşılaştırma işleçleri</dt>
+<dd>iki değeri karşılaştıran altı işleçlerden biridir: <tt class="docutils literal"><span class="pre">==</span></tt>, <tt class="docutils literal"><span class="pre">!=</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>,
+<tt class="docutils literal"><span class="pre">&lt;</span></tt>, <tt class="docutils literal"><span class="pre">&gt;=</span></tt>, and <tt class="docutils literal"><span class="pre">&lt;=</span></tt>.</dd>
+<dt id="term-kosul">koşul</dt>
+<dd>Koşul deyimindeki Boolean ifadesidir ve hangi yolun (dalın)
+yürütüleceğine karar verir.</dd>
+<dt id="term-kosul-deyimi">koşul deyimi</dt>
+<dd>Bazı koşullara göre yürütme akışını kontrol eden deyimdir. Python&#8217;da
+<tt class="docutils literal"><span class="pre">if</span></tt>, <tt class="docutils literal"><span class="pre">elif</span></tt> ve <tt class="docutils literal"><span class="pre">else</span></tt> anahtar kelimeleri koşul cümleleri için
+kullanılmaktadır.</dd>
+<dt id="term-mantiksal-islec">mantıksal işleç:</dt>
+<dd>Boolean ifadeleri birleştire işleçlerdir: <tt class="docutils literal"><span class="pre">and</span></tt>, <tt class="docutils literal"><span class="pre">or</span></tt> ve <tt class="docutils literal"><span class="pre">not</span></tt>.</dd>
+<dt id="term-icice-gecme">içiçe geçme</dt>
+<dd>Bir program yapısının bir başka program yapısı içinde bulunmasıdır.
+Örnek olarak, bir koşul deyiminin bir başka koşul deyimi içinde
+dallanmasını verebiliriz.</dd>
+<dt id="term-bilgi-istemi-prompt">bilgi istemi (prompt)</dt>
+<dd>Kullanıcıya veri girmesini söyleyen görsel ipucu.</dd>
+<dt id="term-dogruluk-tablosu">doğruluk tablosu</dt>
+<dd>Mantıksal işleçlerin değerler üzerine uygulanması sonucu ortaya çıkan
+<tt class="docutils literal"><span class="pre">Boolean</span></tt> değerlerini gösteren tablo.</dd>
+<dt id="term-tip-donusumu">tip dönüşümü</dt>
+<dd>Bir tipteki değeri alıp başka bir tip değerine dönüştüren fonksiyon.</dd>
+<dt id="term-kodu-fonksiyonun-icine-yerlestirme">kodu fonksiyonun içine yerleştirme</dt>
+<dd>Bir fonksiyon başlığı ve fonksiyonun alacağı parametreleri belirleme
+sürecidir. Program içindeki deyimlerin birkaç kere kullanılması
+gerektiğinde bu süreç oldukça faydalıdır. Bir karmaşık problemin nasıl
+parçalara ayrılacağına imkan vermesi dolayından bu faydası daha da
+artar.</dd>
+</dl>
+</div>
+<div class="section" id="alistirmalar">
+<h2>5.14. Alıştırmalar<a class="headerlink" href="#alistirmalar" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Pazardan Cumartesine kadar bir haftanın  günlerinin 0,1,2,3,4,5,6 olarak
+sayılandırıldığını varsayın. Verilen sayıya karşılık gelen günü geri döndüren
+(<tt class="docutils literal"><span class="pre">string</span></tt> olarak) bir fonksiyon yazınız.</p>
+</li>
+<li><p class="first">3 numaralı günde (Çarşamba) harika bir tatile gittiğinizi ( belki de hapishaneye, eğer mutlu
+alıştırmalardan hoşlanmıyorsanız). 137 gün uyuduktan sonra eve dönüyorsunuz.
+Size gittiğiniz günü ve kalma süresini soran program yazınız. Bu program
+döndüğünüz günün ismini ekranda basmalıdır.</p>
+</li>
+<li><p class="first">Aşağıdaki mantıksal ifadelerin karşıtlarını veriniz:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">b</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a</span> <span class="pre">&gt;=</span> <span class="pre">b</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a</span> <span class="pre">&gt;=</span> <span class="pre">18</span>&nbsp; <span class="pre">and</span>&nbsp; <span class="pre">day</span> <span class="pre">==</span> <span class="pre">3</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a</span> <span class="pre">&gt;=</span> <span class="pre">18</span>&nbsp; <span class="pre">and</span>&nbsp; <span class="pre">day</span> <span class="pre">!=</span> <span class="pre">3</span></tt></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Aşağıdaki ifadeler hangi değerleri verir?</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">3</span> <span class="pre">==</span> <span class="pre">3</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">3</span> <span class="pre">!=</span> <span class="pre">3</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">3</span> <span class="pre">&gt;=</span> <span class="pre">4</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">not</span> <span class="pre">(3</span> <span class="pre">&lt;</span> <span class="pre">4)</span></tt></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Aşağıdaki doğruluk tablosunu tamamlayın:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="19%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">p</th>
+<th class="head">q</th>
+<th class="head">r</th>
+<th class="head">(not (p and q)) or r</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>F</td>
+<td>F</td>
+<td>F</td>
+<td>?</td>
+</tr>
+<tr class="row-odd"><td>F</td>
+<td>F</td>
+<td>T</td>
+<td>?</td>
+</tr>
+<tr class="row-even"><td>F</td>
+<td>T</td>
+<td>F</td>
+<td>?</td>
+</tr>
+<tr class="row-odd"><td>F</td>
+<td>T</td>
+<td>T</td>
+<td>?</td>
+</tr>
+<tr class="row-even"><td>T</td>
+<td>F</td>
+<td>F</td>
+<td>?</td>
+</tr>
+<tr class="row-odd"><td>T</td>
+<td>F</td>
+<td>T</td>
+<td>?</td>
+</tr>
+<tr class="row-even"><td>T</td>
+<td>T</td>
+<td>F</td>
+<td>?</td>
+</tr>
+<tr class="row-odd"><td>T</td>
+<td>T</td>
+<td>T</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">Aşağıdaki tabloya göre verilen sınav sonucuna karşılık gelen ve bu sonuca
+göre başarısını gösteren bir fonksiyon yazınız.</p>
+<blockquote>
+<div><blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Not</th>
+<th class="head">Derece</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&gt;= 85</td>
+<td>Pek iyi</td>
+</tr>
+<tr class="row-odd"><td>[60-85)</td>
+<td>İyi</td>
+</tr>
+<tr class="row-even"><td>[50-60)</td>
+<td>Orta</td>
+</tr>
+<tr class="row-odd"><td>[25-50)</td>
+<td>Zayıf</td>
+</tr>
+<tr class="row-even"><td>25 &lt;</td>
+<td>Başarısız</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Köşeli parantez <tt class="docutils literal"><span class="pre">[</span></tt>  ve yuvarlak parentez <tt class="docutils literal"><span class="pre">(</span></tt> sırasıyla kapalı ve açık
+aralıkları temsil ederler. Kapalı aralık   sayıyı açık aralığa dahil, açık aralık ise
+sayıyı dışlar. Örnek olarak 24.999999 alan birisinin derecesi Başarısız
+olacaktır fakat 25 alan birisinin derecesi Zayıf olacaktır.</p>
+<p>Bir sınıfta alınan notlar aşağıdaki gibi olsun:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">83</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mf">74.9</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mf">69.9</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mf">59.9</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>
+                     <span class="mf">49.9</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mf">44.9</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mf">39.9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Listedeki bütün notları ve bunlara karşılık gelen dereceleri basarak
+yazdığınız fonksiyonu sınayınız.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Daha önce yazdığınız cubuk grafik programını değiştirerek herbir çubuk
+arasındaki boşlukta yatay çizgiler olmasın ( kalem&#8217;i yukarı kaldıran
+fonksiyonu kullanın).</p>
+</li>
+<li><p class="first">Çubuk grafik programını değiştiriniz. Çubuğun yükselikliği 200 ve daha büyük
+ise içini kırmızı; [100, 200) arasında ise içini sarı; 100&#8217;den daha küçük ise
+yeşil ile doldurun.</p>
+</li>
+<li><p class="first">Çubuk grafik programınızda kullandığınız listedeki değerlerden biri veya daha
+fazlasının negatif olması durumunda ne olmasını beklersiniz? Deneyin! Çubuk
+grafik programını değiştirerek negatif değerleri çubuğun dibine yerleştirin.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">bul_hipotenus</span></tt> isimli fonksiyon yazınız. Bu fonksiyon, dik kenarlı üçgende
+verilen kenarları parametre olarak alıp hipotenüsün uzunluğunu geri
+döndürsun (İpucu: <tt class="docutils literal"><span class="pre">x</span> <span class="pre">**</span> <span class="pre">0.5</span></tt>, <tt class="docutils literal"><span class="pre">x</span></tt>&#8216;in kare kökünü döndürecektir.)</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">dik_ucgenmi</span></tt> adlı bir fonksiyon yazınız. Bu fonksiyon, üç kenarının
+uzunluğu verilen bir üçgeninin dik üçgen olup olmayacağını bulacak.
+Fonksiyona verilecek üç parametreden en sonuncusunun en uzun kenar olduğunu
+varsayın. Bu fonksiyon, üçgen dik üçgen ise <tt class="docutils literal"><span class="pre">True</span></tt> olarak, aksi
+takdirde <tt class="docutils literal"><span class="pre">False</span></tt> olarak geri dönecek.</p>
+<p>İpucu: Kayan noktalı sayılar hesaplaması her zaman kesin olarak doğru
+değildir. Bu yüzden kayan noktalı sayıların eşitlik işleçinde kullanılması
+güvenli değildir. Eğer iyi bir programcı, <tt class="docutils literal"><span class="pre">x</span></tt>&#8216;in <tt class="docutils literal"><span class="pre">y</span></tt>&#8216;ye eşit olup
+olmadağını veya yeteri kadar eşit olduğunu bilmek isterse, aşağıdaki gibi
+kodu yazabalir:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.000001</span><span class="p">:</span> <span class="c"># if x, y&#39;ye yaklaşık olarak eşittir.</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Yukarıdaki programı genişletiniz ki fonksiyona argüman olarak girilecek
+kenarlar herhangi bir sırada olabilsin.</p>
+</li>
+<li><p class="first">Eğer kayan noktalı sayılar hesaplamalırının bazen niçin doğru sonuç
+vermediğini merak ediyorsanız; bir kağıt parçası üzerinde 10&#8217;u 3&#8217;e bölünüz ve
+kesirli kısmı kağıt üzerinde yazınız. Kesirli kısmın sürekli olarak devam
+edeceğini göreceksiniz. Bu yüzden sonsuz uzunlukta bir kağır parçasına
+ihtiyacınız olacaktır. Sayıların bilgisayar veya hesap makinasında  temsili aynı
+sorunla karşılaşır: Bellek sınırlıdır ve bazı basamaklar ihmal edilebilir. Bu
+yüzden küçük hatalar yavaşça hesaplamalara girer. Aşağıdaki betiği deneyin:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span> <span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span> <span class="o">==</span> <span class="mf">2.0</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fruitful_functions-tr.html" title="6. Ürün veren fonksiyonlar"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="functions-tr.html" title="4. Functions"
+             >previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Name prefix for templates and static dir [_].
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

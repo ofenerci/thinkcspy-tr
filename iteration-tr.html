@@ -1,0 +1,1533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7. Yineleme (Tekrarlamalı) &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="prev" title="6. Ürün veren fonksiyonlar" href="fruitful_functions-tr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fruitful_functions-tr.html" title="6. Ürün veren fonksiyonlar"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="yineleme-tekrarlamali">
+<h1>7. Yineleme (Tekrarlamalı)<a class="headerlink" href="#yineleme-tekrarlamali" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><p id="index-1">Bilgisayarlar sıklıkla tekrarlayan görevleri otomatikleştirmek için
+kullanılmaktadır. Aynı veya benzer görevleri hatasız bir şekilde tekrarlama
+işlemi bilgisayarların iyi yaptığı, insanların ise zorlandığı bir şeydir.</p>
+<p>Bir komutlar kümesinin tekrar tekrar yürütülmesi işlemine <strong>yenileme
+(iteration)</strong> adı verilir. Yineleme çok yaygın olduğu için, Python bunu
+kolaylaştırmak için birkaç özellik sağlar. 3&#8217;üncü bölümde <tt class="docutils literal"><span class="pre">for</span></tt> deyimini
+gördük. <tt class="docutils literal"><span class="pre">for</span></tt> deyimi en sik kullanacağınız olacaktır. Fakat bu bölümde biz
+<tt class="docutils literal"><span class="pre">while</span></tt> deyimine bakacağız. Bu, azıcık farklı durumlarda yenileme yapmanın
+başka değişik yoludur.</p>
+<p>Bu konuya girmeden önce, birkaç fikirin üstünden yeniden geçelim.</p>
+<div class="section" id="atama">
+<h2>7.1. Atama<a class="headerlink" href="#atama" title="Permalink to this headline">¶</a></h2>
+<p>Daha önce bahsettiğimiz üzere, aynı değişkene birden fazla atama yapılması
+geçerli bir yöntemdir. Yeni bir atama varolan değişkeninin yeni bir değeri
+temsil etmesini sağlar ( ve önceki eski değerin temsilliyetini ortadan
+kaldırır.)</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">kalan_sure</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kalan_sure</span><span class="p">)</span>
+<span class="n">kalan_sure</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kalan_sure</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu programın çıktısı:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">15</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Çünkü <tt class="docutils literal"><span class="pre">kalan_sure</span></tt> ilk defa ekrana basıldığında değeri 7&#8217;dir, ikinci defada
+ise 15&#8217;dir.</p>
+<p>Atama komutu ile bir eşitliği sınayan Boolean ifadesi arasındaki farkı
+ayırtetmek özellikle önemlidir. Çünkü Python eşit işaretini (<tt class="docutils literal"><span class="pre">=</span></tt>) <strong>atama</strong> için
+kullanmaktadır. <tt class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></tt> şeklindeki bir komutu Boolean testi olarak algılamak
+çekici gelebilir. Matematikte alıştığından farklıdır. Python&#8217;da eşitlik
+ifadesi olarak  <tt class="docutils literal"><span class="pre">==</span></tt> kullanıyoruz.</p>
+<p>Dikkat ediniz ki eşitlik (==) ifadesi simetrik olmasına rağmen, atama komutu
+(=) simetrik değildir. Örneğin, <tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">7</span></tt> ve <tt class="docutils literal"><span class="pre">7</span> <span class="pre">==</span> <span class="pre">a</span></tt> deyimleri aynıdır.
+Fakat Python&#8217;da <tt class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">7</span></tt> ifadesi geçerli olmasına rağmen, <tt class="docutils literal"><span class="pre">7</span> <span class="pre">=</span> <span class="pre">a</span></tt> geçerli
+bir ifade değildir.</p>
+<p>Python&#8217;da atama komutu iki değişkeni birbirine eşitler, fakat daha ileriki
+atamalar bunlardan herhangi birini değiştirebileceğinden, sürekli bu şekilde
+kalmaları gerekli değildir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="c"># a ve b şimdi eşitler</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">3</span> <span class="c"># a ve b artık eşit değiller.</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Üçüncü satır <tt class="docutils literal"><span class="pre">a</span></tt> değişkeninin değerini değiştirir ama <tt class="docutils literal"><span class="pre">b</span></tt> değişkeninin
+değerinin değiştirmez; bu yüzden artık eşit değillerdir (Bazı programlama
+dillerinde  karmaşayı önlemek için <tt class="docutils literal"><span class="pre">&lt;-</span></tt> veya <tt class="docutils literal"><span class="pre">:=</span></tt> gibi farklı simgeler atama
+komutu yerine kullanılmaktadır.) Bazı kişiler <em>değişken</em> isminin seçilmesinin
+talihsiz olduğu, bunun yerine <em>atanabilir</em>  olarak adlandırılması gerektiğini
+düşünürler. Python dili; C, C++, Java ve C# dillerinde olduğu gibi genel
+terimbilimini ve işaretleri kullanır. <tt class="docutils literal"><span class="pre">=</span></tt> işaretini atama için, <tt class="docutils literal"><span class="pre">==</span></tt>
+işaretini ise eşitlik için kullanır.</p>
+</div>
+<div class="section" id="degiskenleri-guncellemez">
+<h2>7.2. Değişkenleri güncellemez<a class="headerlink" href="#degiskenleri-guncellemez" title="Permalink to this headline">¶</a></h2>
+<p>Bir atama komutu yürütüldüğünde, ilk önce sağ taraftakı ifade hesaplanır (
+yani atama işaretinden sonra gelen ifade.) Bu bir değer üretir. Sonrasında ise
+sol taraftaki değişkenin yeni değeri temsil edecek şekilde ataması yapılır.</p>
+<p>En yaygın atama biçimlerinden biri güncellemedir. Bir değişkenin değerini
+eskisine bağlı olarak değiştirmektir. Örnek olarak kalan süreden 40 saniye
+çıkarmak veya bir skor tabelasına bir eklemek gibi.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Burdaki 2.satır&#8217;ın anlamı: <cite>n&#8217;nin o andaki değerini al, üç ile çarp, bir ekle
+ve çıkan sonucu n&#8217;e ata. Böylece n artık bu sonuca işaret edecektir.</cite>
+Yukarıdaki iki satırı çalıştırdıktan sonra, <tt class="docutils literal"><span class="pre">n</span></tt> 16 sayısını temsil edecek /
+işaret edecektir.</p>
+<p>Eğer atama yapılmamış bir değişkenin değerini almaya kalkarsanız bir hata
+oluşur:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">  File &quot;&lt;interactive input&gt;&quot;, line 1, in</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;x&#39; is not defined</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu değişkeni güncellemeden önce, onu bir başlangıç değerine <strong>ilklendirme
+(initialize)</strong> yapmanız gerekir. Bu ise basit atama komutu ile yapılır:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">mac_skoru</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="o">...</span>
+<span class="n">mac_skoru</span> <span class="o">=</span> <span class="n">mac_skoru</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>3.satır değişkene 1 ekleyek onu güncellemektedir. Güncellemeler oldukça yaygın
+olarak kullanılır. Bir değişken üzerine 1 ekleyerek güncelleme işlemine
+arttırma; değerinden 1 çıkarma işlemine çıkarma adı verilir.
+Programcılar bazen buna değişkene  <em>toslama</em> (bumping variable) olarak da
+bahsetmektedirler. Bu değişkenini 1 arttırılması ile aynı anlama gelir.</p>
+</div>
+<div class="section" id="for-dongusunu-tekrar-gozden-gecirme">
+<span id="index-2"></span><h2>7.3. <tt class="docutils literal"><span class="pre">for</span></tt> döngüsünü tekrar gözden geçirme<a class="headerlink" href="#for-dongusunu-tekrar-gozden-gecirme" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">for</span></tt> döngüsünün listenin içindeki öğeler   üzerinden döngü yaptığını
+hatırlayınız. Listenin içindeki eleman sırasıyla döngü değişkenine yeniden
+atanır ve döngünün içindeki gövde çalıştırılır.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;Jale&quot;</span><span class="p">,</span> <span class="s">&quot;Zerrin&quot;</span><span class="p">,</span> <span class="s">&quot;Burak&quot;</span><span class="p">,</span> <span class="s">&quot;Ahmet&quot;</span><span class="p">,</span> <span class="s">&quot;Zeki&quot;</span><span class="p">,</span> <span class="s">&quot;Tülay&quot;</span><span class="p">,</span>
+<span class="s">&quot;Perihan&quot;</span><span class="p">]:</span>
+    <span class="n">davet_et</span><span class="o">=</span> <span class="s">&quot;Merhaba&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="o">+</span> <span class="s">&quot;. Lütfen Cumartesi Doğumgünü partime</span>
+    <span class="n">gelin</span><span class="o">.</span><span class="s">&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">davet_et</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Liste içindeki bütün öğeleri teker teker taramaya <strong>gezinme (traversing)</strong>
+olarak isimlendireceğiz.</p>
+<p>Öğeleri sayılardan oluşan bir listenin bütün öğelerini toplayan bir fonksyion
+yazalım. Bunu ilk önce el ile yapalım ve adım adım nasıl ilerleyeceğimiz
+fikrini kafamızda oluşturalım. Liste üzerinden bir yere kadar   yaptığınız <strong>ara toplamı</strong> bir kağıt üzerinde, kafanızda veya hesap makinanızda tutmanıza ihtiyaç olacak.
+Programımızda değişkenlerin olmasının sebebi bir adımdan diğer bir adıma
+geçerken şeyleri hatırlamaktır. Bu yüzden &#8220;ara toplamı&#8221; hatırlayacak bazı
+değişkenlere ihtiyacımız olacak. Bu ara toplamın  ilk başlangıçtaki değerini
+sıfır ile başlatmalıyız (ilklendirmeliyiz.)  ve bu listenin öğeleri üzerinden
+gezinmeliyiz. Ara toplamaya sonraki  bir sayıyı  eklediğimizde, ara toplamayı
+güncelleştirmeliyiz.</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">toplam</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; xs listesi içindeki bütün öğelerin toplar ve bu sonucu geri</span>
+<span class="sd">    döndürür.&quot;&quot;&quot;</span>
+    <span class="n">ara_toplam</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+        <span class="n">anlik_toplam</span> <span class="o">=</span> <span class="n">anlik_toplam</span> <span class="o">+</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">ara_toplam</span>
+
+<span class="c"># Aşağıdaki sınamaları, sınama takımına ekleyiniz.</span>
+<span class="n">test</span><span class="p">(</span><span class="n">toplam</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">toplam</span><span class="p">([</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">])</span> <span class="o">==</span> <span class="mf">5.5</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">toplam</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">toplam</span><span class="p">([</span> <span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">toplam</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span> <span class="o">==</span> <span class="mi">55</span><span class="p">)</span>  <span class="c"># 11 listeye dahil değildir.</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="while-deyimi">
+<span id="index-3"></span><h2>7.4. While deyimi<a class="headerlink" href="#while-deyimi" title="Permalink to this headline">¶</a></h2>
+<p>Aşağıdaki kod parçası <tt class="docutils literal"><span class="pre">while</span></tt> deyiminin kullanışını gösterir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">kadar_toplam</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;  1 + 2 + 3 + ... n toplamını geri döndürür.&quot;&quot;&quot;</span>
+    <span class="n">ara_toplam</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># listenin ilk elemanı</span>
+    <span class="k">while</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">ara_toplam</span> <span class="o">=</span> <span class="n">ara_toplam</span> <span class="o">+</span> <span class="n">v</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span> <span class="c"># sonraki öğe</span>
+    <span class="k">return</span> <span class="n">ara_toplam</span> <span class="c"># listenin bütün öğeleri toplandı</span>
+
+<span class="c"># Test takımınız</span>
+<span class="n">test</span><span class="p">(</span><span class="n">kadar_toplam</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="n">kadar_toplam</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">==</span> <span class="mi">500500</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>While cümlesini sanki bir ingilizce cümleymiş gibi okuyabilirsiniz. Bunun
+anlamı: &#8221; <tt class="docutils literal"><span class="pre">v</span></tt>&#8216;nin değeri <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;den küçük ve eşit olduğu sürece, döngü gövdesini
+çalıştırmaya devam ettir&#8221;  demektir. Gövdenin içinde (<tt class="docutils literal"><span class="pre">while</span></tt> içindeki
+girintili kısım <tt class="docutils literal"><span class="pre">v</span></tt>&#8216;nin değerini bir
+arttırılır. <tt class="docutils literal"><span class="pre">v</span></tt>&#8216;nin değeri <tt class="docutils literal"><span class="pre">n</span></tt> değerini geçince toplam değeri geri
+döndürülür.</p>
+<p>Daha biçimsel olarak, <tt class="docutils literal"><span class="pre">while</span></tt> deyiminin yürütme akışını aşağıda
+inceleyebilirsiniz:</p>
+<ul class="simple">
+<li>5&#8217;inci satırdaki koşulu değerlendir; <tt class="docutils literal"><span class="pre">False</span></tt> veya <tt class="docutils literal"><span class="pre">True</span></tt> değerini üret.</li>
+<li>Eğer değer <tt class="docutils literal"><span class="pre">False</span></tt> ise, <tt class="docutils literal"><span class="pre">while</span></tt> deyiminden çık ve bir sonraki satırdan
+yürütmeye devam et ( bu durumda 8&#8217;inci satır.)</li>
+<li>Eğer değer <tt class="docutils literal"><span class="pre">True</span></tt> ise, <tt class="docutils literal"><span class="pre">while</span></tt> gövdesi içindeki satırları çalıştır (6&#8217;ıncı
+ve 7&#8217;inci satır)</li>
+</ul>
+<p>Gövde, <tt class="docutils literal"><span class="pre">while</span></tt> deyiminin altında eşit girintiye sahip olan cümleleri
+içermektedir.</p>
+<p>Dikkat ediniz ki, eğer döngü koşulu ilk defa <tt class="docutils literal"><span class="pre">False</span></tt> değerini döndürdüğünde,
+gövdenin içindeki cümleler asla çalıştırılmaz.</p>
+<p>Döngünün gövdesi bir veya birden fazla değişkenin değerini değiştirmelidir ki,
+koşul (<tt class="docutils literal"><span class="pre">while</span></tt> deyimi)  sonunda yanlışlanabilsin ve döngünün bitmesi garanti edilsin. Aksi takdirde döngü sonsuza kadar tekrar edecektir. Bu şekildeki döngülere <strong>sonsuz</strong> döngü denir. Şampuanların üzerindeki &#8220;köpürtün, durulayın, tekrarlayın&#8221; işlemi başlı başına bilgisayar bilimcisi için komik kaçabilir çünkü bu döngüyü durduracak bir koşul yoktur.</p>
+<p>Burdaki durumda döngünün bir süre sonra sona erdiğini ispatlıyabiliriz. Çünkü
+<tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin değerinin sonlu olduğunu biliyoruz  ve <tt class="docutils literal"><span class="pre">v</span></tt>&#8216;nin değerinin döngü içinde arttırıldığını görebiliriz. Sonunda <tt class="docutils literal"><span class="pre">v</span></tt>&#8216;nin değeri <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin değerini aşacaktır. Diğer başka durumlarda, döngünün sona ereceğini  bilmek kolay olmayabilir.</p>
+<p>Programcı açısından <tt class="docutils literal"><span class="pre">while</span></tt> döngüsünün  onun eşiti <tt class="docutils literal"><span class="pre">for</span></tt> döngüsünden  daha fazla emek
+gerektirdiğini dikkat etmiş olabilirsiniz. <tt class="docutils literal"><span class="pre">while</span></tt> döngüsünü kullanırken, kişi
+döngü değişkenini kendi yönetmelidir: bu değişkenine başlangıç değeri verin,
+döngünün sona erip ermediğini sınayın ve döngü gövdesi içindeki değişkeni
+arttırıldığına emin olun ki döngü sonlanabilsin. Karşılaştırma yapmak için aynı
+işlemleri <tt class="docutils literal"><span class="pre">for</span></tt> deyimi ile yapan fonksiyonu yazalım:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">kadar_toplam</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; 1 + 2 + 3 + ... n toplamını geri döndürür.&quot;&quot;&quot;</span>
+    <span class="n">ara_toplam</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ara_toplam</span> <span class="o">=</span> <span class="n">ara_toplam</span> <span class="o">+</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">ara_toplam</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">range</span></tt> fonksıyonunun biraz kafa karıştırıcı kullanımını dikkat edin. <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;e
+bir eklemek zorunda kaldık çünkü <tt class="docutils literal"><span class="pre">range</span></tt> fonksiyonu,  içine verdiğiniz değere kadar
+fakat bu değeri dışarda tutarak bir liste oluşturur.  Daha önceki bölümde <cite>birim sınama
+(unit testing)</cite> konusuna zaman ayırdığımız için sınama takımı kullanarak
+yaptığımız hatayı yakalabilirdik.</p>
+</div>
+<div class="section" id="collatz-in-3n-1-dizisi">
+<span id="index-4"></span><h2>7.5. Collatz&#8217;ın 3n+1 dizisi<a class="headerlink" href="#collatz-in-3n-1-dizisi" title="Permalink to this headline">¶</a></h2>
+<p>Matematikçileri yıllarca yanılgaya düşüren ve kendine hayran bırakan basit bir diziye
+bakalım. Matematikçiler  bu dizi hakkındaki basit soruları bile
+hala cevaplıyamamaktır.</p>
+<p>Bu diziyi yaratmak için kuralımız: Verilen <tt class="docutils literal"><span class="pre">n</span></tt> ile diziye başlayın; eğer n
+çift ise bunu ikiye bölün, eğer tek ise bu sayıyı 3 ile çarpıp 1 ekleyin. Bu
+dizi,  <tt class="docutils literal"><span class="pre">n</span></tt> 1&#8217;e ulaştığında sona erer.</p>
+<p>Aşağıdaki Python fonksiyonu bu algoritmayı ifade eder:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">Collatz_dizisi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; n&#39;den başlayarak 3n+1 dizisini basar,</span>
+<span class="sd">    1&#39;e ulaştığında durur.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;, &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># n çift sayı</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">else</span> <span class="p">:</span>  <span class="c"># n tek sayı</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Dikkat ederseniz 6&#8217;ıncı satırdaki <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonu fazladan <tt class="docutils literal"><span class="pre">end=&quot;,&quot;</span></tt>
+argümanı vardır. Bu bize, <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonunun  ekrana bastığı değişkenden
+sonra,  programcının seçtiği (bu durumda, virgül ve  arkasından bir boşluk)
+karakter dizisini peşisıra basmasını ve alttaki satıra geçmemesini söyler.
+Böylece döngü içindeki birşey ekrana basıldığında, sayılar arasına virgül
+gelecek şekilde aynı satıra yazılırlar. Döngü sona erdiğinde 11&#8217;inci satırdaki <tt class="docutils literal"><span class="pre">print(n,end=&quot;.\n&quot;)</span></tt> çağrılacak ve sonrasında ekrana en son <tt class="docutils literal"><span class="pre">n</span></tt> değerini arkasından nokta ve yeni satır gelecek şekilde sonlandıracaktır ( Gelecek bölümde <tt class="docutils literal"><span class="pre">\n</span></tt>&#8216;nin  (yeni satır karakteri) ne anlama geldiğini göreceğiz.)</p>
+<p><tt class="docutils literal"><span class="pre">n</span> <span class="pre">!=1</span></tt>  döngünün devam etme koşuludur, böylece döngü sonlandırma koşuluna
+ulaşıncıya kadar çalışmaya devam edecektir ( yani, <tt class="docutils literal"><span class="pre">n</span> <span class="pre">==</span> <span class="pre">1</span></tt>.)</p>
+<p>Döngü her tekrarladığında, program <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin değerinin çıktısını verir ve
+sonrasında <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin tek veya çift olup olmadığını denetler. Eğer çift ise
+<tt class="docutils literal"><span class="pre">n</span></tt> 2&#8217;ye bölünür; eğer tek ise <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin değeri <tt class="docutils literal"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">1</span></tt> ile
+değiştirilir. Bazı örnekler:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Collatz_dizisi</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">3, 10, 5, 16, 8, 4, 2, 1.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Collatz_dizisi</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
+<span class="go">19, 58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13,</span>
+<span class="go">                    40, 20, 10, 5, 16, 8, 4, 2, 1.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Collatz_dizisi</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<span class="go">21, 64, 32, 16, 8, 4, 2, 1.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Collatz_dizisi</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">16, 8, 4, 2, 1.</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>n artabildiği ve azalabildiği için <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin 1&#8217;e erişip erişemiyeceğine veya
+programın sonlanıp sonlanmıyacağına  dair bir garanti yoktur. <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin bazı
+belirgin değerleri için yürütmenin biteceğini garantiyebiliriz. Örneğin, ikinin
+kuvvetlerini başlangıç değeri olarak kabul edersek  <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin her seferinde
+döngüde ikiyi bölünerek 1&#8217;e ulaşılacaktır (her bölünme çift sayı olacaktır.) 16
+ile başlayan önceki örneğimiz böyle bir seridir.</p>
+<p>Küçük bir sayı ile başlayıp, program sonlanmadan önce yüz adımdan fazla tekrar gerektiren bir dizi bulup bulamıyacağınızı bakın.</p>
+<p>Belirgin değerler hariç, Alman matematikçi Collatz tarafından  ilginç soru
+ortaya atılmıştır: <em>Collatz sanısı</em> ( <em>3n +  1 sanısı</em> olarak da bilinir), n&#8217;nin
+bütün pozitif değerleri için dizi sonlanır. Şimdiye kadar, hiç kimse bunu veya
+aksini ispatlamış değildir! (<em>Sanı (Conjecture)</em>: Bir ifadenin doğru
+olabileceğini fakat kimsenin emin olamamasıdır.)</p>
+<p><em>&#8220;Collatz kuralını kullanarak bütün pozitif sayıların sonunda 1&#8217;e
+yakınsayacağını&#8221;</em>  sanısının ispatlanması veya aksini ispatlanması için neye ihtiyaç olacağını
+dikkatlice düşünün. Çok büyük sayıları hızlı bilgisayarlarla sınayabilirsiniz.
+Şimdiye kadar bütün bu sayılar sonunda 1&#8217;de sona eriyor. Fakat kim bilir?
+Belki de 1&#8217;e indirgenimiyen hala test edilmemiş bir sayı vardır.</p>
+<p>Eğer 1&#8217;e ulaştığıdınızda durmaz, dizinin kendi içinde bir döngüye girdiğine
+dikkat edeceksiniz: 1, 4, 2, 1, 4, 2, 1, 4 ...  Bir olasılık da henüz bizim keşfedemediğimiz hala bazı diziler olmasıdır.</p>
+<p>Collatz sanısı hakkında Wikipedia&#8217;da bilgilendirici bir makale vardır. Bu dizi
+başka isimlerlerle de adlandırılır ( Hailstone dizisi, Wonderous sayıları, vb.)
+Bu makalede kaç tane tam sayının sınandığını ve hepsinin de 1&#8217;e yakınsadığını
+bulacaksınız.</p>
+<div class="admonition-for-ve-while-arasinda-secim admonition">
+<p class="first admonition-title"><tt class="docutils literal"><span class="pre">for</span></tt> ve <tt class="docutils literal"><span class="pre">while</span></tt> arasında seçim</p>
+<p>Bir döngüye başlamadan önce bir döngü gövdesini kaç kere çalıştıracağınızı
+biliyorsanız <tt class="docutils literal"><span class="pre">for</span></tt> döngüsünü kullanınız. Örneğin, bir listenin öğeleri
+üzerinden geziniyorsanız, &#8220;listedeki bütün elemanlar&#8221; kadar döngü sayısına
+ihtiyacınız olacağını muhtemelen biliyorsunuzdur. Veya bir tabloyu 12 kere
+ekrana basmanız gerekiyorsa, kaç kere döngüyü çalıştıracağınızı derhal
+biliyorsunuzdur.</p>
+<p>Örneğin <tt class="docutils literal"><span class="pre">bu</span> <span class="pre">hava</span> <span class="pre">modellemesini</span> <span class="pre">1000</span> <span class="pre">kere</span> <span class="pre">yinele&quot;</span> <span class="pre">veya</span> <span class="pre">&quot;bir</span> <span class="pre">kelime</span> <span class="pre">listesi</span>
+<span class="pre">içinden</span> <span class="pre">bir</span> <span class="pre">kelimeyi</span> <span class="pre">ara&quot;,</span> <span class="pre">&quot;10000'e</span> <span class="pre">kadarki</span> <span class="pre">bütün</span> <span class="pre">asal</span> <span class="pre">sayıları</span> <span class="pre">bul&quot;</span> <span class="pre">gibi</span>
+<span class="pre">işlemler</span> <span class="pre">``for</span></tt> döngüsü için en iyisidir.</p>
+<p class="last">İlk duruma biz <strong>belirli yineleme</strong> olarak isimlendireceğiz: Önceden neye
+ihtiyaç olucağı konusunda bazı sınırlar olacağını biliyoruz. <strong>Belirsiz
+yineleme</strong> ise: Kaç tane yinelem olacağı hakkında emin değiliz; hatta bir
+üst sınır bile belirleyemiyoruz.</p>
+</div>
+</div>
+<div class="section" id="programi-izlemek">
+<span id="index-5"></span><h2>7.6. Programı izlemek<a class="headerlink" href="#programi-izlemek" title="Permalink to this headline">¶</a></h2>
+<p>Etkili bilgisayar programları yazabilmek ve programın çalışma modeli hakkında kavramsal bilgi oluşturabilmek için, bir programcının bilgisayar programlarının yürütmesini <strong>izleme</strong> yeteneğini geliştirmesini gereklidir. İzleme, bir bilgisayar olmayı ve bir örnek programın çalışması sırasında yürütme akışını takip etmeyi gerektirir. Bu takip, herbir komutun çalıştırılmasından sonra bütün değişkenlerin durumunu ve programın ürettiği herhangi bir çıktıyı kaydetmeyi gerektirir.</p>
+<p>Bu süreci anlamak için, önceki kısımdaki <cite>Collatz_dizisi(3)`</cite> çağrımını
+izleyelim. İzlemenin başında <tt class="docutils literal"><span class="pre">n</span></tt> (parametre) adında 3 ilk değerine sahip bir
+değişkenimiz vardır. 3, 1&#8217;e eşit olmadığından <tt class="docutils literal"><span class="pre">while</span></tt> döngüsü çalıştırılır; 3
+ekrana basılır ve <tt class="docutils literal"><span class="pre">3%2</span> <span class="pre">==</span> <span class="pre">0</span></tt> deyimi değerlendirilir. Sonuç <tt class="docutils literal"><span class="pre">False</span></tt>
+olduğundan, <tt class="docutils literal"><span class="pre">else</span></tt> dalı yürütülür ve ve <tt class="docutils literal"><span class="pre">3</span> <span class="pre">*</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">1</span></tt> işlemi yapılıp sonuç
+<tt class="docutils literal"><span class="pre">n</span></tt>&#8216;e atanır.</p>
+<p>Program akışı süresince  olup bittiğini anlayabilmek için  şunu yapalım: Bir kağıt üzerinde
+programın çalıştığı sürece  her değişken için bir sütun, çıktılar için ise başka
+bir sütün yaratalım. İzlememiz aşağıdaki gibi bir şey olacaktır:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">n               çıktı</span>
+<span class="go">--              ------</span>
+<span class="go">3               3,</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">10</span> <span class="pre">!=1</span></tt> ifadesinin değeri <tt class="docutils literal"><span class="pre">True</span></tt> olduğundan, döngü gövdesi tekrar
+yürütülecek ve 10 ekrana basılacaktır. <tt class="docutils literal"><span class="pre">10</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></tt> doğru olduğundan, <tt class="docutils literal"><span class="pre">if</span></tt>
+dalı yürütülecek ve <tt class="docutils literal"><span class="pre">n</span></tt> 5 olacaktır. İzlemenin sonunda aşağıdaki gibi sonuç
+olacaktır:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">n               output printed so far</span>
+<span class="go">--              ---------------------</span>
+<span class="go">3               3,</span>
+<span class="go">10              3, 10,</span>
+<span class="go">5               3, 10, 5,</span>
+<span class="go">16              3, 10, 5, 16,</span>
+<span class="go">8               3, 10, 5, 16, 8,</span>
+<span class="go">4               3, 10, 5, 16, 8, 4,</span>
+<span class="go">2               3, 10, 5, 16, 8, 4, 2,</span>
+<span class="go">1               3, 10, 5, 16, 8, 4, 2, 1.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>İzleme biraz yorucu ve hataya yatkın olabilir (bu yüzden bilgisayarları bu tür
+işler için kullanıyoruz) fakat bir programcının sahip olması gereken zorunlu
+yeteneklerden biridir. Bu izlemeden, programızın nasıl çalıştığı hakkında bilgi
+edinebiliriz. <tt class="docutils literal"><span class="pre">n</span></tt>&#8216;nin kuvveti ikinin katları olur olmaz, programın
+<span class="math">\(\mathrm{log}_2 n\)</span> sayısı kadar yürütme sonrası döngünün sona ereceğini
+izleme sayesinde görebilirsiniz. Gövde içindeki çıktı son 1&#8217;i basmayacağından,
+fonksiyonun sonuna özel olarak <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonunu koyduğumuzu
+görebilirsiniz.</p>
+<p>Programı izleme, kodunuzun tek tek adımlıyarak çalıştırmayla ve bu değişkenleri
+gözlemlemekle şüphesiz ilgilidir. Bilgisayarı <strong>tek tek adımlama</strong> için kullanma
+bizim için daha az hataya sebep olur ve daha uygundur. Programınız karıştıkça
+kağıt üzerinde izleme zorlaşır. Bilgisayarınızla izleme yapmak çok daha kuvvetlidir ve kodunuza  <strong>kesme noktası (breaking point)</strong> koymak işinizi kolaylıştırır. Kullandığınız programlama arayüzünü (bu kitapta PyScripter) öğrenmek için zaman ayırmanızı şiddetle tavsiye ediyoruz.</p>
+<p>Sizin program izleme yapmanızı ve Python kodunun küçük parçalarını anlamanıza yardım
+edecek oldukça yararlı görselleştirmeli araçlar vardır. Bizim tavsiye edeceğimiz bir tanesini  <a class="reference external" href="http://netserv.ict.ru.ac.za/python3_viz">http://netserv.ict.ru.ac.za/python3_viz</a> bağlantısında bulabilirsiniz.</p>
+<p>Daha önce chatterbox (geveze, konuşan) fonksiyonlar konusunda uyarmıştık, fakat
+biz burda onları kullandık. Python&#8217;u daha fazla öğrendikçe, üretilen çıktıları
+bir dizinin içinde nasıl saklayacağımızı göstereceğiz. Böylece fonksiyonları
+ortasında gereksiz şekilde ortaya çıkıp düşünce yapımızı sekteye uğratan  sinir bozucu <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonlarını kaldırabileceğiz.</p>
+</div>
+<div class="section" id="basamaklari-sayma">
+<span id="sayma"></span><h2>7.7. Basamakları sayma<a class="headerlink" href="#basamaklari-sayma" title="Permalink to this headline">¶</a></h2>
+<p>Aşağıdakı fonksiyon bir tam sayının içindeki rakamları (basamakları) sayar:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">rakam_sayisi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">sayac</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">sayac</span> <span class="o">=</span> <span class="n">sayac</span><span class="o">+</span> <span class="mi">1</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">sayac</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Fonksiyonumuzu, <tt class="docutils literal"><span class="pre">print(rakam_sayisi(710))</span></tt> çağırdığımızda <tt class="docutils literal"><span class="pre">3</span></tt> değerini
+ekrana basacaktır. Bu fonksiyon çağrımının yürütmesini ( bir kağıt üzerinde veya
+Pyscripter&#8217;in adım adım yürütme özelliğini veya Python visualizer kullanarak)
+izliyerek çalıştığına dair kendinizi ikna edin.</p>
+<p>Bu fonksiyon hesaplamanın <strong>sayaç</strong> adı verilen önemli bir hesaplama örneğini
+göstermektedir. <tt class="docutils literal"><span class="pre">sayac</span></tt> değişkeni 0 ile ilklenmekte ve daha sonra döngü
+gövdesi herbir seferde yürütüldüğünde sayac bir arttırılmaktadır. Döngü
+tamamlandıktan sonra, <tt class="docutils literal"><span class="pre">sayac</span></tt>&#8216;ın değeri basamak sayısına eşittir.</p>
+<p>Eğer sadece 0 veya 5 olan basamakları saymak isteseydik, sayacı arttırmadan önce
+bir koşul cümlesi koymamız işe yarardı.</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">sifir_ve_besleri_say</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">sayac</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">rakam</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">if</span> <span class="n">rakam</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">rakam</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">sayac</span> <span class="o">=</span> <span class="n">sayac</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">sayac</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><cite>sifir_ve_besleri_say(1055030250)</cite> ifadesinin 7 döndürdüğünü doğrulayın.</p>
+</div>
+<div class="section" id="kisaltilmis-atama">
+<h2>7.8. Kısaltılmış atama<a class="headerlink" href="#kisaltilmis-atama" title="Permalink to this headline">¶</a></h2>
+<p>Bir değişkeni arttırma sık karşılaşılan bir şeydir. Python bunun için bır
+kısaltma sağlar:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sayac</span>  <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sayac</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sayac</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sayac</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sayac</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">sayac</span> <span class="pre">+=</span> <span class="pre">1</span></tt> ifadesi <tt class="docutils literal"><span class="pre">sayac</span> <span class="pre">=</span> <span class="pre">sayac</span> <span class="pre">+</span> <span class="pre">1</span></tt> yerine geçen bir kısaltmadır. Bu
+işleci <em>&#8220;artı-eşittir&#8221;</em> olarak okuyoruz. Arttırma değeri 1 olmak zorunda
+değildir.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">+=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Diğer işleçler için  de (<tt class="docutils literal"><span class="pre">-=</span></tt>, <tt class="docutils literal"><span class="pre">*=</span></tt>, <tt class="docutils literal"><span class="pre">/=</span></tt>, <tt class="docutils literal"><span class="pre">//=</span></tt> ve <tt class="docutils literal"><span class="pre">%=</span></tt>) kısaltmalar
+vardır:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">*=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">-=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">//=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">%=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="python-da-yardim-ve-meta-simge-meta-notation">
+<span id="index-6"></span><h2>7.9. Python&#8217;da yardım ve meta-simge (meta-notation)<a class="headerlink" href="#python-da-yardim-ve-meta-simge-meta-notation" title="Permalink to this headline">¶</a></h2>
+<p>Python,  kendi içinde tanımlanmış fonksiyonları (gömülü fonksiyonları)  ve kütüphaneleri için oldukça geniş bir
+belgeye sahiptir. Bu yardım belgelerine ulaşmanın farklı yolları vardır.
+PyScripter içinde, <em>Help</em> menü öğesine tıklayın ve <em>Python Manuals</em>&#8216;i seçin.
+<strong>range</strong> gömülü fonksiyonu hakkında yardım arayın. Aşağıdaki gibi birşey elde
+edeceksiniz.</p>
+<img alt="_images/help_range.png" src="_images/help_range.png" />
+<p>Argümanların bazılarının köşeli parantez içinde olduğuna dikkat edin. Bunlar
+<strong>meta-simge (meta-notation)</strong> örnekleridir. Bunlar Python&#8217;un söz
+dizimini tanımlar fakat Python&#8217;un içinde yer almazlar. Bu belge içindeki köşeli
+parantezlerin anlamı, argümanların isteğe bağlı olduğudur; isterse programcı onu
+ihmal edebilir. Yardım belgesinin ilk satırı bize <tt class="docutils literal"><span class="pre">range</span></tt> fonksiyonunun her
+zaman bir <tt class="docutils literal"><span class="pre">stop</span></tt> argümanı olması gerektiği, fakat <tt class="docutils literal"><span class="pre">start</span></tt> ve <tt class="docutils literal"><span class="pre">stop</span></tt>
+argümanlarının seçenekler olduğunu ( aralarında virgül ile ayrılırlar) söyler.</p>
+<p>Burdaki yardım belgesi bize <tt class="docutils literal"><span class="pre">range</span></tt> fonksiyonunun 1, 2 veya 3 argümanı
+olabileceğini gösteriyor. Liste herhangi bir başlangıç değerinden
+başlayabilir; bu başlangıç değerinden 1&#8217;den farklı olarak aşağıya doğru
+azalabilir veya yukarı doğru artabilir. Bu belge bize argümanların tamsayı
+olması gerektiğini söylüyor.</p>
+<p>Sıkça  karşılacağınız  siyah ve eğik yazılmış meta-simgeleridir. Siyah
+yazılmış olanlar bunların anahtar kelime veya simge olduğunu ve nasıl yazılmışsa
+öyle yazılmalarını; eğik olanların ise &#8221; bir tür&#8221; olduğunu belirtir. Böylece
+aşağıdaki sözdiziminde</p>
+<blockquote>
+<div><strong>for</strong> <em>variable</em> <strong>in</strong> <em>list</em> <strong>:</strong></div></blockquote>
+<p>italik kelimeler yerine herhangi bir geçerli değişken (variable)  ve listeyi (list) koyabilirsiniz.</p>
+<p><tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonunun (basitleştirilmis) açıklaması bize meta-simgesinin başka
+bir kullanımını gösteriyor. Üç nokta meta-simgesinin (<tt class="docutils literal"><span class="pre">...</span></tt>) anlamı: Birbirleriyle
+virgül ile ayrılmış istediğiniz kadar nesne (isterseniz hiç) koyabilirsiniz:</p>
+<blockquote>
+<div><strong>print( [</strong><em>object,</em> ... <strong>] )</strong></div></blockquote>
+<p>Meta-simgesi, söz dizimlerinin şablonunu kesin ve güçlü bir şekilde tanımlamaya
+olanak verir.</p>
+</div>
+<div class="section" id="tablolar">
+<span id="index-7"></span><h2>7.10. Tablolar<a class="headerlink" href="#tablolar" title="Permalink to this headline">¶</a></h2>
+<p>Döngülerle ilgili güzel şeylerden biri tablo biçiminde veri üretmede yararlı
+olmasıdır. Bilgisayarlar yokken logaritma, sinüs, cosinüs ve diğer matematiksel
+fonksıyonların değerlerini insanlar el ile hesaplamak zorundaydı. Bu işi
+basitleştirmek için matematik kitapları bu fonksiyonların değerlerini veren uzun
+listeler verirlerdi. Tabloları yaratmak uzun ve sıkıcı işti; üstelik hatalarla
+doluydu.</p>
+<p>Bilgisayarlar sahneye çıktıktan sonra ilk tepkilerden biri, <em>&#8220;Müthiş
+Bilgisayarları tabloları üretmek için kullanabiliriz, böylece herhangi bir hata
+olmaz.&#8221;</em> Bu tepkinin (çoğunlukla) doğru olduğu ortaya ama bu ileriyi göremeyen
+bir bakıştı. Bilgisayarların ve hesap makinalarının oldukça yaygınlaşmasindan
+sonra tablolara gerek kalmadı.</p>
+<p>Tabi hemen hemen demek gerekiyor. Bazı işlemleri için, yaklaşık bir yanıt
+üretebilmek ve yaklaşık yanıtı iyileştirmek için hesaplamalar yapmak üzere
+tabloları kullanıyor. Bazı durumlarda,  kaynak olarak kullanılan tablolarda bazı
+hatalar vardı; bunun en çok bilinen örneği, Intel Pentium tarafından kayan
+noktalı sayılarda bölme işleminde kullanılan tabloydu.</p>
+<p>Her ne kadar bir log tablosu eskisi kadar yararlı olmasa bile, hala yinelemenin
+güzel bir örneğidir. Aşağıdaki program, sol sütünda değer dizisini ve sağ
+sütünsa 2 sayısının bu değerden kuvvetinin değerini  bir tablo şeklinde verir.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">):</span>   <span class="c"># 0&#39;dan 12&#39;ye kadar sayı üret</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">&quot;\t&quot;</span></tt> ifadesi ** tab karakterini (sekme karakteri)** temsil eder. <tt class="docutils literal"><span class="pre">&quot;t&quot;</span></tt>
+ifadesindeki  <tt class="docutils literal"><span class="pre">&quot;\&quot;</span></tt> kaçış serisi&#8217;nin  (escape sequence) başlangıcını belirtir.
+Kaçış dizileri, sekme ve yeni satır gibi görünmez karakterleri temsil eder.
+<tt class="docutils literal"><span class="pre">&quot;\n&quot;</span></tt> serisi yeni satırı betimler.</p>
+<p>Bir kaçış serisi bir karakter dizisinin herhangi bir yerinde bulunabilir;
+yukarıdaki örnekte tab (sekme) kaçış serisi <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonu içinde tektir.
+Bir karakter dizisinin arasına ters bölüyü  <tt class="docutils literal"><span class="pre">&quot;\&quot;</span></tt> nasıl yerleştirirsiniz.</p>
+<p>Karakter ve karakter dizileri ekranda göründükçe, bir görünmeyen işaretçi olan
+<strong>imleç (cursor)</strong>, bir sonraki karakterin nereye koyulacağını takip eder.
+<tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonundan sonra imleç sonraki satırın başına gider.</p>
+<p>Tab karakteri imleci bir sekme kadar (Python için 8 boşluk) ileriye götürür.
+Daha önceki programın çıktısında olduğu gibi, sekmeler metinleri sutünlar
+şeklinde hizalamak için yararlıdır:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">0       1</span>
+<span class="go">1       2</span>
+<span class="go">2       4</span>
+<span class="go">3       8</span>
+<span class="go">4       16</span>
+<span class="go">5       32</span>
+<span class="go">6       64</span>
+<span class="go">7       128</span>
+<span class="go">8       256</span>
+<span class="go">9       512</span>
+<span class="go">10      1024</span>
+<span class="go">11      2048</span>
+<span class="go">12      4096</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Sütunlar arasındaki sekmelerden (tab) dolayı, ikinci sütunun konumu birinci
+sütundaki sayıların basamak sayısına bağlı değildir.</p>
+</div>
+<div class="section" id="iki-boyutlu-tablolar">
+<span id="index-8"></span><h2>7.11. İki Boyutlu Tablolar<a class="headerlink" href="#iki-boyutlu-tablolar" title="Permalink to this headline">¶</a></h2>
+<p>İki boyutlu bir tablo, satır ve sütun kesişimindeki değeri okuduğunuz bir
+tablodur. Çarpın tablosu buna iyi bir  örnektir. 1&#8217;den 6&#8217;ya kadar çarpım
+tablosunu yazmak istediğinizi varsayalım.</p>
+<p>Başlamak için iyi bir yol, 2&#8217;nin katlarını bir satırda basan bir döngü
+yazmaktır:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Burda <tt class="docutils literal"><span class="pre">range</span></tt> fonksiyonunu kullandık fakat diziyi 1&#8217;den başlattık. Döngü
+yürütüldükçe <tt class="docutils literal"><span class="pre">i</span></tt> 1&#8217;den 6&#8217;ya kadar değişir. <tt class="docutils literal"><span class="pre">range</span></tt>&#8216;in oluşturduğu dizinin
+bütün öğeleri <tt class="docutils literal"><span class="pre">i</span></tt>&#8216;ye atandığında döngü sona erer. Her bir döngü sırasında,
+<tt class="docutils literal"><span class="pre">2**i</span></tt>&#8216;nin değerini aralarında bir sekme(t: tab komutu, Python&#8217;da 4 boşluk olarak verilir)  olacak şekilde görüntüler.</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">2      4      6      8      10     12</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Buraya kadar herşey güzel. Bir sonraki adımımız <strong>sarmalama (encapsulate)</strong> ve
+<strong>genelleştirme (generalize)</strong>dır.</p>
+</div>
+<div class="section" id="sarmalama-ve-genellestirme">
+<span id="index-9"></span><h2>7.12. Sarmalama ve genelleştirme<a class="headerlink" href="#sarmalama-ve-genellestirme" title="Permalink to this headline">¶</a></h2>
+<p>Sarmalama (encapsulation) bir kod parçasını fonksiyon içerisine koymadır.
+Böylece fonksiyonlar tarafından sağlanan tüm avantajlardan yararlanmamazı
+sağlar. Daha önce sarmalama ile örnekler gördünüz; daha önceki bölümdeki
+<tt class="docutils literal"><span class="pre">bolunebilirmi</span></tt> fonksiyonu gibi.</p>
+<p>Genelleştirmeyse,  2&#8217;nin çarpım katları gibi özel bir şey alıp onu daha genel
+bir hale getirmektir. Herhangi bir sayının çarpım katları gibi.</p>
+<p>Aşağıdaki fonksiyon bir önceki döngüyü sarmalar ve onu <tt class="docutils literal"><span class="pre">n</span></tt> tamsayısının
+katlarını basacak şekilde genelleştirir.</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">katlari_bas</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Sarmak için yapmamız gereken tek şey fonksiyon ismini ve paratmetre listesini
+tanımladığımız başlığı ilk satır olarak eklemektir. Genelleştirmek için yapmamız
+gereken şey, 2&#8217;nin değerini  <tt class="docutils literal"><span class="pre">n</span></tt> parametresi ile değiştirmektir.</p>
+<p>Eğer bu fonksiyonu 2 argümanı ile çağırırsak, daha önce aldığımız çıktının
+aynısını alırız. Eğer argümanımızı 3 seçersek çıktımız:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">3      6      9      12     15     18</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Eğer argümanımız 4 olursa çıktımız:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">4      8      12     16     20     24</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Şimdiye kadar  çarpım tablosunu nasıl ekrana basılacağını
+(<tt class="docutils literal"><span class="pre">katlari_bas</span></tt> fonksıyonunu farklı argümanlarla tekrar tekrar çağırarak)
+tahmin etmişsinizdir. Aslında başka bir döngü kullanabiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="n">katlari_bas</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu yeni döngünün <tt class="docutils literal"><span class="pre">katlari_bas</span></tt> fonksıyonun içindeki döngüye ne kadar
+benzediğini dikkat edin. Yaptığımız tek şey <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonunu bir fonksıyan
+çağrımı <tt class="docutils literal"><span class="pre">katlari_bas</span></tt> koymak oldu.</p>
+<p>Bu programın çıktısı bir çarpım tablosudur:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">1      2      3      4      5      6</span>
+<span class="go">2      4      6      8      10     12</span>
+<span class="go">3      6      9      12     15     18</span>
+<span class="go">4      8      12     16     20     24</span>
+<span class="go">5      10     15     20     25     30</span>
+<span class="go">6      12     18     24     30     36</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="daha-fazla-sarmalama">
+<span id="index-10"></span><h2>7.13. Daha fazla sarmalama<a class="headerlink" href="#daha-fazla-sarmalama" title="Permalink to this headline">¶</a></h2>
+<p>Sarmalamayı tekrar göstermek için en son kısımdan kodu alalım ve onu bir
+fonksiyon şekline getirelim:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">carpim_tablosu_bas</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+        <span class="n">katlari_bas</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu süreç yaygın karşılaşılan bir <strong>geliştirme planı</strong>dır. Kodu herhangi bir
+fonksiyon dışında yazarak veya yorumlayıcıya doğrudan yazarak geliştiririz. Tam
+olarak çalışan koda ulaştığımızda bu kodu çıkarır ve bir fonksiyon içerisine
+koyarız.</p>
+<p>Bu geliştirme planı eğer programı hangi fonksiyonlara parçalayacağınızı
+bilmiyorsanız oldukça yararlıdır. Bu yaklaşım siz ilerledikçe programı
+tasarlamanıza izin verir.</p>
+</div>
+<div class="section" id="yerel-degisken">
+<span id="index-11"></span><h2>7.14. Yerel Değişken<a class="headerlink" href="#yerel-degisken" title="Permalink to this headline">¶</a></h2>
+<p>Aynı değişken <tt class="docutils literal"><span class="pre">i</span></tt>&#8216;yi hem <tt class="docutils literal"><span class="pre">katlari_bas</span></tt> hem de <tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt>
+fonksiyonlarının ikisinde de nasıl kullanabildiğimizi merak ediyor
+olabilirsiniz. Bu fonksiyonlardan biri <tt class="docutils literal"><span class="pre">i</span></tt>&#8216;nin değerini değiştirirse bu
+sorunlara yol açmaz mı?</p>
+<p>Yanıt &#8220;hayırdır.&#8221; Çünkü <tt class="docutils literal"><span class="pre">katlari_bas</span></tt>&#8216;ın içindeki <tt class="docutils literal"><span class="pre">i</span></tt> ile
+<tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt>&#8216;ın içindeki <tt class="docutils literal"><span class="pre">i</span></tt> aynı değişken değildir.</p>
+<p>Bir fonksiyon tanımlanmasının içinde yaratılan değişkenler yereldir; bu
+değişkenlere tanımlandığı fonksiyonun dışından erişemezsiniz. Bunun anlamı aynı
+fonksiyon içerisinde tanımlı olmayan, aynı isme sahip birden fazla değişkene
+sahip olabilirsiniz.</p>
+<p>Python bir fonksiyon içindeki bütün cümleleri inceler. Eğer bu cümlelerden biri
+bir değişkene değer atıyorsa Python bu değişkeni yerel değişken yapar.</p>
+<p><tt class="docutils literal"><span class="pre">i</span></tt> isimli iki değişkeninin bu program için yiğit diyagramını gösteren
+şekiller aynı değildir. Bunlar farklı değerleri gösterebilir ve birinin
+değişmesi diğerini etkilemez.</p>
+<blockquote>
+<div><img alt="Stack 2 diagram" src="_images/stack2.png" />
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span> <span class="pre">(print_mult_table)</span></tt> içindeki <tt class="docutils literal"><span class="pre">i</span></tt>&#8216;nin değeri 1&#8217;den 6&#8217;ya kadar gider. Şekilde 3&#8217;tür. Bir sonraki döngüde 4 olacaktır. Döngüdeki her seferde, <tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt> fonksiyonu <tt class="docutils literal"><span class="pre">katlari_bas</span> <span class="pre">(print_multiples)</span></tt> fonksiyonunun o andaki <tt class="docutils literal"><span class="pre">i</span></tt> değerini argüman olarak çağırmaktadır. Bu değer n parametresine atanmaktadır.</p>
+<p><tt class="docutils literal"><span class="pre">katlari_bas</span></tt> içindeki <tt class="docutils literal"><span class="pre">i</span></tt> değeri 1&#8217;den 6&#8217;ya kadar değişir. Şekilde 2&#8217;dir.
+Bu değişkeni değiştirmenin <tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt> fonksiyonu içindeki <tt class="docutils literal"><span class="pre">i</span></tt>
+argümanı üzerinde bir etkisi yoktur.</p>
+<p>Aynı isimde farklı yerel değişkenlere sahip olmak sık karşılaşılan bir durumdur
+ve tamamen geçerlidir. Özellikle <tt class="docutils literal"><span class="pre">i</span></tt> ve <tt class="docutils literal"><span class="pre">j</span></tt> isimleri sıklıkla döngü
+değişkenleri olarak kullanılmaktadır. Eğer bir başka fonksiyon içerisinde
+kullandınız diye kullanmamazlık ederseniz, programın okunmasını
+zorlaştırırsınız.</p>
+<p><a class="reference external" href="http://netserv.ict.ru.ac.za/python3_viz/">http://netserv.ict.ru.ac.za/python3_viz/</a> adresindeki görselleştirici program,
+iki yerde değişken olarak kullanılan <tt class="docutils literal"><span class="pre">i</span></tt>&#8216;nin nasıl farklı değişkenler olduğunu
+ve birbirinden bağımsız değerler aldığını göstermektedir.</p>
+</div>
+<div class="section" id="break-deyimi">
+<span id="index-12"></span><h2>7.15. <tt class="docutils literal"><span class="pre">break</span></tt> deyimi<a class="headerlink" href="#break-deyimi" title="Permalink to this headline">¶</a></h2>
+<p><strong>break</strong> deyimi bir döngünün gövdesini terketmek için kullanılır. Döngü
+terkedildiğinde gövdeden sonra ilk deyim yürütülür.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">29</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c"># Eğer sayı tek ise</span>
+       <span class="k">break</span>        <span class="c">#  ... döngüden heme çıkar</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;bitti&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go">12</span>
+<span class="go">16</span>
+<span class="go">bitti</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition-dongu-oncesi-sinama-standard-dongu-davranisi admonition">
+<p class="first admonition-title">Döngü öncesi sınama: standard döngü davranışı</p>
+<p><tt class="docutils literal"><span class="pre">for</span></tt> ve <tt class="docutils literal"><span class="pre">while</span></tt> döngüleri, gövdenin içindeki deyimleri çalıştırmadan
+önce başlangıçta sınamalarını yaparlar. Bunlara <strong>döngü öncesi sınama</strong>
+denir. Çünkü sınama gövde öncesinde yapılır.</p>
+<img alt="_images/pre_test_loop.png" class="last" src="_images/pre_test_loop.png" />
+</div>
+</div>
+<div class="section" id="dongulerin-baska-turlu-kullanimi">
+<h2>7.16. Döngülerin başka türlü kullanımı<a class="headerlink" href="#dongulerin-baska-turlu-kullanimi" title="Permalink to this headline">¶</a></h2>
+<p>Bazen döngünün yürütülmesi sırasında <strong>gövde ortasında sınama</strong> yaparak gövdenin sonunda veya
+başında değil, yürütmenin ortasında gövdeden çıkmak isteriz. Veya gövdenin
+<strong>gövde sonunda sınama</strong> yaparak gövdeden çıkış sağlar. Başka diller bunlar için farklı söz dizimi
+ve anahtar kelimeler kullanabilir, fakat Python <tt class="docutils literal"><span class="pre">while</span></tt> ve <tt class="docutils literal"><span class="pre">if</span> <span class="pre">condition:</span>
+<span class="pre">break</span></tt> deyimlerinin birleşimini kullanarak bu işi başarır.</p>
+<p>tipik bir örnek olarak program kullanıcısı toplanacak sayıları ekrandan girsin.
+Kullanıcı daha fazla girilecek sayı olmadığını belirtmek için ekrana özel bir
+değer girer; bu değer genellikle -1 veya boş bir <tt class="docutils literal"><span class="pre">string</span></tt> olur. Bu tür program
+<tt class="docutils literal"><span class="pre">ortasında</span> <span class="pre">sınama</span></tt> yapmalıdır: Bir sayı girilip, bu sayı sınanıp gövdeden
+çıkılıp çıkılmıyacağına karar verir.</p>
+<blockquote>
+<div><div class="admonition-ortasinda-sinama-akis-diyagrami admonition">
+<p class="first admonition-title">Ortasında sınama akış diyagramı</p>
+<img alt="_images/mid_test_loop.png" class="last" src="_images/mid_test_loop.png" />
+</div>
+<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">toplam</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="k">True</span><span class="p">:</span>
+    <span class="n">cevap</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Bir sonraki sayıyı girin.  (Sonlandırmak için boş bırakın)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">toplam</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cevap</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Girdiğiniz sayıların toplamı&quot;</span><span class="p">,</span> <span class="n">toplam</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu programın <strong>gövde ortasında sınama</strong> akış diyagramına uyduğuna kendinizi ikna ediniz.
+3&#8217;üncü satır burda faydalı bir iş yapar, 4. ve 5. satırlar döngüden çıkışı
+sağlar; eğer bu satırlar çıkış yapmazsa, daha sonraki yenileme başlamadan önce
+6&#8217;ıncı satır faydalı bir iş yapar.</p>
+<p><tt class="docutils literal"><span class="pre">while</span> <span class="pre">bool-tip</span></tt> Boolean ifadesi kullanarak yeniden yenileme yapıp
+yapmayacağını belirler. <tt class="docutils literal"><span class="pre">while</span> <span class="pre">True:</span></tt> deyimi <em>gövde üzerinden sürekli döngü</em>
+yap demektir. Bu deyimi birçok programcı hemen tanıyacaktır. 2&#8217;inci satırdaki
+ifade döngüyü asla sonlardırmayacaktır, bu yüzden programcı döngü dışına çıkacak
+(break) bir komut kullanmalıdır. 4. ve 5. satırlar bunu sağlar. Akıllı bir
+derleyici veya yorumlayıcı 2&#8217;inci satırın her zaman doğru olan bir sınama
+olacağını bildiğinden, her zaman döngünün başına gidip sınama yapmadan döngüyü
+yürütür. Bu durumda döngümüz her zaman elmas şekline atlama yapacaktır.</p>
+<p>Benzer olarak, <tt class="docutils literal"><span class="pre">if</span> <span class="pre">koşul:</span> <span class="pre">break</span></tt> deyimini gövdenin sonuna taşıyarak gövdein <strong>gövde sonunda
+sınama</strong> yaparız. Eğer gövdenin en az bir kere yürütülmesini istiyorsanız
+<strong>gövde sonunda sınama</strong> kullanırız (çünkü ilk sınama gövdenin sonunda
+gerçekleşir). Eğer program bir kişiye karşı en az bir oyun oynamak istiyorsa bu
+tür kullanım faydalıdır:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">while</span> <span class="k">True</span><span class="p">:</span>
+    <span class="n">oyunu_birkere_oyna</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Tekrar oynamak istiyor musun?(evet veya hayir)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cevap</span> <span class="o">!=</span> <span class="s">&quot;evet&quot;</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Güle güle!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<div class="admonition-ipucu-cikis-sinamasinin-nerde-yapilacagina-karar-verin admonition">
+<p class="first admonition-title">İpucu: Çıkış sınamasının nerde yapılacağına karar verin.</p>
+<p class="last">Bir şeyi tekrarlamak için bir döngüye ihtiyacınız olduğunu farkettiğinizde,
+o şeyin sonlandırma sınamasını hakkında düşünün; ne zaman yenilemeyi
+durdurmayı istiyorsunuz? Sınamayı, ilk yinelemeden önce veya ilk yinelemenin
+sonunda veya her yinelemenin ortasında sınamayı yapıp yapmak istemediğinize
+karar verin. Kullanıcı artık
+daha fazla oyun oynamak istemediğinde, etkileşimli programlar kullanıcıdan bir girdi bekler veya rogramlar yinelemenin
+sonunda veya ortasında döngüden çıkmak dosyada artık işlenecek veri
+kalmadığına emin olmalıdır.</p>
+</div>
+</div>
+<div class="section" id="ornek">
+<h2>7.17. Örnek<a class="headerlink" href="#ornek" title="Permalink to this headline">¶</a></h2>
+<p>Aşağıdaki program aşağıdaki tahmin etme oyununu uygular:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">random</span>                   <span class="c"># Rastgele sayıları ileriki bölümlerde</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">()</span>           <span class="c"># işleyeceğiz.</span>
+<span class="n">sayi</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="c"># [1 and 1000) arasında rastgele sayı</span>
+                                <span class="c"># üretir.</span>
+
+<span class="n">tahminler</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+<span class="k">while</span> <span class="k">True</span><span class="p">:</span>
+    <span class="n">tahmin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">msg</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s"> 1 ve 1000 arasında bir sayı tahmin et: &quot;</span><span class="p">))</span>
+    <span class="n">tahminler</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">tahmin</span> <span class="o">&gt;</span> <span class="n">sayi</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tahmin</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; çok yüksek.</span><span class="se">\n</span><span class="s">&quot;</span>
+    <span class="k">elif</span> <span class="n">tahmin</span> <span class="o">&lt;</span> <span class="n">sayi</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tahmin</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; çok düşük.</span><span class="se">\n</span><span class="s">&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">input</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Müthiş, {0} tahminde sayıyı buldunuz!</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tahminler</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu program, matematiğin <strong>trichotomy (üçe kısma bölünme)</strong> kuralını uygular ( a
+ve b gerçel sayıları verildiğinde;  a &gt; b, a &lt; b veya a == b eşitliklerinden biri mutlaka doğru olmalıdır).</p>
+<p>19&#8217;uncu satırda input fonksiyonu çağrılır, fakat input fonksiyonundan dönen
+sonuç ile bir şey yapmayız; bir değişkene bile atamıyoruz. Buna Python&#8217;da izin
+verilir. Burda girdi bekleyen bir pencere ortaya çıkar ve program sonlanmadan
+önce kullanıcıdan bir cevap bekler. Programcılar, program sonlandığında bu
+pencerenin açık kalmasını sağlamak (kullanıcın sonucu görmesi için) sıklıkla bu
+numarayı (kurnazlığı) yaparlar.</p>
+<p>Başlangıçta boş bir karakter dizisi olarak;  sonradan 7, 13 ve 15 satırlarda <tt class="docutils literal"><span class="pre">msg</span></tt> değişkeninin kullanış biçimine dikkat edin. Döngünün içinden her defasında geçtiğimizde ekranda yazılan mesajı yenileriz. Program bize sonraki tahmini sorduğu yerde bu mesaj bize gerekli yol gösterimini sağlar ( büyük veya küçük sayı girdiğimizi belirtir.)</p>
+<blockquote>
+<div><img alt="_images/python_input.png" src="_images/python_input.png" />
+</div></blockquote>
+</div>
+<div class="section" id="continue-devam-deyimi">
+<span id="index-13"></span><h2>7.18. <tt class="docutils literal"><span class="pre">Continue</span> <span class="pre">(devam)</span></tt> deyimi<a class="headerlink" href="#continue-devam-deyimi" title="Permalink to this headline">¶</a></h2>
+<p>Bu bir kontrol akış deyimidir; döngünün o anki adımını bitirir ama döngüye devam
+eder. Fakat döngü geri kalan yinelemelerine devam eder.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>      <span class="c"># Bu program çift sayıları</span>
+       <span class="k">continue</span>         <span class="c"># ekrana basar.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;bitti&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bunun çıktısı:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">12</span>
+<span class="go">16</span>
+<span class="go">24</span>
+<span class="go">30</span>
+<span class="go">bitti</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="daha-fazla-genellestirme">
+<h2>7.19. Daha fazla genelleştirme<a class="headerlink" href="#daha-fazla-genellestirme" title="Permalink to this headline">¶</a></h2>
+<p>Genelleştirmeye başka bir örnek olarak, yalnız sadece altıya altı çarpım tablosu
+değil; herhangi bir boyutta bir çarpım tablosunu bastırmak istediğimizi
+varsayalım. <tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt> fonksiyonuna bir parametre eklemeniz gerecekti.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">carpim_tablosu_bas</span><span class="p">(</span><span class="n">zirve</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">zirve</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">katlari_bas</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>7 değerini <tt class="docutils literal"><span class="pre">zirve+1</span></tt> ile değiştirdik. Eğer <tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt> fonksiyonunu
+7 argümanı ile çağırırsak, şu çıktıyı basar:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">1      2      3      4      5      6</span>
+<span class="go">2      4      6      8      10     12</span>
+<span class="go">3      6      9      12     15     18</span>
+<span class="go">4      8      12     16     20     24</span>
+<span class="go">5      10     15     20     25     30</span>
+<span class="go">6      12     18     24     30     36</span>
+<span class="go">7      14     21     28     35     42</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu fena değil; fakat biz muhtemelen aynı satır ve sütuna sahip bir kare tablo istiyoruz. Bunu yapmak için,  tablonun kaç sütuna sahip olmasını belirtmek için <tt class="docutils literal"><span class="pre">katlari_bas</span></tt> fonksiyonuna başka bir parametre ekleriz.</p>
+<p>Biraz sinir bozucu olmasını sağlamak için, bu parametreye <tt class="docutils literal"><span class="pre">zirve</span></tt> olarak
+isimlendireceğiz. Bu bize farklı fonksyiyonların aynı isimli parametrelere (
+yerel değişkenlerde olduğu gibi) sahip
+olabileceğini gösterecek. Bütün program aşağıdaki gibidir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">katlari_bas</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">zirve</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">zirve</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">carpim_tablosu_bas</span><span class="p">(</span><span class="n">zirve</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">zirve</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">katlari_bas</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">zirve</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Yeni bir parametre eklediğimizde fonksiyonunun ilk satırını (fonksiyon başlığı)
+değiştirdiğimizi farketmişsinizdir. Buna ek olarak fonksiyonunun çağrıldığı
+yerleri ( örneğin <tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt> fonksiyonu içinde çağrılan yer) de
+değiştirmemiz gerekmektedir.</p>
+<p><tt class="docutils literal"><span class="pre">carpim_tablosu_bas(7)</span></tt> fonksiyonunu çağırdığımızda 7x7 boyutlarında tablo
+üretir:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">1      2      3      4      5      6      7</span>
+<span class="go">2      4      6      8      10     12     14</span>
+<span class="go">3      6      9      12     15     18     21</span>
+<span class="go">4      8      12     16     20     24     28</span>
+<span class="go">5      10     15     20     25     30     35</span>
+<span class="go">6      12     18     24     30     36     42</span>
+<span class="go">7      14     21     28     35     42     49</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bir fonksiyonu uygun şekilde genelleştirdiğinizde, planlamadığımız yeteneklere
+sahip bir program elde ederseniz. Örneğin ab =ba olması dolayısıyla tablodaki
+her bir girdinin iki kere görüntülendiğini farketmişsinizdir. Mürekkep
+harcamasını azaltmak için tablonun sadece yarısını görüntülemek
+istiyebilirsiniz. Bunu yapmak için <tt class="docutils literal"><span class="pre">carpim_tablosi_bas</span></tt> fonksiyonunda bir
+satır değiştirmeniz gerekir. Aşağıdaki satırı</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">carpim_tablosu_bas</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">zirve</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>aşağıdaki şekilde</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">carpim_tablosu_bas</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>değiştirdiğinizde şu sonucu üretirsiniz:</p>
+<div class="highlight-python"><div class="highlight"><pre>1
+2      4
+3      6      9
+4      8      12     16
+5      10     15     20     25
+6      12     18     24     30     36
+7      14     21     28     35     42     49
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonksiyonlar">
+<span id="index-14"></span><h2>7.20. Fonksiyonlar<a class="headerlink" href="#fonksiyonlar" title="Permalink to this headline">¶</a></h2>
+<p>Şimdiye kadar fonksiyonların faydalarını birkaç kere bahsettik. Bu faydaların
+tam olarak ne olduklarını merak ediyor olabilirsiniz. Bunlardan bazıları:</p>
+<ol class="arabic simple">
+<li>Büyük bir programı fonksiyonlara parçalamanız ve bu parçalara anlamlı isimler
+vermek iyi bir akıl yürütme tekniğidir. Gövde sonunda sınama tekniğini
+gösteren <tt class="docutils literal"><span class="pre">oyunu_birkere_oyna</span></tt> fonksiyonuna bakınız. Bu parçalama, oyununun
+detaylarını bir kenara koymamamıza izin verdi. Bu bize yalıtılmış program
+üzerine yoğunlaşmamızı sağlar. Bu fonksiyon, oyuncunun yeniden oyun oynaması
+hakkındaki seçimini gerçekleştirir.</li>
+<li>Uzun bir programı fonksiyonlara parçalamanız, programda parçaları birbirinden
+ayırmanızı sağlayacaktır. Böylece izole bir şekilde hataları ayıklayabilecek,
+bu farklı parçaların bir bütün olarak davranmasını sağlayabileceksiniz.</li>
+<li>Fonksiyonlar yinelemenin kullanımını kolaylaştırır.</li>
+<li>İyi tasarlanmış fonksiyonlar sıklıkla birçok program için yararlıdır. Bir
+kere fonksiyonu yazdığınızda ve hataların ayıkladığınızda o fonksiyonu tekrar
+kullanabilirsiniz.</li>
+</ol>
+</div>
+<div class="section" id="ikili-veri">
+<h2>7.21. İkili veri<a class="headerlink" href="#ikili-veri" title="Permalink to this headline">¶</a></h2>
+<p>Python&#8217;da simlerden oluşan bir listeyle ve sayılardan oluşan bir listeyi önceden
+gördük. İleriki konularda bu konuya biraz daha değineceğiz ve verilerinizi
+temsil etmeninin ileri yöntemlerini göstereceğiz. İkili veri oluşturmak,
+bunları iki parantez içine koymak kadar kolaydır. Aşağıdaki gibi:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">isim_dogumyil</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Paris Hilton&quot;</span><span class="p">,</span> <span class="mi">1981</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Birçok ikili veri tipini,  ikili veri tiplerinden oluşan bir listeye
+yerleştirebiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">sohretler</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&quot;Brad Pitt&quot;</span><span class="p">,</span> <span class="mi">1963</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;Jack Nicholson&quot;</span><span class="p">,</span> <span class="mi">1937</span><span class="p">),</span>
+                                <span class="p">(</span><span class="s">&quot;Justin Bieber&quot;</span><span class="p">,</span> <span class="mi">1994</span><span class="p">)]</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu gibi yapılandırılmış veri tipleri ile yapabileceğimiz hızlı bir örnek
+verelim. İlk olarak şöhretleri ekrana basalım:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">print</span><span class="p">(</span><span class="n">celebs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">celebs</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go">[(&quot;Brad Pitt&quot;, 1963), (&quot;Jack Nicholson&quot;, 1937), (&quot;Justin Bieber&quot;, 1994)]</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">sohretler</span></tt> listesinin 3 öğesi olduğunu farkedin; herbiri ikili veri tipidir.</p>
+<p>1980 yılından önce doğmuş şöhretlerin isimlerini ekrana basalım:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">yr</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sohretler</span><span class="p">:</span>
+   <span class="k">if</span> <span class="n">yr</span> <span class="o">&lt;</span> <span class="mi">1980</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">nm</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go">Brad Pitt</span>
+<span class="go">Jack Nicholson</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu bize <tt class="docutils literal"><span class="pre">for</span></tt> döngüsü için şimdiye kadar görmediğimiz bir şeyi gösteriyor:
+tek bir değişken kullanmak yerine <tt class="docutils literal"><span class="pre">(nm,yr)</span></tt> çiftinden oluşan değişken
+kullandık. Döngü üç kere yürütülür. Her bir yineleme için listedeki çift bir
+değişkene atanır.</p>
+</div>
+<div class="section" id="icice-gecmis-veriler-icin-icice-listeler">
+<span id="nested-data"></span><h2>7.22. İçiçe geçmiş veriler için içiçe listeler<a class="headerlink" href="#icice-gecmis-veriler-icin-icice-listeler" title="Permalink to this headline">¶</a></h2>
+<p>Yapılandırılmış veri listesi ile daha fazla haşır neşir olacağız. Aşağıdaki
+durumda elimizde bir öğrenci listesi var. Her bir öğrencinin ismi, öğrencilerin
+kayıt oldukları derslerden oluşan başka bir liste eşlenmiştir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ogrenciler</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">&quot;John&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;CompSci&quot;</span><span class="p">,</span> <span class="s">&quot;Physics&quot;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s">&quot;Vusi&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;Maths&quot;</span><span class="p">,</span> <span class="s">&quot;CompSci&quot;</span><span class="p">,</span> <span class="s">&quot;Stats&quot;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s">&quot;Jess&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;CompSci&quot;</span><span class="p">,</span> <span class="s">&quot;Accounting&quot;</span><span class="p">,</span> <span class="s">&quot;Economics&quot;</span><span class="p">,</span> <span class="s">&quot;Management&quot;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s">&quot;Sarah&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;InfSys&quot;</span><span class="p">,</span> <span class="s">&quot;Accounting&quot;</span><span class="p">,</span> <span class="s">&quot;Economics&quot;</span><span class="p">,</span> <span class="s">&quot;CommLaw&quot;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s">&quot;Zuki&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;Sociology&quot;</span><span class="p">,</span> <span class="s">&quot;Economics&quot;</span><span class="p">,</span> <span class="s">&quot;Law&quot;</span><span class="p">,</span> <span class="s">&quot;Stats&quot;</span><span class="p">,</span> <span class="s">&quot;Music&quot;</span><span class="p">])]</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">students</span></tt> isimli değişkene beş öğeli bir liste atadık. Her bir öğrencinin
+ismini ve kayıt oldukları dersleri ekrana basalım:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># öğrencinin ismini ve kayıtlı oldukları derslerin sayısını basalım.</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">isim</span><span class="p">,</span> <span class="n">dersler</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ogrenciler</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">isim</span><span class="p">,</span> <span class="s">&quot;, kayıtlı ders sayisi:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dersler</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>CompSci dersini kaç öğrencinin aldığını şimdi sorabiliriz. Bunun için bir sayaca
+ihtiyacımız vardır ve her bir öğrenci aldıkları dersleri sınayan ikinci bir
+döngüye gereksinim duyarız.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Kaç öğrencinin  CompSci dersini aldığını sayalım.</span>
+<span class="n">sayac</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">isim</span><span class="p">,</span> <span class="n">dersler</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ogrenciler</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">dersler</span><span class="p">:</span>                 <span class="c"># içiçe geçmiş döngü</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&quot;CompSci&quot;</span><span class="p">:</span>
+           <span class="n">sayac</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Compsci dersini alana öğrenci sayısı:&quot;</span><span class="p">,</span> <span class="n">sayac</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go">Compsci dersini alana öğrenci sayısı:  3</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Sizi ilgilendiren kendi veri tipinizin listesini oluşturmanız gerekir. Örneğin
+bir CD listesi için şarkı isimlerinin listesi; veya film listesi için her bir
+film için  o filmde oynayan oyuncuların listesi olabilir. Böylece bu listeye şu
+soruları sorabilirsiniz: &#8221; Angelina Jolie hangi filmlerde oynamıştır?&#8221;</p>
+</div>
+<div class="section" id="bir-sayinin-kare-kokunu-bulmak-icin-newton-yontemi">
+<span id="index-15"></span><h2>7.23. Bir sayının kare kökünü bulmak için Newton yöntemi<a class="headerlink" href="#bir-sayinin-kare-kokunu-bulmak-icin-newton-yontemi" title="Permalink to this headline">¶</a></h2>
+<p>Döngüler sayısal hesaplamalarda sıklıkla kullanılır. Bu gibi hesaplamalarda bir
+yaklaşık tahminle başlanır ve bu tahmin yinelenerek geliştirilir.</p>
+<p>Örnek olarak, hesap makinaları ve bilgisayarlar olmadan önce insanlar bir
+sayının kare kökünü elle hesaplamaları gerekiyordu. Newton iyi bir yöntem
+kullanarak (Newton&#8217;dan uzun yıllar önce bu yöntemin bilindiğine dair kanıtlar
+vardır.) <tt class="docutils literal"><span class="pre">n</span></tt> değişkeninin kare kökünün bulmak istediğimizi farzedelim.
+Herhangi yaklaşık değer ile başlarsak, aşağıdaki formül ile daha iyi bir
+yaklaşıkla değer (başladığımız yaklaşık değeri iyileştirerek) hesaplayabiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">daha_iyi_yaklasik</span> <span class="o">=</span> <span class="p">(</span><span class="n">yaklasik</span> <span class="o">+</span> <span class="n">n</span><span class="o">/</span><span class="n">yaklasik</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Burda <tt class="docutils literal"><span class="pre">n</span></tt> değeri, karekökünü hesaplamak istediğimiz değerdir. Bu hesaplamayı,
+hesap makinası kullanarak birkaç kere yapınız. Her bir yinelemenin sizin
+tahminizi cevaba daha yakınlaştırdığını görebiliyor musunuz? Algoritmanın çok hızlı bir şekilde cevaba yakınsaması,  bu algoritmanın elle hesaplamadaki büyük avantajını gösterir.</p>
+<p>Döngü  ve bu formülü kullanarak  bir
+önceki yaklaşık değeri daha geliştererek bir sayının kare kökünün hesaplayan
+bir fonksiyon yazabiliriz (Gerçekte hesap makinası kare kökü bulmak için bu
+yöntemi kullanır. Belki biraz farklı formül ve yöntem kullanabilir, fakat
+tahmini sürekli geliştiren yöntemi uygular).</p>
+<p>Bu,  sonsuz sayıda yineleme problemine örnektir: Tahminimizi geliştirmek ve
+istedğimiz sonuca ulaşmak için kaç kere yineleme yapmak istediğimizi baştan
+belirlemek mümkün değildir. Tek istediğimiz sonuca olabildiğince yaklaşmaktır.
+Bizim yinelemeyi durdurmak için koşulumuz şu olacaktır: bir önceki tahminiz  ile
+formülü kullanarak elde ettiğmiz iyileştirilmiş yaklaşımız birbirine oldukça yakın olduğunda döngümüz duracaktır.</p>
+<p>İdeal olarak program durduğunda eski tahmin ile yeni tahminin birbirine eşit
+olmasını isteriz. Fakat gerçel sayıların bilgisayar aritmetiğinde birbirine tam
+olarak eşit olması biraz zor durumdur. Çünkü gerçel sayılar tam doğru olarak
+bilgisayarlarda temsil edilemez ( neticede, pi veya <span class="math">\(\sqrt{2}\)</span>  sonsuz
+sayıda ondalık basamağa sahiptir çünkü bu sayılar irrasyonel sayılardır). Bir
+döngüyü durdurmasını sınamak için &#8221; <cite>a</cite>&#8216;nın <cite>b</cite>&#8216;ye yeterince yakın&#8221; olup
+olmadığını programa sormak gerekir. Bu durdurma koşulu şu şekilde kodlanabilir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">:</span>  <span class="c"># Bunu daha küçük yaparak doğruluğu</span>
+                      <span class="c"># arttırabilirsin.</span>
+      <span class="k">break</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">a</span></tt> ile <tt class="docutils literal"><span class="pre">b</span></tt> arasındaki farkın mutlak değerini aldığımızı farkedin!</p>
+<p>Bu problem  döngünün ortasında çıkmaya iyi bir  örnektir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">kare_kok</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">yaklasik</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mf">2.0</span>     <span class="c"># Start with some or other guess at the answer</span>
+    <span class="k">while</span> <span class="k">True</span><span class="p">:</span>
+        <span class="n">daha_iyi_yaklasik</span><span class="o">=</span> <span class="p">(</span><span class="n">approx</span> <span class="o">+</span> <span class="n">n</span><span class="o">/</span><span class="n">approx</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">yaklasik</span> <span class="o">-</span> <span class="n">daha_iyi_yaklasik</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">daha_iyi_yaklasik</span>
+        <span class="n">yaklasik</span> <span class="o">=</span> <span class="n">daha_iyi_yaklasik</span>
+
+<span class="c"># Test cases</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kare_kok</span><span class="p">(</span><span class="mf">25.0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kare_kok</span><span class="p">(</span><span class="mf">49.0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kare_kok</span><span class="p">(</span><span class="mf">81.0</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Çıktı şöyle olur:</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">5.000000000016778</span>
+<span class="go">7.0</span>
+<span class="go">9.000000000004924</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Durdurma koşulunu değiştirerek yakınlaştırmayı geliştirip geliştiremiyeceğine
+bakınız. Algoritma üzerinden adımlayarak ( hesap makinası kullanarak ) bu
+doğruluk derecesinin elde edilmesi için kaç yineleme gerektiğine bakınız.</p>
+</div>
+<div class="section" id="algoritmalar">
+<span id="index-16"></span><h2>7.24. Algoritmalar<a class="headerlink" href="#algoritmalar" title="Permalink to this headline">¶</a></h2>
+<p>Newton yöntemi bir algoritma örneğidir: Belli bir kategorideki (bu durumda kare
+kökleri hesaplama kategorisi) problemleri çözmeye yönelik mekanik bir süreçtir.</p>
+<p>Bazi bilgilerimiz algoritmik değildir. Örneğin tarihteki olayların zamanlarını
+öğrenmek veya çarpım tablosunu ezberlemek gibi.</p>
+<p>Fakat eldeli toplama, borçlu çıkarma veya uzun bölme işlemleri için öğrendiniz
+tekniklerin hepsi algoritmadır. Veya tutkulu bir Sudoku bilmecesi çözücüsü
+iseniz, bu bulmacaları çözmek için belli adımları izliyor olabilirsiniz.</p>
+<p>Algoritmanın temel özelliklerinden birisi de, yürütebilmesi için bir akıla ihtiyaç olmamasıdır. Basit kurallara göre her bir adımın birbirini izlemesidir. Algoritmalar yanlız özel bir problemi çözmek için değil genel bir sınıftaki problemleri çözmek için tasarlanmıştır.</p>
+<p>İnsanlığa büyük faydaları olan  atılımlardan biri, zor problemlerin adım adım algoritmik süreç ile çözülebileceğini ( ve bualgoritmaları uygulamak için yeterli teknolojiye sahip olmak) anlamak olmuştur. Bir algoritmanın yürütülmesi sıkıcı olabilir ve bir akıl, algoritmik veya hasaplamalı düşünce gerektirmeyebilir. Yani algoritma kullanmak ve otomatikleştirmek bir probleme yaklaşmanın temelini oluşturur. Bu algoritmaların yürütülmesi toplumumuzu hızla değiştirmektedir. Bazıları, algoritmik düşünceye ve sürece doğru olan kaymanın toplum üzerindeki etkisinin  ilk matbaanın keşfinden daha önemli olacağını ileri sürmektedir. Bir algoritmanın tasarımı,  ilginç, zihni zorlayan ve programlamın merkezinde olan bir süreçtir.</p>
+<p>İnsanların zorlanmadan veya bilinç dışı olarak doğallıkla yaptığı bazı şeyleri
+algoritmik olarak ifade etmek zordur. Konuştuğumuz dili anlamak buna güzel bir
+örnektir. Hepimiz konuşabiliyoruz, fakat hiç kimse nasıl yaptığımızı şimdiye
+kadar tam olarak açıklıyamamaktadır. En azından bu işlemi bir algoritmik biçimde
+yapmıyoruz.</p>
+</div>
+<div class="section" id="sozluk">
+<h2>7.25. Sözlük<a class="headerlink" href="#sozluk" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-algoritma">algoritma</dt>
+<dd>Bir sınıf problemi adım adım çözme sürecidir.</dd>
+<dt id="term-govde">gövde</dt>
+<dd>Bir döngü içindeki deyimler</dd>
+<dt id="term-breakpoint-kesme-noktasi">breakpoint (kesme noktası)</dt>
+<dd>Programın yürütülmesinin duracağı (veya kesileceği), böylece programın
+değişkenlerinin o andaki durumunu incelebileceğiniz veya her bir deyim
+üzerinden adım adım giderek bunları bir seferde  bir yürütme yapabileceğiniz
+programdaki yer.</dd>
+<dt id="term-bump">bump</dt>
+<dd>Programcı jargonu. Arttırma ile eş anlamlıdır.</dd>
+<dt id="term-continue-deyimi">continue deyimi</dt>
+<dd>Döngünün o anda kalan kısmının atlanmasını sağlayan deyimdir. Akış
+döngünün başına gider, koşulu değerlendirir ve uygun şekilde döngüye
+devam eder.</dd>
+<dt id="term-sayac">sayaç</dt>
+<dd>Bir şeyi saymak için kullanılan değişkendir. Genelde başlangıçta sıfıra
+ilklendirilir (atanırlar) ve döngünün gövdesi içinde arttırılırlar.</dd>
+<dt id="term-imlec">imleç</dt>
+<dd>Bir sonraki karakterin nereye yazılacağını tutan görünmez işaretçi.</dd>
+<dt id="term-azaltma">azaltma</dt>
+<dd>1 çıkarma</dd>
+<dt id="term-kesin-yineleme">kesin yineleme</dt>
+<dd>Gövdenin yürütülme sayısını daha önceden bilme. Bu tür yineleme
+genellikle <tt class="docutils literal"><span class="pre">for</span></tt> loop kullanılarak gerçekleştirilir.</dd>
+<dt id="term-gelistirme-plani">geliştirme planı</dt>
+<dd>Bir programı geliştirme süreci. Bu bölümde basit, belli şeyleri
+yaptıran; daha sonra bunları sarıp, genelleştirmesine dayanan bir kod
+geliştirme süreci anlatılmıştır.</dd>
+<dt id="term-kacis-dizisi">kaçış dizisi</dt>
+<dd>Kaçış karakteri işaretirinin ,\, sağına bir veya daha fazla karakter
+koyarak bu işaretlerin bazı özel davranışlar sergilemesini sağlar.
+Örnek olarak <tt class="docutils literal"><span class="pre">\n</span></tt> yeni bir satıra geçmenizi sağlar.</dd>
+<dt id="term-genellestirme">genelleştirme</dt>
+<dd>Gereksiz özel bir ifadeyi (sabit bir değer gibi), uygun bir şekilde
+genel olan bir ifadeyle (bir değişken veya parametre gibi) değiştirme
+işlemidir. Genelleştirme kodu çok yönlü yapar, tekrar kullanabilirliğini
+arttırır, hatta yazılması işlemini kolaylaştırır.</dd>
+<dt id="term-arttirma-arttirmak">arttırma (arttırmak)</dt>
+<dd>Hem isim ve hem de fiil olarak, arttırma bir değere 1 ekleme anlamına
+gelir.</dd>
+<dt id="term-sonsuz-dongu">sonsuz döngü</dt>
+<dd>Döngüyü sonlandırma koşulunun asla gerçekleşmediği döngü çeşididir.</dd>
+<dt id="term-belirsiz-yineleme">belirsiz yineleme</dt>
+<dd>Bir döngünün, bir koşul sağlanana kadar devam etmesidir. Örneğin
+<tt class="docutils literal"><span class="pre">while</span></tt> deyimi bu durum için kullanılır.</dd>
+<dt id="term-ilkleme-degisken">ilkleme (değişken)</dt>
+<dd>Bir değişkeni ilklemek (initialize), bir değişkene bir başlangıç değeri
+verilmesidir. Python&#8217;da değişkenlere atama yapılmadıkları sürece
+varolmadıkları için yaratıldıkları zaman ilklenirler. Bu durum diğer
+programlama dillerinde geçerli değildir. Bu dillerde ilkleme yapılmadan
+da değişkenler yaratılabilirler. Bu durumda ya <em>çöp değere</em> (anlamsız
+değer ) veya program tarafından öntanımlı bir değer (genellikle sıfır)
+atanır.</dd>
+<dt id="term-yineleme">yineleme</dt>
+<dd>Program deyimler kümesinin tekrar tekrar çalıştırılması.</dd>
+<dt id="term-dongu">döngü</dt>
+<dd>Bitiş koşulu karşılanana kadar tekrar tekrar çalıştırılan bir deyim veya
+deyimler grubu.</dd>
+<dt id="term-dongu-degiskeni">döngü değişkeni</dt>
+<dd>Bir döngü sonlandırma koşulunun parçası olarak kullanılan değişken</dd>
+<dt id="term-meta-simgeleri-meta-notation">meta-simgeleri (meta notation)</dt>
+<dd>Başka simgeleri tanımlamada yardımcı olan ek semböller veya simgeler.
+Kare parentez, üç nokta ve siyah (harf) meta-simgelerini daha önce
+değinmiştik. Bunlar Python sözdiziminde seçimlik, tekrarlanabilen,
+yerine başka bir şey yerleştirmede bize yardımcı olan meta-simgelerdir.</dd>
+<dt id="term-dongu-ortasi-sinama">döngü ortası sınama</dt>
+<dd>Gövdenin bir parçasını çalıştıran, daha sonra çıkış koşulunu sınayan; ve
+bu koşula göre ya döngüden çıkan ya da kalan gövdeyi çalıştan deyimdir.
+Python&#8217;da  bunun için özel bir yapı yoktur fakat <tt class="docutils literal"><span class="pre">while</span></tt> ve <tt class="docutils literal"><span class="pre">break</span></tt>
+deyimlerini birlikte kullanabiliriz.</dd>
+<dt id="term-icice-dongu">içiçe döngü</dt>
+<dd>Bir döngü gövdesi içinde bulunan başka bir döngü.</dd>
+<dt id="term-yeni-satir">yeni satır</dt>
+<dd>İmleci bir sonraki satırın başına taşıyan özel bir karakter (<tt class="docutils literal"><span class="pre">\n</span></tt>)</dd>
+<dt id="term-dongu-sonrasi-sinama">döngü sonrası sınama</dt>
+<dd>Bir döngünün bir gövdeyi çalıştırdıktan  sonra çıkış koşulunu
+sınamasıdır. Bu yapı için Python&#8217;da özel bir komut yoktur, fakat
+<tt class="docutils literal"><span class="pre">while</span></tt> ve <tt class="docutils literal"><span class="pre">break</span></tt> deyimlerini birlikte kullanabiliriz.</dd>
+<dt id="term-dongu-oncesi-sinama">döngü öncesi sınama</dt>
+<dd>Bir döngünün önceden bir gövdeyi çalıştırıp çalıştırmayacağına
+sınamasıdır. <tt class="docutils literal"><span class="pre">for</span></tt> and <tt class="docutils literal"><span class="pre">while</span></tt> deyimlerinin her ikisi de döngü
+öncesi sınama deyimleridir.</dd>
+<dt id="term-tek-adimlama-single-step">tek adımlama (single step)</dt>
+<dd>Programınızı bir anda bir tek adım atarak çalıştırmanızı  ve bu adımlama sonucu
+programınızda meydana gelen değişikleri inceleminizi sağlayan python
+yorumlayıcı özelliği. Hata ayıklamanıza ve programda neler olduğunu
+anlamınıza yardımca olur.</dd>
+<dt id="term-tab-sekme">tab (sekme)</dt>
+<dd>İmleci bulunduğu satırdan diğer o satırdaki bir tab durma noktasına hareket ettiren
+özel karakter.</dd>
+<dt id="term-trichotomy-uc-parcaya-ayirma">trichotomy (üç parçaya ayırma)</dt>
+<dd>Verilen iki gerçel sayı <em>a</em> ve <em>b</em> arasında  burda verilen bağıntılardan
+birinin mutlaka geçerli olmasıdır: <em>a &lt; b</em>, <em>a &gt; b</em> veya <em>a == b</em>. Eğer
+iki bağıntının yanlış olduğunu tespit edebilirseniz, geri kalanın doğru
+olduğunu farzedebilirsiniz.</dd>
+<dt id="term-izleme">izleme</dt>
+<dd>Bir programın yürütme akışını elle takip etme; değişken durumlarındaki
+değişimleri ve üretilen çıktıları kaydetme işlemidir.</dd>
+</dl>
+</div>
+<div class="section" id="alistirmalar">
+<h2>7.26. Alıştırmalar<a class="headerlink" href="#alistirmalar" title="Permalink to this headline">¶</a></h2>
+<p>Bu bölüm, bir listenin öğelerinin nasıl toplanacağını ve bu öğeleri nasıl
+sayacağımızı gösterdi. Sayma örneğimizde ayrıca <tt class="docutils literal"><span class="pre">if</span></tt> deyimi bize yalnızca bazı
+öğeleri saymamıza yardım etti. Daha önceki bölümde
+<tt class="docutils literal"><span class="pre">2harfli_ilk_kelimeyi_bul</span></tt> fonksiyonunun içinde bir koşul gerçeklendiğinde,
+<tt class="docutils literal"><span class="pre">return</span></tt> deyimini kullanarak bize &#8220;erken çıkış&#8221; olanağı verdiğini
+göstermiştik. Şimdi ise <tt class="docutils literal"><span class="pre">break</span></tt> deyimini döngüden çıkmak için ( fonksiyondan çıkmak için <tt class="docutils literal"><span class="pre">break</span></tt> kullanılmaz ve <tt class="docutils literal"><span class="pre">continue</span></tt> ise döngüyü sonlandırmadan o andaki döngüden çıkmak için kullanılır).</p>
+<p>Listeleri oluşturma, toplama, sayma , sınama koşulları ve erken çıkış
+işlemleri zengin yapı taşlarıdır. Bunları çeşitli yollarla birleştirerek
+birbirinden farklı birçok fonksiyon yaratabilirsiniz.</p>
+<p>Yukarıdaki yapi taşlarını kullanarak ilk altı soru için fonksiyonları
+yazabilmelisiniz.</p>
+<ol class="arabic simple">
+<li>Bir liste içinde kaç tane teksayı olduğunu sayan bir fonksiyon yazınız
+(İpucu: Bu fonksiyon bir listeyi parametre olarak alsın.  Mesela listemiz xs =
+[1,2,3,5,8,20,23] olsun.)</li>
+</ol>
+<ol class="arabic simple">
+<li>Bir liste içindeki çift sayıları toplasın.</li>
+</ol>
+<ol class="arabic simple">
+<li>Bir liste içindeki negatif sayıları toplasın. (xs = [-1, -3, 5,2,-7])</li>
+</ol>
+<ol class="arabic simple">
+<li>Bir listenin içinde verilen kelimeler arasından 5 harflilerin sayısını
+bulsun (xs = [&#8220;ahmet&#8221;, &#8220;ozhan&#8221;, &#8220;şener&#8221;, &#8220;naz&#8221;, &#8220;gül&#8221;]</li>
+</ol>
+<ol class="arabic simple">
+<li>Bir liste içindeki sayıları ilk çift sayıya rastlayan kadar toplayan (çift
+sayı dahil değil) bir fonksiyon yazınız. (xs = [ 1, 11, 13, 14, 15,12])</li>
+</ol>
+<ol class="arabic">
+<li><p class="first">Kelimelerden oluşan bir listede, &#8220;sam&#8221; kelimesine kadarki (sam kelimesi de
+dahil) kaç kelime olduğunu sayan bir fonksiyon yazın. ( Bunun için bir sınama
+testi yazın. &#8220;sam&#8221; kelimesi listede yoksa ne oluyor?)</p>
+</li>
+<li><p class="first">Newton yönteminde tanımlanan <tt class="docutils literal"><span class="pre">kare_kok</span></tt> fonksiyonunda <tt class="docutils literal"><span class="pre">daha_iyi_yaklasik</span></tt> her          hasaplandığında ekranda görüntüyelen bir <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonu
+ekleyin. Fonksiyonuun değiştirdiğiniz halini 25 argümanı ile çağırıp
+sonuçları kaydedin.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">carpim_tablosu_bas</span></tt> fonksiyonun son sürümünün yürütülmesini izleyin ve
+nasıl çalıştığını anlamaya çalışın.</p>
+</li>
+<li><p class="first">n&#8217;inci sayıya kadar üçgensel sayılar basan (triangular numbers)
+<tt class="docutils literal"><span class="pre">ucgensel_sayi_bas(n)</span></tt> bir fonksiyon yazınız. Bu fonksiyonu
+<tt class="docutils literal"><span class="pre">ucgensel_sayi_bas(5)</span></tt> aşağıdaki çıktıyı üretmeli:</p>
+<div class="highlight-python"><div class="highlight"><pre>1       1
+2       3
+3       6
+4       10
+5       15
+</pre></div>
+</div>
+<p>(<em>ipucu: üçgensel sayının ne olduğunu internetden araştırın.</em>)
+.. sourcecode:: ignore</p>
+<dl class="docutils">
+<dt>def ucgensel_sayi_bas(n):</dt>
+<dd><p class="first">i = 1
+while i &lt;=n:</p>
+<blockquote class="last">
+<div><p>print (i,&#8221;t&#8221;);print (i*(i+1)/2)
+i +=1</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">asal_sayimi</span></tt> isimli bir fonksiyon yazınız. Bu fonksiyon, tek bir argüman
+alsı; eğer argüman asal sayı ise <tt class="docutils literal"><span class="pre">True</span></tt>, değil ise <tt class="docutils literal"><span class="pre">False</span></tt> döndürsün.
+Fonksiyonunu aşağıdaki durumlar için sınayın:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span><span class="p">(</span><span class="n">asal_sayimi</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
+<span class="n">test</span><span class="p">(</span><span class="ow">not</span> <span class="n">asal_sayimi</span><span class="p">(</span><span class="mi">35</span><span class="p">))</span>
+<span class="n">test</span><span class="p">(</span><span class="n">asal_sayimi</span><span class="p">(</span><span class="mi">19911121</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Son durum doğum gününüzü sınamalıdır. Asal sayı olan bir günde mi doğdunuz?
+100 kişilik bir sınıfta, kaç kişinin asal sayı doğum gününe sahip olduğunu
+düşünüyorsunuz.</p>
+</li>
+<li><p class="first">Bölüm 3&#8217;de</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fruitful_functions-tr.html" title="6. Ürün veren fonksiyonlar"
+             >previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Name prefix for templates and static dir [_].
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

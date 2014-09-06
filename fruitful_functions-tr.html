@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6. Ürün veren fonksiyonlar &mdash; How to Think Like a Computer Scientist: Learning with Python 3</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3rd Edition',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="How to Think Like a Computer Scientist: Learning with Python 3" href="index.html" />
+    <link rel="next" title="7. Yineleme (Tekrarlamalı)" href="iteration-tr.html" />
+    <link rel="prev" title="5. Koşul İfadeleri" href="conditionals-tr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="iteration-tr.html" title="7. Yineleme (Tekrarlamalı)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="conditionals-tr.html" title="5. Koşul İfadeleri"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="urun-veren-fonksiyonlar">
+<h1>6. Ürün veren fonksiyonlar<a class="headerlink" href="#urun-veren-fonksiyonlar" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><div class="section" id="geri-donus-degerleri">
+<span id="index-1"></span><h2>6.1. Geri dönüş değerleri<a class="headerlink" href="#geri-donus-degerleri" title="Permalink to this headline">¶</a></h2>
+<p>Şimdiye kadar kullandığımız <tt class="docutils literal"><span class="pre">abs</span></tt>, <tt class="docutils literal"><span class="pre">pow</span></tt>, <tt class="docutils literal"><span class="pre">int</span></tt>, <tt class="docutils literal"><span class="pre">max</span></tt> ve <tt class="docutils literal"><span class="pre">range</span></tt>
+benzeri Python&#8217;un içinde tanımlı fonksiyonlar bir sonuç ürettiler. Bu
+fonksiyonları her çağrımızda, fonksiyon bir değer üretir. Bu değerleri genellikle
+bir değişkene atar   veya bir ifadenin parçası içinde kullanırız.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">enbuyuk</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">abs</span> <span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bileşik faiz hesabı yapıp, bu değeri bize döndüren kendi fonksiyonumuzu da
+yazdık.</p>
+<p>Bu bölümde değer döndüren başka fonksiyonlar yazacağız ve bunlara <em>ürün veren
+fonksiyonlar</em> adını vereceğiz. İlk örnek olarak, yarıçapı verilen bir dairenin
+alanını hesaplayan <tt class="docutils literal"><span class="pre">alan</span></tt> fonksiyonunu vereceğiz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">yaricap</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="o">*</span><span class="n">yaricap</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Daha önce return deyimini gördük, ancak ürün veren bir fonksiyonda return deyimi
+bir geri dönüş değeri verir. Bu cümlenin anlamı:  Bu fonksiyonunun dönüş
+ifadesini hesapla ve hemen bunu fonksiyonun  sonucu (ürünü) olarak döndür. Dönüş
+ifadesi isteğimize bağlı olarak karmaşık olabilir, örneğin yukarıdaki fonksiyonu
+şöyle yazabilirdik:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">alan</span><span class="p">(</span><span class="n">yaricap</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">3.14159</span><span class="o">*</span><span class="n">yaricap</span><span class="o">*</span><span class="n">yaricap</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Diğer bir taraftan, <tt class="docutils literal"><span class="pre">b</span></tt> gibi <strong>geçici değerleri</strong> kullanmak hata ayıklamayı
+kolaylaştırır.</p>
+<p>Bazı durumlarda, birden fazla dönüş deyimine sahip olmak faydalıdır. Herbir
+dönüş değeri koşullu dalllanma içine yerleştirilir. Phyton&#8217;un içinde tanımlı
+<tt class="docutils literal"><span class="pre">abs</span></tt> fonksiyonunu daha önce görmüştük. Şimdi bu fonksıyonu kendimiz yazalım:</p>
+<blockquote id="my-ref-mutlakdeger">
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mutlak_deger</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Yukarıdaki fonksiyonu başka türlü yazmanın yolu <tt class="docutils literal"><span class="pre">else</span></tt> deyimini kaldırıp,
+<tt class="docutils literal"><span class="pre">if</span></tt> koşul gövdesinden sonra  ikinci bir <tt class="docutils literal"><span class="pre">return</span></tt> deyimi yazmaktır.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mutlak_deger</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Yukarıdaki örnek hakkında düşünüp, aynen ilki gibi çalıştığına kendinizi ikna
+edin.``return`` deyiminden sonra gelen herhangi bir kod veya yürütme akışı açısından
+erişilemez durumda olan kodlar <strong>ölü kod</strong> veya <strong>erişilemez kod</strong> olarak
+adlandırılır.</p>
+<p>Bir ürünlü fonksiyonda olası her yolda bir <tt class="docutils literal"><span class="pre">return</span></tt> deyiminin olması iyi bir
+fikirdir. <tt class="docutils literal"><span class="pre">mutlak_deger</span></tt> fonksiyonun aşağıdaki hali bunu
+gerçekleştirememektedir.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">kotu_mutlak_deger</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Fonksiyonumuzun bü sürümü doğru değildir çünkü eğer <tt class="docutils literal"><span class="pre">x</span></tt>&#8216;in değeri 0 olduğunda,
+hiçbir koşul değildir ve fonksiyon <tt class="docutils literal"><span class="pre">return</span></tt> deyimiyle karşılaşmadan sona erer. Bu durumda geri dönüş değeri <strong>None (hiçbir şey)</strong> olan özel bir değer olacaktır.</p>
+<p><tt class="docutils literal"><span class="pre">for</span></tt> döngüsünün ortasında <tt class="docutils literal"><span class="pre">return</span></tt> deyimini kullanmak mümkündür, bu durumda
+<tt class="docutils literal"><span class="pre">return</span></tt> deyimine rastlandığında fonksiyonun çalışması sona erer. Örneğin bir
+kelime listesine bakan bir fonksiyon yazmak istiyoruz. Bu fonksiyondan, liste içinde iki harften oluşan ilk kelimeyi bulmasını istiyoruz. Eğer böyle bir kelime yoksa, boş bir karakter dizisi döndürmesini istiyoruz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre>def 2harfli_ilk_kelimeyi_bul(xs):
+    for kel in xs:
+        if len(kel) == 2:
+            return kel
+    return &quot;&quot;
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="n">harfli_ilk_kelimeyi_bul</span><span class="p">([</span><span class="s">&quot;Yazık&quot;</span><span class="p">,</span> <span class="s">&quot;Bu&quot;</span><span class="p">,</span> <span class="s">&quot;bir&quot;</span><span class="p">,</span> <span class="s">&quot;ölü&quot;</span><span class="p">,</span> <span class="s">&quot;papağandır&quot;</span><span class="p">])</span>
+<span class="go">&#39;Bu&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="n">harfli_ilk_kelimeyi_bul</span><span class="p">([</span><span class="s">&quot;Ben&quot;</span><span class="p">,</span> <span class="s">&quot;papağandan&quot;</span><span class="p">,</span> <span class="s">&quot;hoşlanırım&quot;</span><span class="p">])</span>
+<span class="go">&#39;&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu kodu tek adımla çalıştırın ve ilk durumdaki durum için fonksiyon listenin
+ikinci kelimesinde sonuç döndürür. Bütün listeyi arşınlamak zorunda değildir.</p>
+</div>
+<div class="section" id="program-gelistirme">
+<span id="index-2"></span><h2>6.2. Program geliştirme<a class="headerlink" href="#program-gelistirme" title="Permalink to this headline">¶</a></h2>
+<p>Bu noktada, tamamlanmış fonksiyonlara bakarak ne yapabildiklerini
+anlatabilmelisiniz. Ayrıca, alıştırmaları yapıyorsanız, bazı küçük fonksiyonlar
+yazmış olmalısınız. Daha büyük fonksiyonlar yazdıkça zorlanmaya  başlar ve
+özellikle çalışma zamanı ve sözdizimi hataları yaparsınız.</p>
+<p>Artan karmaşık programlarla başa çıkabilmek için, <strong>arttırımsal geliştirme</strong>
+tekniğini önereceğiz. Arttırımsal geliştirmenin hedefi, uzun hata ayıklama
+süreçlerini kısaltmak için  programa küçük kodlar eklemek ve bu kodları
+sınamaktır.</p>
+<p>Örneğin, iki nokta arasındaki uzaklığı bulma istediğimizi varsayalım.
+Koordinatları verilmiş <span class="math">\((x_1,y_1)\)</span> ve <span class="math">\((x_2,y_2)\)</span> noktaları
+arasındaki uzaklığı Pisagor teoremine göre şu şekilde hesaplarız.</p>
+<div class="math">
+\[\mathrm{uzaklık} = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\]</div>
+<p>İlk adımımız <tt class="docutils literal"><span class="pre">uzaklık</span></tt> fonksiyonunun Python&#8217;da nasıl oluşturulacağını
+anlamaktır. Başka bir ifadeyle, bu fonksiyonunun &#8220;girdileri (parametreleri)
+ve çıktısı (dönüş değeri) nedir?&#8221; sorusuna cevap bulmaktır.</p>
+<p>Bu durumda, iki nokta girdilerimizdir. Bu iki noktayı dört parametre ile ifade
+edebiliriz. Çıktımız ise uzaklıktır, bu da kayan noktalı bir sayıdır.</p>
+<p>Bu cevaplardan sonra fonksiyonumuzun ana hatlarını yazabiliriz.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">uzaklik</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu haliyle fonksiyonumuzun uzaklığı hesaplamadığı açıktır; her zaman sıfır
+değerini döndürecektir. Fakat sözdizimi olarak doğrudur ve bu fonksiyon
+çalışacaktır. Bunun anlamı, onu daha fazla karmaşık hale getirmeden önce
+sınayabiliriz.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">uzaklik</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Bu değerleri seçtik ki; dikey uzunlık 3, yatay uzaklık 4 olsun ve böylece
+sonucumuz 5&#8217;e eşit olur (dik ücgende 3-4-5 kuralı.) Bir fonksiyonu sınarken,
+doğru sonucu bilmek yararlıdır.</p>
+<p>Bu noktada fonksiyonun sözdizimsel olarak doğru olduğunu onaylamış olduk ve daha
+fazla satır kodu ekleyebiliriz. Her bir arttırımsal değişiklikten sonra,
+fonksiyonumuzu yeniden sınayabiliriz. Eğer bir noktada hata oluşursa, fonksiyona
+eklediğimiz son satırların hata oluşturduğunu söyleyebiliriz.</p>
+<p>Daha sonraki adımımız <span class="math">\(x_2-x_1\)</span> ve <span class="math">\(y_2-y_1\)</span> farklarını bulmaktır.
+Bu değerleri geçici olarak <tt class="docutils literal"><span class="pre">dx</span></tt> ve <tt class="docutils literal"><span class="pre">dy</span></tt> değerlerinde saklayacağız.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">uzaklik</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="n">uKare</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">+</span><span class="n">dy</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Eğer bu fonksiyonu yukarıdaki argümanlar ile çağırarsak, program akışı
+<tt class="docutils literal"><span class="pre">return</span></tt> deyimine ulaştığında, <tt class="docutils literal"><span class="pre">dx</span></tt>&#8216;in değeri 3 ve <tt class="docutils literal"><span class="pre">dy</span></tt>&#8216;nin değeri 4
+olmalidır. Bu durumu <strong>PyScripter</strong> kullanarak kontrol edebilirsiniz: Fare
+imlecini <tt class="docutils literal"><span class="pre">return</span></tt> deyiminin üstüne yerleştirin ve program <tt class="docutils literal"><span class="pre">return</span></tt> deyiminin
+olduğu satıra geldiğinde duracaktır (F4 düğmesini kullanarak.)</p>
+<p>Eğer <tt class="docutils literal"><span class="pre">dx</span></tt> ve <tt class="docutils literal"><span class="pre">dy</span></tt> değerlerinin üstüne faremizi gezdirdiğimizde,
+fonksiyonunun doğru argümanları aldığı ve hesaplamaları doğru yaptığını
+onaylayabiliriz. Eğer doğru değilse, yalnızca en son yazdığımız birkaç satırı
+kontrol ederiz.</p>
+<p>Daha sonra <tt class="docutils literal"><span class="pre">dx</span></tt> ve <tt class="docutils literal"><span class="pre">dy</span></tt> değişkenlerinin karelerini toplarız:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">uzaklik</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="n">uKare</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="n">dy</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu aşamada programı tekrar çalıştırıp, <tt class="docutils literal"><span class="pre">uKare</span></tt>&#8216;nin (uzaklığın Karesi)
+değerini buluruz ( 25 olmalıdır.)</p>
+<p>Son olarak, kesirsel üst <tt class="docutils literal"><span class="pre">0.5</span></tt>&#8216;i kullanarak uzaklığın karekökü&#8217;nü hesaplar ve
+sonuç olarak geri döndürürüz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">uzaklik</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="n">uKare</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="n">dy</span>
+    <span class="n">sonuc</span> <span class="o">=</span> <span class="n">uKare</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">sonuc</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Eğer bu doğru çalışırsa, işimiz bitmiştir. Çalışmazsa, <tt class="docutils literal"><span class="pre">sonuc</span></tt> değişkeninin
+geri döndürmeden önceki değerini incelememiz gerekebilir.</p>
+<p>Fonksiyonu yazmaya başladığınızda, bir anda sadece bir veya iki satır ekleminiz
+gerekir. Deneyim kazandıkça kendinizi daha büyük parçalar yazıp, onları sınayıp
+ve hata ayıklar durumda bulacaksınız. Her şekilde, kodunuzu anlık olarak satır
+satır adımlamak ve her adımın beklentinize uyduğunu onaylamak sizin hata
+ayıklama zamanınızı kısaltacaktır. Programlama yeteğinizi geliştirdikçe,
+kendinizi daha büyük parçalar üzerinden hata ayıklar bulacaksınız. Bu bizim
+okumayı öğrenirken ilk önce harfleri okumaya başlayıp, daha sonra heceleri,
+kelimeleri, ifadeleri, cümleleri ve sonuçta paragrafları okur hale gelmemize
+benzemektedir.</p>
+<p>Bu sürecin ana hatları şunlardır:</p>
+<ol class="arabic simple">
+<li>Çalışan bir programla başlayın ve bu program üzerinde küçük arttırımlar
+yapın. Herhangi bir noktada bir hata varsa hatanın nerede olduğunu
+bileceksiniz.</li>
+<li>Ara değerleri tutmak için geçici değişkenler kullanın; böylece bu değerleri
+inceleyibilir ve kontrol edebilirsiniz.</li>
+<li>Program çalışır hale gelince, rahatlayın, arkanıza yaslanın ve programınıza
+farklı işlemler yaptırarak oynayın.  ( Araştırmalar gösteriyor ku <strong>oynamak</strong>
+sizin bir şeyi daha iyi anlamanıza, neler yapabileceğiniz hakkında bir fikir
+elde edebilmenize yardımcı olur. Bu yüzden programınızla oynamayı
+unutmayınız.)
+Fonksiyonun içindeki çeşitli deyimleri bir grup deyim içine toplamayı
+isteyebilir veya değişkenlerinizin isimlerini daha kısa hale
+getirebilirsiniz. Böylece fonksiyonunuz kısalır. Burdaki ilkemiz,
+programımızı okuyan insanların işlerini kolaylaştırmaktır.</li>
+</ol>
+<p>Aşağıda bu fonksiyonunun başka sürümünü bulacaksınız. Python&#8217;un <tt class="docutils literal"><span class="pre">math</span></tt> modülü
+(modülleri daha sonra öğreneceksiniz.) içindeki karekök alma fonksiyonunu
+kullanır. Hangisi tercih edersiniz? Hangisi Pisagor formülünü daha yakın
+gözüküyor.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">uzakli</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python3"><div class="highlight"><pre>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">uzaklik</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="print-ile-hata-ayiklama">
+<span id="index-3"></span><h2>6.3. <tt class="docutils literal"><span class="pre">print</span></tt> ile hata ayıklama<a class="headerlink" href="#print-ile-hata-ayiklama" title="Permalink to this headline">¶</a></h2>
+<p>Hata ayıklamada diğer bir kuvvetli  teknik ise  ( programı adımlama ve program
+değişkenlerini incelemeye alternatif) programınızda dikkatlice seçtiğimiz
+yerlere <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonlarını yerleştirmektir. Böylece programın çıktısını
+inceleyerek, programımızın algoritmasının umduğumuz şeyleri yapıp yapmadığını
+denetleyebiliriz. Fakat aşağıdaki noktalar hakkında berrak bir düşünceye sahip
+olun:</p>
+<ul>
+<li><p class="first">Sorunun çözümü hakkında açık bir çözüme sahip olun ve hata ayıklamaya
+geçmeden önce programda neler olacağını bilmeniz gerekir. Programı yeniden
+yazmadan önce sorunun çözümü için
+bir kağıt üzerinde çalışın ( belki de bir akış diyagramı üzerinde alacağınız
+adımları yazın.) Programı yazmak sorunu çözmez &#8212; yalnızca atacağınız
+adımları otomatikleştirir. Elinizin altında kalem-kağıttan oluşan bir çözüm
+olmalıdır.</p>
+</li>
+<li><p class="first">Gereksiz işler yapan fonksiyonlar yazmayın. Fonksiyonunuz ne yapması
+gerekiyorsa onu yapmalıdır.</p>
+<p>Örneğin <tt class="docutils literal"><span class="pre">range</span></tt>, <tt class="docutils literal"><span class="pre">max</span></tt> ve <tt class="docutils literal"><span class="pre">abs</span></tt> gibi Python içinde tanımlı fonksiyonları
+görmüştük. Bu fonksiyonlar kendi amaçları dışında, eğer kullancıya giriş değeri
+sorsaydı veya hesaplamaları sırasında gereksiz yere ara sonuçları ekrana
+yazdırsaydı bu fonksiyonlar başka fonksiyonlar için yararsız olacaktı.</p>
+<p>İyi bir ipucu olarak, eğer fonksiyonuzun amacı kullanıcıdan bir girdiyi
+beklemek ve çıktıyı ekrana bastırmak değilse <tt class="docutils literal"><span class="pre">print</span></tt> ve <tt class="docutils literal"><span class="pre">input</span></tt>
+fonksiyonlarını ürün veren fonksiyonlar içinde kullanmaktan kaçının. Bu
+kurala istisna vardır: Hata ayıklamayı kolaylaştırmak ve programda çalışırken
+ne olduğunu anlamak için <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonunu kodunuz içine
+serpiştirebilirsiniz. Programınız çalışır çalışmaz, bu fonksiyonlar
+kaldıralacaktır. Örneğin daha önceki uzaklık fonksiyonumuzda, <strong>Pyscripter</strong>
+adım adım hata ayaklama yöntemini kullanmadan, yalnızca <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonunu
+kullanarak hata ayıklıyabilirdik:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="k">def</span> <span class="nf">uzaklik</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;dx&#39;nin değeri &quot;</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;dy&#39;nin değeri = &quot;</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
+    <span class="n">uKare</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="n">dy</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;uKare&#39;nin değeri = &quot;</span><span class="p">,</span> <span class="n">uKare</span><span class="p">)</span>
+    <span class="n">sonuc</span> <span class="o">=</span> <span class="n">uKare</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">sonuc</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>Yukarıdaki örnekte eğer <tt class="docutils literal"><span class="pre">dx</span></tt>, <tt class="docutils literal"><span class="pre">dy</span></tt> ve <tt class="docutils literal"><span class="pre">uKare</span></tt> çıktıları beklediğimiz sonuçları veriyorsa
+programımızın doğru çalıştığına emin olabiliriz. Böylece artık fonksiyonunun
+içindeki <tt class="docutils literal"><span class="pre">print</span></tt> fonksiyonuna ihtiyacımız yoktur. Bunları kaldırmamız gerekir.</p>
+</div>
+<div class="section" id="kompozisyon">
+<span id="index-4"></span><h2>6.4. Kompozisyon<a class="headerlink" href="#kompozisyon" title="Permalink to this headline">¶</a></h2>
+<p>Şimdiye kadar farketmiş olacağınız üzere, bir fonksiyonu başka bir fonksiyondan
+çağırabilirsiniz. Bu yeteneği kompozisyon (bileşim) adı verilmektedir.</p>
+<p>Örnek olarak, dairenin merkezi ve çevresi üzerinde iki nokta alıp, dairenin
+alanını hesaplayan bir fonksiyon yazacağız.</p>
+<p>Merkez noktanın <tt class="docutils literal"><span class="pre">xc</span></tt> ve <tt class="docutils literal"><span class="pre">yc</span></tt> değişkenlerinde; çevre üzerindeki
+değişkenlerin de <tt class="docutils literal"><span class="pre">xp</span></tt> ve <tt class="docutils literal"><span class="pre">yp</span></tt> değişkenlerinde saklandıklarının varsayalım.
+İlk yapmamız gereken, iki nokta arasındaki uzaklıktan yarıçapı
+bulmaktır. Daha önce yazdığımız <tt class="docutils literal"><span class="pre">uzaklik</span></tt> fonksiyonunu iki nokta arasındaki
+uzaklığı  hesaplamak için kullanabiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">yaricap</span> <span class="o">=</span> <span class="n">uzaklik</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>İkinci adım ise bulduğumuz bu yarıçapı kullanarak dairenin alanını hesaplayıp
+geri döndürmektir. Yine daha önce yazdığımız fonksiyonları kullanacağız.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">sonuc</span> <span class="o">=</span> <span class="n">alan</span><span class="p">(</span><span class="n">yaricap</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">sonuc</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Bu kodları diğer bir fonksiyon içinde yazarsak:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">alan2</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">):</span>
+    <span class="n">yaricap</span> <span class="o">=</span> <span class="n">uzaklik</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xc</span><span class="p">,</span> <span class="n">yp</span><span class="p">)</span>
+    <span class="n">sonuc</span> <span class="o">=</span> <span class="n">alan</span><span class="p">(</span><span class="n">yaricap</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sonuc</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Daha önce tanımladığımız <tt class="docutils literal"><span class="pre">alan</span></tt> fonksiyonundan ayırtetmek için <tt class="docutils literal"><span class="pre">alan2</span></tt>
+fonksiyonunu kullandık.</p>
+<p>Geçici <tt class="docutils literal"><span class="pre">yaricap</span></tt> ve <tt class="docutils literal"><span class="pre">sonuc</span></tt> değişkenleri program geliştirme, hata ayıklama
+ve adım adım program üzerinden ne olduğunu anlamak için yararlıdır. Programımız
+çalışır çalışmaz, fonksiyon çağrılarını birleştirirsek (kompozisyon) daha az ve
+kısa hale getirmiş oluruz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">alan2</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">alan</span><span class="p">(</span><span class="n">uzaklik</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="boolean-dogru-ve-yanlis-fonksiyonlari">
+<span id="index-5"></span><h2>6.5. Boolean (Doğru ve Yanlış ) fonksiyonları<a class="headerlink" href="#boolean-dogru-ve-yanlis-fonksiyonlari" title="Permalink to this headline">¶</a></h2>
+<p>Fonksiyonlar Boolean değerler ( Doğru=True, False=Yanlış) döndürebilirler.
+Bunlar karmaşık sınamaları fonksiyon içinde saklamak için yararlıdır. Örneğin:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">bolunebilirmi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; x, y tarafından tam bölünebilir olup olmadığını sına &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">False</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p><strong>Boolean fonksiyonlarına</strong> genelde evet/hayır sorusuymuş gibi isim verilir.
+<tt class="docutils literal"><span class="pre">bolunebilirmi</span></tt> fonksiyonu, <tt class="docutils literal"><span class="pre">x</span></tt>&#8216;in <tt class="docutils literal"><span class="pre">y</span></tt> tarafından bölünebilir olup olmadığına
+göre <tt class="docutils literal"><span class="pre">True</span></tt> veya <cite>False`</cite> döndürecektir.</p>
+<p><tt class="docutils literal"><span class="pre">ıf</span></tt> deyiminin kendisinin de bir Boolean ifadesi olduğu gerçeğinden
+yararlanarak fonksiyonu daha kısa ve öz hale getirebiliriz. Doğrudan sonucu
+döndürerek, <tt class="docutils literal"><span class="pre">if</span></tt> deyiminden kurtulabiliriz:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">bolunebilirmi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Aşağıda bu yeni fonksiyonunun nasıl kullanıldığını görebilirsiniz:</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">bolunebilirmi</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bolunebilirmi</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Boolean fonksiyonları genelde koşul cümlelerinde kullanılır:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">bolunebilirmi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">bolunebilirmi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+        <span class="o">...</span> <span class="c"># birşey yap</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="o">...</span> <span class="c"># yoksa başka birşey yap</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Aşağıdaki gibi bir şey yazmak cazip olabilir:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">bolunebilirmi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="k">True</span><span class="p">:</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Ancak ek karşılaştırma gereksizdir.</p>
+</div>
+<div class="section" id="program-yazim-kurallari">
+<span id="index-6"></span><h2>6.6. Program yazım kuralları<a class="headerlink" href="#program-yazim-kurallari" title="Permalink to this headline">¶</a></h2>
+<p>Okunabilirlik programcılar açısından çok önemlidir, çünkü pratikte programlar
+yazılmaktan ziyade okunması ve değiştirilmesi sık karşılaşılan durumdur. Bu
+kitapta yazılan kod örneklerin çoğu Python topluluğu tarafından geliştirilen <em>Python Geliştirme Önerisi 8</em>
+(<a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">PEP 8</a>) ile uyumlu olacaktır.</p>
+<p>Programlarımız karmaşıklaştıkça yazım kuralları konusunda söyleyeceklerimiz
+artacaktır, fakat birkaç noktayı açıklamak yararlı olacaktır:</p>
+<ul class="simple">
+<li>Girintiler için 4 boşluk karakteri kullanın.</li>
+<li>Bir satırın uzunluğu 78 karakteri aşmasın.</li>
+<li>Tanımlayıcı sözcükler için; <tt class="docutils literal"><span class="pre">CamelCase</span></tt>&#8216;i  (örnek: <cite>YillikFaizHesabi</cite>,
+<cite>GunlukSutMiktari</cite>, vb.) <cite>sınıflar</cite> için kullanın ( ileriki bölümlerde
+sınıfları göreceğiz.) Değişkenler ve fonksiyonlar için ise hepsi küçük harf ile başlayan ve
+kelimerin arasında alt çizgi olan kelimeler seçin ( örnek: <cite>yil_sonu_miktari</cite>, <cite>uzaklik_kare</cite>
+vb.)</li>
+<li>Python modüllerini dosyanın en başına koyun.</li>
+<li>Fonksyion tanımlamaları bir arada olmalıdır.</li>
+<li>Fonksiyonları belgelendirmek için docstrings kullanın.</li>
+<li>Arka arkaya gelen fonksiyon tanımlamaları arasında iki boş satır bırakın.</li>
+<li>En üst seviye cümleleri, fonksiyon çağırımları da dahil olmak üzere, programın
+en altında birlikte tutun.</li>
+</ul>
+</div>
+<div class="section" id="doctest-ile-birim-sinama-unit-test">
+<h2>6.7. doctest ile birim sınama (unit test)<a class="headerlink" href="#doctest-ile-birim-sinama-unit-test" title="Permalink to this headline">¶</a></h2>
+<p>Yazılım geliştirmede kaynok kodun <strong>birim sınama</strong>sını yapmak (unit test)
+yaygın olan en iyi alışkanlıktır. Birim sınama, fonksiyonlar gibi bağımsız kod
+parçalarının otomatik olarak doğru çalıştığını onaylamak için bir yol sağlar. Bu
+daha sonra fonksiyonunun gerçekleştirimini değiştirmeyi ve yine de beklenini
+yapmasına olanak kılar.</p>
+<p>Birkaç yıl öncesine kadar, program kodu ve programa ait belgeleri firmalar
+tarafından önemli bir varlık olarak değerlendiriliyordu. Bu organizasyonlar
+yazılım bütçelerinin büyük bir kısmını bu programları test etmede (ve korumada)
+kullanıyorlar.</p>
+<p>Birim sınaması, fonksiyonunun ele alması gereken çeşitli durumları programcıya
+düşündürtür. Programın içine bir testi yalnızca bir kere yazarsınız; böylece
+kodunuzu geliştirdikçe  tekrar tekrar aynı test verilerini program içine
+girmekten kurtulursunuz.</p>
+<p>Fazladan kodun programızın içinde bulunmasının nedeni,  programı test etmeyi ve hata
+ayıklamayı kolaylaştırmasıdır. Bu <strong>iskele</strong> (scaffolding) olarak
+isimlendirilir.</p>
+<p>Bir kod için yapılacak testlerin bütününe <strong>test takımı</strong> denir.</p>
+<p>Python&#8217;da birim sınaması yapmak için birkaç farklı yol vardır. Python
+ile uğraşan kişilerin genelde birim sınaması için yaptıklarıni şimdilik dikkate almayacağız ve kendi yazacağımız iki fonksiyon ile başlayacağız.</p>
+<p>Bu bölümde daha önce yazdığımız <tt class="docutils literal"><span class="pre">mutlak_deger</span></tt> fonksiyonu ile başlayalım. Biz
+farklı sürümlerini yazdık; en son yazdığımız sürümü hatalı bir sürümdü ve bir
+böcek içeriyordu. Bu böceği yakalayabilmiş miydiniz?</p>
+<p>İlk önce testimizi tasarlıyoruz. Fonksiyonun argümanı negatif, pozitif veya sıfır
+olduğunda fonksiyonumuzun doğru değer döndürüp döndürmediğini bilmek istiyoruz.
+Testimizi tasarlarken en uç durumları dikkatlice düşünmeliyiz. <tt class="docutils literal"><span class="pre">mutlak_deger</span></tt>
+fonksiyonunun argümanı sıfır olduğu durum,  <tt class="docutils literal"><span class="pre">mutlak_deger</span></tt> fonksiyonumuzun
+davranışının değiştiği bir uç durumdur. Bu bölümün başında gördüğümüz üzere, bir
+programcı beklenmeyen yerde hata yapar. Bu yüzden test takımımızda bun eklemek
+iyi bir durumdu.</p>
+<p>Bir testin sonuçlarını denetlemek için yardımcı bir fonksiyon yazacağız. Bu
+fonksiyon Boolean argümanı alacak. Testen geçtiğini veya testen başarız olduğunu
+belirten bir mesajı ekrana basacak. Fonksiyon gövdesinin ilk cümlesi
+(fonksiyonunun docstring&#8217;inden sonra) programın içinde fonksiyon çağrılmasının
+yapıldığı satırı belirler. Bu yapılan testin satır numarasını belirler. Bu bize
+hangi testlerin başarılı veya başarısız olduğunu belirlemede yardımcı olacak.</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">did_pass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;  Test sonuçlarını basar &quot;&quot;&quot;</span>
+    <span class="n">linenum</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">f_lineno</span>   <span class="c"># Çağırıcının satır numarasını belirler.</span>
+    <span class="k">if</span> <span class="n">did_pass</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;{0} satır testi ok.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">linenum</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot; {0} satır testi BAŞARISIZ.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">linenum</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Katar dizisini hızlı bir şekilde biçimlendirmede kullanılan <tt class="docutils literal"><span class="pre">format</span></tt>
+fonksiyonuna birazdan göz gezdireceğiz ve ilerideki bölümde daha detaylı olarak
+işleyeceğiz. Yazdığımız fonksiyon ile, test takımımızı kontrol etmeye
+başlayabiliriz.</p>
+<blockquote>
+<div><div class="highlight-python3"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_suite</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Bu modül içindeki test takımını çalıştırır.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">mutlak_deger</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span> <span class="o">==</span> <span class="mi">17</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">mutlak_deger</span><span class="p">(</span><span class="o">-</span><span class="mi">17</span><span class="p">)</span> <span class="o">==</span> <span class="mi">17</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">mutlak_deger</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">mutlak_deger</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span> <span class="o">==</span> <span class="mf">3.14</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">mutlak_deger</span><span class="p">(</span><span class="o">-</span><span class="mf">3.14</span><span class="p">)</span> <span class="o">==</span> <span class="mf">3.14</span><span class="p">)</span>
+
+<span class="n">test_suite</span><span class="p">()</span>        <span class="c"># Burda testi çağıyoruz.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Burda gördüğünüz gibi test takımımız içinde 5 tane test oluşturduk. Biz bunu <a class="reference internal" href="#my-ref-mutlakdeger"><em>multak_deger</em></a> fonksiyonunun birinci ve ikinci sürümleri (doğru sonuç veren fonksiyonlar)
+çalıştırdığımızda aşağıdaki benzer çıktıyı alırız.</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">19 satır testi OK.</span>
+<span class="go">20 satır testi OK.</span>
+<span class="go">21 satır testi OK.</span>
+<span class="go">22 satır testi OK.</span>
+<span class="go">23 satır testi OK.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Şimdi ise fonksiyonu doğru olmayan sürüme çevirelim:</p>
+<blockquote>
+<div><div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mutlak_deger</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>   <span class="c"># Bocekli sürüm</span>
+    <span class="sd">&quot;&quot;&quot; n&#39;nin mutlak değerini hesaplayalım. &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Yukarıdaki fonksiyonda en az iki hata bulabilir misiniz? Bizim test takımımız bu
+hataları bulabilir! Sonuçta</p>
+<blockquote>
+<div><div class="highlight-pycon"><div class="highlight"><pre><span class="go">19 satır testi OK.</span>
+<span class="go">20 satır testi BAŞARISIZ.</span>
+<span class="go">21 satır testi BAŞARISIZ.</span>
+<span class="go">22 satır testi OK.</span>
+<span class="go">23 satır testi BAŞARISIZ.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Burda başarısız olan 3 test vardır.</p>
+<p>Python&#8217;un içinde tanımlı <strong>assert</strong> deyimi <strong>test</strong> fonksiyonu ile hemen hemen
+aynı şeyi yapar (programın ilk <strong>savı</strong> (assertion)  başarısız olduğunda program
+çalışmasını durdurur. <strong>assert</strong> hakkında daha fazla okuyabilir ve bunu test
+fonksiyonu yerine kullanabilirsiniz.</p>
+</div>
+<div class="section" id="sozluk">
+<h2>6.8. Sözlük<a class="headerlink" href="#sozluk" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-boolean-fonksiyon">Boolean fonksiyon</dt>
+<dd>Boolean değer döndüren fonksiyon. <tt class="docutils literal"><span class="pre">False</span></tt> (yanlış) ve <tt class="docutils literal"><span class="pre">True``(doğru)</span>
+<span class="pre">değerleri</span> <span class="pre">``bool</span></tt> türünün yalnız dönme değerleridir.</dd>
+<dt id="term-chatterbox-konusan-fonksyion">chatterbox (konuşan) fonksyion</dt>
+<dd><tt class="docutils literal"><span class="pre">input</span></tt> ve <tt class="docutils literal"><span class="pre">print</span></tt> deyimlerini kullanarak, gereksiz olarak kullanıcı ile etkileşime
+giren fonksiyonlara denir. Bu fonksiyonların karşıtı <cite>sessiz
+fonksiyonlar</cite> ise aldıkları argümanları bir çıktıya çevirirler. Bu
+fonksiyonlar genelde en faydalı fonksiyonlardır.</dd>
+<dt id="term-kompozisyon-fonksiyonlarin">kompozisyon (fonksiyonların)</dt>
+<dd>Bir fonksiyon gövdesinden bir başka fonksiyonu çağırmak veya bir
+fonksiyonun geri dönüş değerini, bir başka fonksiyonunun argümanı
+olarak kullanmak.</dd>
+<dt id="term-olu-kod">ölü kod</dt>
+<dd>Bir kısım programın asla çalıştırılamamasıdır. Genelde sebebi fonksiyon
+içindeki <tt class="docutils literal"><span class="pre">return</span></tt> deyiminden sonra cümleler konulmasıdır.</dd>
+<dt id="term-urun-veren-fonksiyon">ürün veren fonksiyon</dt>
+<dd><tt class="docutils literal"><span class="pre">None</span></tt> dışında bir değer döndüren fonksiyon</dd>
+<dt id="term-arttirimli-gelistirme">arttırımlı geliştirme</dt>
+<dd>Hata ayıklamayı kolaylaştırmak küçük miktarda bir kodun programa
+eklenmesi vo o anda çalıştırılmasına dayanan program geliştirme
+yöntemidir.</dd>
+<dt id="term-none">None</dt>
+<dd>Özel bir Python değeri. Fonksiyon içinde <tt class="docutils literal"><span class="pre">return</span></tt> deyimi olmayan veya argümansız
+<tt class="docutils literal"><span class="pre">return</span></tt> deyimi içeren fonksiyonların döndürdükleri değerdir.</dd>
+<dt id="term-geri-donus-degeri">geri dönüş değeri</dt>
+<dd>Bir fonksiyonun çağrılması sonucu sağlanan değer</dd>
+<dt id="term-iskele-scaffolding">iskele (scaffolding)</dt>
+<dd>Programın geliştirilmesinde ve hata ayıklanmasına yardım etmek için
+programın içinde kullanılan kod. Bu bölümde kullandığımız <cite>birim testi</cite>
+iskele örnekleridir.</dd>
+<dt id="term-gecici-degisken">geçici değişken</dt>
+<dd>Karmaşık hesaplamalarda ara değerleri saklamak için kullanılan değişken.</dd>
+<dt id="term-test-takimi">test takımı</dt>
+<dd>Test yapmak için yazdığınız test sayısı (topluluğu)</dd>
+<dt id="term-birim-sinama-birim-testi">birim sınama (birim testi)</dt>
+<dd>Bağımsız kod parçalarını doğrulamak için kullanılan otomatik yordamlar.
+Bir kodun içinde test takımı bulundurmak, o kodu geliştiren veya
+düzenleyen kişi için çok faydalıdır. Daha önceden hatasız çalışan bir kodun
+içinde bocek oluşmasını ve yeniden geriye dönmeyi engellemek  için bir güvenlik duvarı oluşturur.
+<em>Geriye dönme sınaması</em> (regression testing) genelde
+<cite>programda gerilememek</cite> fikrini vermesi için kullanılmaktadır.</dd>
+</dl>
+</div>
+<div class="section" id="alistirmalar">
+<h2>6.9. Alıştırmalar<a class="headerlink" href="#alistirmalar" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="iteration-tr.html" title="7. Yineleme (Tekrarlamalı)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="conditionals-tr.html" title="5. Koşul İfadeleri"
+             >previous</a> |</li>
+        <li><a href="index.html">How to Think Like a Computer Scientist: Learning with Python 3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Name prefix for templates and static dir [_].
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
