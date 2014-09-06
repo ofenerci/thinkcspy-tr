@@ -13,9 +13,9 @@ Meyers**
 (Jeffrey Elkner, Allen B. Downey ve Chris Meyers'in ikinci baskısı temel
 alınmıştır.)
 
-**Ceviren: 2.baskıyı çeviren Tahir Emre Kalaycı**
+**Ceviren: 2.baskıyı çeviren Tahir Emre Kalaycı (2012)**
 
-**Çeviren: 2.baskıdan 3.baskıyı çeviren Özhan Fenerci**
+**Çeviren: 2.baskıdan 3.baskıyı çeviren Özhan Fenerci (2014)**
 
 (Kitap *GNU Free Document License* ile lisanlanmıştır.) 
 
