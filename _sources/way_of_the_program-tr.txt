@@ -10,7 +10,7 @@
     
 |    
     
-Programlama Yolu
+Programlama Yolueia
 ======================
 Bu kitabın amacı size bilgisayar bilimcisi gibi düşünmeyi öğretmektir. Bu
 düşünme şekli matematiğin, mühendisliğin ve doğal bilimlerin bazı en iyi
