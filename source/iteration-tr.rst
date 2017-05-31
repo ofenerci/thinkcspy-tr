@@ -1543,14 +1543,14 @@ yazabilmelisiniz.
 .. cozum
 
    xs = ["ahmet", "ozhan", "şener", "naz", "gül"]
-   def 5harfli_kelime_say(xs):
+   def bes_harfli_kelime_say(xs):
        sayac=0
        for i in xs:
            if len(i) == 5: 
                sayac +=1
        return sayac
 
-   sayac = 5harfli_kelime_say(xs)
+   sayac = bes_harfli_kelime_say(xs)
    print("Liste içindeki negatif sayıların toplamı", sayac )
 
 #. Bir liste içindeki sayıları ilk çift sayıya rastlayan kadar toplayan (çift
