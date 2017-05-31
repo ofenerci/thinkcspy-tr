@@ -109,7 +109,7 @@ kelime listesine bakan bir fonksiyon yazmak istiyoruz. Bu fonksiyondan, liste i�
     .. sourcecode:: python3
         :linenos:
 
-        def 2harfli_ilk_kelimeyi_bul(xs):
+        def iki_harfli_ilk_kelimeyi_bul(xs):
             for kel in xs:
                 if len(kel) == 2:
                     return kel
@@ -117,9 +117,9 @@ kelime listesine bakan bir fonksiyon yazmak istiyoruz. Bu fonksiyondan, liste i�
 
     .. sourcecode:: python3
 
-        >>> 2harfli_ilk_kelimeyi_bul(["Yazık", "Bu", "bir", "ölü", "papağandır"])
+        >>> iki_harfli_ilk_kelimeyi_bul(["Yazık", "Bu", "bir", "ölü", "papağandır"])
         'Bu'
-        >>> 2harfli_ilk_kelimeyi_bul(["Ben", "papağandan", "hoşlanırım"])
+        >>> iki_harfli_ilk_kelimeyi_bul(["Ben", "papağandan", "hoşlanırım"])
         ''
 
 Bu kodu tek adımla çalıştırın ve ilk durumdaki durum için fonksiyon listenin
